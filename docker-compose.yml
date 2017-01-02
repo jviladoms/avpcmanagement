@@ -1,0 +1,16 @@
+db:
+  image: mysql
+  environment:
+    MYSQL_USER: root
+    MYSQL_ROOT_PASSWORD:
+    MYSQL_DATABASE: avpc
+    MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+  expose:
+    - "3306"
+
+app:
+  build: .
+  links:
+    - db:mysql
+  ports:
+    - "8080:8080"

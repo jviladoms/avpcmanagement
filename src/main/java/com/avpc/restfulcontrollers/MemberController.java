@@ -124,7 +124,8 @@ public class MemberController {
             memberDAO.save(member);
 
         } catch (Exception e){
-            log.error("ERROR");
+            log.error("ERROR: " + e.getMessage());
+            return "ERROR";
         }
 
         return "OK";

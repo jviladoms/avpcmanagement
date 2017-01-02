@@ -4,7 +4,6 @@ package com.avpc.model.dao;
  * Created by Jordi on 13/11/2016.
  */
 
-import com.avpc.model.Member;
 import com.avpc.model.Message;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
