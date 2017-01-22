@@ -3,9 +3,12 @@ package com.avpc.model;
 /**
  * Created by Jordi on 29/10/2016.
  */
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+
 
 @Entity
 public class Member implements Serializable{
@@ -45,7 +48,7 @@ public class Member implements Serializable{
     private String landphoneNumber;
 
     @Column(nullable = false)
-    private String userGroup = "member";
+    private String userGroup;
 
     @Column(nullable = false)
     private Date registryDate = new Date();
@@ -67,6 +70,15 @@ public class Member implements Serializable{
 
     @Column(nullable = true)
     private Boolean disponibility;
+
+    @Column(nullable = true)
+    private Integer services;
+
+    @Column(nullable= true)
+    private String pictureUrl;
+
+    @Column(nullable= true)
+    private String tip;
 
     public Boolean getDeleted() {
         return deleted;
@@ -226,5 +238,29 @@ public class Member implements Serializable{
 
     public void setDisponibility(Boolean disponibility) {
         this.disponibility = disponibility;
+    }
+
+    public Integer getServices() {
+        return services;
+    }
+
+    public void setServices(Integer services) {
+        this.services = services;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
+
+    public String getTip() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
     }
 }

@@ -37,7 +37,7 @@ public class Service {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "SERVICE_MEMBERS", joinColumns = { @JoinColumn(name = "service_id") }, inverseJoinColumns = { @JoinColumn(name = "member_id") })
-    private List<Member> members_in_service;
+    private List<Member> membersInService;
 
     public Long getId() {
         return id;
@@ -71,11 +71,43 @@ public class Service {
         this.comments = comments;
     }
 
-    public List<Member> getMembers_in_service() {
-        return members_in_service;
+    public String getTypeOfService() {
+        return typeOfService;
     }
 
-    public void setMembers_in_service(List<Member> members_in_service) {
-        this.members_in_service = members_in_service;
+    public void setTypeOfService(String typeOfService) {
+        this.typeOfService = typeOfService;
+    }
+
+    public String getLocalization() {
+        return localization;
+    }
+
+    public void setLocalization(String localization) {
+        this.localization = localization;
+    }
+
+    public String getServiceDescription() {
+        return serviceDescription;
+    }
+
+    public void setServiceDescription(String serviceDescription) {
+        this.serviceDescription = serviceDescription;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public List<Member> getMembersInService() {
+        return membersInService;
+    }
+
+    public void setMembersInService(List<Member> membersInService) {
+        this.membersInService = membersInService;
     }
 }

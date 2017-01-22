@@ -24,6 +24,7 @@ public class MemberDTO {
     private Double longitud;
     private Double lattitude;
     private Boolean disponibility;
+    private String tip;
 
     public Long getId() {
         return id;
@@ -151,5 +152,13 @@ public class MemberDTO {
 
     public void setDisponibility(Boolean disponibility) {
         this.disponibility = disponibility;
+    }
+
+    public String getTip() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
     }
 }

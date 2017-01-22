@@ -2,11 +2,16 @@ package com.avpc.restfulcontrollers;
 
 import com.avpc.model.Member;
 import com.avpc.model.dao.MemberDAO;
+import com.avpc.model.dao.ServiceDAO;
 import com.avpc.restfulcontrollers.dto.MemberDTO;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +26,14 @@ public class MemberController {
     @Autowired
     private MemberDAO memberDAO;
 
+    @Autowired
+    private ServiceDAO serviceDAO;
+
+    private HttpServletResponse response;
+
     @RequestMapping(value ="/members", method = RequestMethod.POST)
-    public String addMember(@RequestBody MemberDTO memberParams) {
+    @CrossOrigin
+    public void addMember(@RequestBody MemberDTO memberParams) throws IOException {
 
         try{
             Member member = new Member();
@@ -33,44 +44,45 @@ public class MemberController {
             member.setCity(memberParams.getCity());
             member.setEmail(memberParams.getEmail());
             member.setLandphoneNumber(memberParams.getLandPhoneNumber());
-            member.setMobilephoneNumber(memberParams.getLandPhoneNumber());
+            member.setMobilephoneNumber(memberParams.getMobilePhoneNumber());
             member.setPostalCode(memberParams.getPostalCode());
             member.setSurname1(memberParams.getSurname1());
             member.setSurname2(memberParams.getSurname2());
             member.setVAT(memberParams.getVat());
-            member.setLattitude(memberParams.getLattitude());
-            member.setLongitud(memberParams.getLongitud());
-            member.setDisponibility(memberParams.getDisponibility());
+            member.setUserGroup(memberParams.getUserGroup());
             memberDAO.save(member);
-        } catch (Exception e){
-            return "ERROR" ;
+        } catch (IllegalArgumentException e) {
+            response.sendError(HttpStatus.CONFLICT.value());
         }
-        return "OK";
     }
 
     @RequestMapping(value ="/members/{memberId}", method = RequestMethod.GET)
     @ResponseBody
-    public List<Member> findMember(@PathVariable(value="memberId",required=false) Long memberId) {
+    @CrossOrigin
+    public Member findMember(@PathVariable(value="memberId",required=false) Long memberId) {
 
-        List<Member> listMember = new ArrayList<>();
+        Member member = null;
 
         try{
-            listMember.add(memberDAO.findOne(memberId));
+            member = memberDAO.findOne(memberId);
+            member.setServices(serviceDAO.findBymembersInServiceIn(member).size());
         } catch (Exception e){
             log.error("ERROR");
         }
 
-        return listMember;
+        return member;
     }
 
     @RequestMapping(value ="/members", method = RequestMethod.GET)
     @ResponseBody
+    @CrossOrigin
     public List<Member> findMember() {
 
         List<Member> listMember = new ArrayList<>();
 
         try{
                 memberDAO.findAll().forEach(member -> listMember.add(member));
+                listMember.forEach(member -> member.setServices(serviceDAO.findBymembersInServiceIn(member).size()));
                 return listMember;
         } catch (Exception e){
             log.error("ERROR");
@@ -81,7 +93,8 @@ public class MemberController {
 
     @RequestMapping(value ="/members/{memberId}", method = RequestMethod.PUT)
     @ResponseBody
-    public Member updateMember(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams) {
+    @CrossOrigin
+    public Member updateMember(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams) throws IOException {
 
         Member member = null;
 
@@ -99,13 +112,13 @@ public class MemberController {
             member.setSurname1(memberParams.getSurname1());
             member.setSurname2(memberParams.getSurname2());
             member.setVAT(memberParams.getVat());
-            member.setLattitude(memberParams.getLattitude());
-            member.setLongitud(memberParams.getLongitud());
-            member.setDisponibility(memberParams.getDisponibility());
+            member.setTip(memberParams.getTip());
+            member.setUserGroup(memberParams.getUserGroup());
             memberDAO.save(member);
 
-        } catch (Exception e){
+        } catch (IllegalArgumentException e){
             log.error("ERROR");
+            response.sendError(HttpStatus.CONFLICT.value());
         }
 
         return member;
@@ -113,7 +126,8 @@ public class MemberController {
 
     @RequestMapping(value ="/members/{memberId}/position", method = RequestMethod.PUT)
     @ResponseBody
-    public String updatePositionMember(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams) {
+    @CrossOrigin
+    public void updatePositionMember(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams) throws IOException {
 
         Member member = null;
 
@@ -125,14 +139,13 @@ public class MemberController {
 
         } catch (Exception e){
             log.error("ERROR: " + e.getMessage());
-            return "ERROR";
+            response.sendError(HttpStatus.CONFLICT.value());
         }
-
-        return "OK";
     }
 
     @RequestMapping(value ="/members/{memberId}/disponibility", method = RequestMethod.PUT)
     @ResponseBody
+    @CrossOrigin
     public Member updateAvailabilityMember(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams) {
 
         Member member = null;
@@ -149,19 +162,15 @@ public class MemberController {
         return member;
     }
 
-    @RequestMapping(value ="/members", method = RequestMethod.DELETE)
+    @RequestMapping(value ="/members/{memberId}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deleteMember(Long memberId) {
-
+    @CrossOrigin
+    public void deleteMember(@PathVariable(value="memberId") Long memberId) throws IOException{
         try{
-            Member member = memberDAO.findOne(memberId);
-            member.setDeleted(true);
-            memberDAO.save(member);
-        } catch (Exception e){
+            memberDAO.delete(memberId);
+        } catch (IllegalArgumentException e){
             log.error("ERROR");
-            return "ERROR";
+            response.sendError(HttpStatus.CONFLICT.value());
         }
-
-        return "OK";
     }
 }

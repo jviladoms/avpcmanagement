@@ -1,0 +1,23 @@
+#%RAML 0.8
+---
+title: spring-boot-example API
+baseUri: http://localhost:8080
+
+/users:
+  post:
+    description: Creates a new user
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+                { "status": "ok" }
+  /{userid}:
+    get:
+      description: Retrieves a user
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                { "firstname": "Kevin" }

@@ -41,7 +41,7 @@ public class ServiceController {
             List<Member> members = getMembers(serviceDTO.getMembers());
 
             if(members.size() > 0){
-                service.setMembers_in_service(members);
+                service.setMembersInService(members);
                 serviceDAO.save(service);
             } else {
                 throw new Exception("no valid members");
@@ -99,7 +99,7 @@ public class ServiceController {
             List<Member> members = getMembers(serviceDTO.getMembers());
 
             if(members.size() > 0){
-                service.setMembers_in_service(members);
+                service.setMembersInService(members);
                 serviceDAO.save(service);
             } else {
                 throw new Exception("no valid members");
