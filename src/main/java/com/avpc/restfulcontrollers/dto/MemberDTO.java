@@ -1,30 +1,35 @@
 package com.avpc.restfulcontrollers.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.function.BooleanSupplier;
 
 /**
  * Created by Jordi on 29/10/2016.
  */
-public class MemberDTO {
+public class MemberDTO implements Serializable {
 
     private Long id;
+    private String dni;
     private String name;
     private String surname1;
     private String surname2;
-    private String email;
     private String mobilePhoneNumber;
     private String landPhoneNumber;
-    private String userGroup;
+    private String email;
     private String address;
     private String city;
     private String postalCode;
+    private String userGroup;
+    private Date registryDate;
+    private Date deletionDate;
+    private Date lastAccesDate;
     private Date birthDate;
-    private String vat;
-    private Double longitud;
-    private Double lattitude;
-    private Boolean disponibility;
-    private String tip;
+    private Double longitude;
+    private Double latitude;
+    private Boolean availability;
+    private String photoURL;
+
 
     public Long getId() {
         return id;
@@ -32,6 +37,14 @@ public class MemberDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getName() {
@@ -58,14 +71,6 @@ public class MemberDTO {
         this.surname2 = surname2;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getMobilePhoneNumber() {
         return mobilePhoneNumber;
     }
@@ -82,12 +87,12 @@ public class MemberDTO {
         this.landPhoneNumber = landPhoneNumber;
     }
 
-    public String getUserGroup() {
-        return userGroup;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserGroup(String userGroup) {
-        this.userGroup = userGroup;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAddress() {
@@ -114,6 +119,38 @@ public class MemberDTO {
         this.postalCode = postalCode;
     }
 
+    public String getUserGroup() {
+        return userGroup;
+    }
+
+    public void setUserGroup(String userGroup) {
+        this.userGroup = userGroup;
+    }
+
+    public Date getRegistryDate() {
+        return registryDate;
+    }
+
+    public void setRegistryDate(Date registryDate) {
+        this.registryDate = registryDate;
+    }
+
+    public Date getDeletionDate() {
+        return deletionDate;
+    }
+
+    public void setDeletionDate(Date deletionDate) {
+        this.deletionDate = deletionDate;
+    }
+
+    public Date getLastAccesDate() {
+        return lastAccesDate;
+    }
+
+    public void setLastAccesDate(Date lastAccesDate) {
+        this.lastAccesDate = lastAccesDate;
+    }
+
     public Date getBirthDate() {
         return birthDate;
     }
@@ -122,43 +159,39 @@ public class MemberDTO {
         this.birthDate = birthDate;
     }
 
-    public String getVat() {
-        return vat;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setVat(String vat) {
-        this.vat = vat;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
-    public Double getLongitud() {
-        return longitud;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setLongitud(Double longitud) {
-        this.longitud = longitud;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
-    public Double getLattitude() {
-        return lattitude;
+    public Boolean getAvailability() {
+        return availability;
     }
 
-    public void setLattitude(Double lattitude) {
-        this.lattitude = lattitude;
+    public void setAvailability(Boolean availability) {
+        this.availability = availability;
     }
 
-    public Boolean getDisponibility() {
-        return disponibility;
+    public String getPhotoURL() {
+        return photoURL;
     }
 
-    public void setDisponibility(Boolean disponibility) {
-        this.disponibility = disponibility;
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
     }
 
-    public String getTip() {
-        return tip;
-    }
-
-    public void setTip(String tip) {
-        this.tip = tip;
+    public Boolean getDeleted() {
+        return deletionDate != null ? true : false;
     }
 }

@@ -1,9 +1,11 @@
 package com.avpc.restfulcontrollers.dto;
 
+import java.io.Serializable;
+
 /**
  * Created by Jordi on 31/10/2016.
  */
-public class VehicleDTO {
+public class VehicleDTO implements Serializable {
 
     private Long id;
     private String brand;

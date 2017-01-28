@@ -5,20 +5,19 @@ package com.avpc.model;
  */
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 
 @Entity
-public class Member implements Serializable{
+public class Member {
     @Id
     @GeneratedValue
-    @Column(name = "member_id")
+    @Column(name = "memberId")
     private Long id;
 
-    @Column(unique=true,nullable=false)
-    private String DNI;
+    @Column(unique = true, nullable = false)
+    private String dni;
 
     @Column(nullable = false)
     private String name;
@@ -26,8 +25,14 @@ public class Member implements Serializable{
     @Column(nullable = false)
     private String surname1;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String surname2;
+
+    @Column(nullable = false)
+    private String mobilePhoneNumber;
+
+    @Column(nullable = true)
+    private String landPhoneNumber;
 
     @Column(nullable = true)
     private String email;
@@ -42,51 +47,35 @@ public class Member implements Serializable{
     private String postalCode;
 
     @Column(nullable = false)
-    private String mobilephoneNumber;
-
-    @Column(nullable = true)
-    private String landphoneNumber;
-
-    @Column(nullable = false)
     private String userGroup;
 
     @Column(nullable = false)
     private Date registryDate = new Date();
 
     @Column(nullable = true)
-    private Date LastAccesDate = new Date();
+    private Date deletionDate = new Date();
+
+    @Column(nullable = true)
+    private Date lastAccesDate = new Date();
 
     @Column(nullable = true)
     private Date birthDate;
 
-    @Column(nullable = false)
-    private Boolean deleted = false;
+    @Column(nullable = true)
+    private double longitude;
 
     @Column(nullable = true)
-    private double longitud;
+    private double latitude;
 
     @Column(nullable = true)
-    private double lattitude;
+    private Boolean availability;
 
-    @Column(nullable = true)
-    private Boolean disponibility;
+    @Column(nullable= true)
+    private String photoURL;
 
     @Column(nullable = true)
     private Integer services;
 
-    @Column(nullable= true)
-    private String pictureUrl;
-
-    @Column(nullable= true)
-    private String tip;
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-    }
 
     public Long getId() {
         return id;
@@ -94,6 +83,14 @@ public class Member implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getName() {
@@ -120,44 +117,28 @@ public class Member implements Serializable{
         this.surname2 = surname2;
     }
 
+    public String getMobilePhoneNumber() {
+        return mobilePhoneNumber;
+    }
+
+    public void setMobilePhoneNumber(String mobilePhoneNumber) {
+        this.mobilePhoneNumber = mobilePhoneNumber;
+    }
+
+    public String getLandPhoneNumber() {
+        return landPhoneNumber;
+    }
+
+    public void setLandPhoneNumber(String landPhoneNumber) {
+        this.landPhoneNumber = landPhoneNumber;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getMobilephoneNumber() {
-        return mobilephoneNumber;
-    }
-
-    public void setMobilephoneNumber(String mobilephoneNumber) {
-        this.mobilephoneNumber = mobilephoneNumber;
-    }
-
-    public String getLandphoneNumber() {
-        return landphoneNumber;
-    }
-
-    public void setLandphoneNumber(String landphoneNumber) {
-        this.landphoneNumber = landphoneNumber;
-    }
-
-    public String getUserGroup() {
-        return userGroup;
-    }
-
-    public void setUserGroup(String userGroup) {
-        this.userGroup = userGroup;
-    }
-
-    public String getVAT() {
-        return DNI;
-    }
-
-    public void setVAT(String VAT) {
-        this.DNI = VAT;
     }
 
     public String getAddress() {
@@ -184,6 +165,14 @@ public class Member implements Serializable{
         this.postalCode = postalCode;
     }
 
+    public String getUserGroup() {
+        return userGroup;
+    }
+
+    public void setUserGroup(String userGroup) {
+        this.userGroup = userGroup;
+    }
+
     public Date getRegistryDate() {
         return registryDate;
     }
@@ -192,12 +181,20 @@ public class Member implements Serializable{
         this.registryDate = registryDate;
     }
 
+    public Date getDeletionDate() {
+        return deletionDate;
+    }
+
+    public void setDeletionDate(Date deletionDate) {
+        this.deletionDate = deletionDate;
+    }
+
     public Date getLastAccesDate() {
-        return LastAccesDate;
+        return lastAccesDate;
     }
 
     public void setLastAccesDate(Date lastAccesDate) {
-        LastAccesDate = lastAccesDate;
+        this.lastAccesDate = lastAccesDate;
     }
 
     public Date getBirthDate() {
@@ -208,36 +205,36 @@ public class Member implements Serializable{
         this.birthDate = birthDate;
     }
 
-    public String getDNI() {
-        return DNI;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
-    public double getLongitud() {
-        return longitud;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setLongitud(double longitud) {
-        this.longitud = longitud;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
-    public double getLattitude() {
-        return lattitude;
+    public Boolean getAvailability() {
+        return availability;
     }
 
-    public void setLattitude(double lattitude) {
-        this.lattitude = lattitude;
+    public void setAvailability(Boolean availability) {
+        this.availability = availability;
     }
 
-    public Boolean getDisponibility() {
-        return disponibility;
+    public String getPhotoURL() {
+        return photoURL;
     }
 
-    public void setDisponibility(Boolean disponibility) {
-        this.disponibility = disponibility;
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
     }
 
     public Integer getServices() {
@@ -246,21 +243,5 @@ public class Member implements Serializable{
 
     public void setServices(Integer services) {
         this.services = services;
-    }
-
-    public String getPictureUrl() {
-        return pictureUrl;
-    }
-
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
-    }
-
-    public String getTip() {
-        return tip;
-    }
-
-    public void setTip(String tip) {
-        this.tip = tip;
     }
 }

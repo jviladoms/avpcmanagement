@@ -37,19 +37,20 @@ public class MemberController {
 
         try{
             Member member = new Member();
+
             member.setName(memberParams.getName());
             member.setAddress(memberParams.getAddress());
             member.setBirthDate(memberParams.getBirthDate());
             member.setAddress(memberParams.getAddress());
             member.setCity(memberParams.getCity());
             member.setEmail(memberParams.getEmail());
-            member.setLandphoneNumber(memberParams.getLandPhoneNumber());
-            member.setMobilephoneNumber(memberParams.getMobilePhoneNumber());
+            member.setLandPhoneNumber(memberParams.getLandPhoneNumber());
+            member.setMobilePhoneNumber(memberParams.getMobilePhoneNumber());
             member.setPostalCode(memberParams.getPostalCode());
             member.setSurname1(memberParams.getSurname1());
             member.setSurname2(memberParams.getSurname2());
-            member.setVAT(memberParams.getVat());
             member.setUserGroup(memberParams.getUserGroup());
+
             memberDAO.save(member);
         } catch (IllegalArgumentException e) {
             response.sendError(HttpStatus.CONFLICT.value());
@@ -100,20 +101,20 @@ public class MemberController {
 
         try{
             member = memberDAO.findOne(memberId);
+
             member.setName(memberParams.getName());
+            member.setSurname1(memberParams.getSurname1());
+            member.setSurname2(memberParams.getSurname2());
             member.setAddress(memberParams.getAddress());
             member.setBirthDate(memberParams.getBirthDate());
             member.setAddress(memberParams.getAddress());
             member.setCity(memberParams.getCity());
             member.setEmail(memberParams.getEmail());
-            member.setLandphoneNumber(memberParams.getLandPhoneNumber());
-            member.setMobilephoneNumber(memberParams.getLandPhoneNumber());
+            member.setLandPhoneNumber(memberParams.getLandPhoneNumber());
+            member.setMobilePhoneNumber(memberParams.getLandPhoneNumber());
             member.setPostalCode(memberParams.getPostalCode());
-            member.setSurname1(memberParams.getSurname1());
-            member.setSurname2(memberParams.getSurname2());
-            member.setVAT(memberParams.getVat());
-            member.setTip(memberParams.getTip());
             member.setUserGroup(memberParams.getUserGroup());
+
             memberDAO.save(member);
 
         } catch (IllegalArgumentException e){
@@ -124,17 +125,19 @@ public class MemberController {
         return member;
     }
 
-    @RequestMapping(value ="/members/{memberId}/position", method = RequestMethod.PUT)
+    @RequestMapping(value ="/members/{memberId}/location", method = RequestMethod.PUT)
     @ResponseBody
     @CrossOrigin
-    public void updatePositionMember(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams) throws IOException {
+    public void updateMemberLocation(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams) throws IOException {
 
         Member member = null;
 
         try{
             member = memberDAO.findOne(memberId);
-            member.setLongitud(memberParams.getLongitud());
-            member.setLattitude(memberParams.getLattitude());
+
+            member.setLongitude(memberParams.getLongitude());
+            member.setLatitude(memberParams.getLatitude());
+
             memberDAO.save(member);
 
         } catch (Exception e){
@@ -143,16 +146,18 @@ public class MemberController {
         }
     }
 
-    @RequestMapping(value ="/members/{memberId}/disponibility", method = RequestMethod.PUT)
+    @RequestMapping(value ="/members/{memberId}/availability", method = RequestMethod.PUT)
     @ResponseBody
     @CrossOrigin
-    public Member updateAvailabilityMember(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams) {
+    public Member updateMemberAvailability(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams) {
 
         Member member = null;
 
         try{
             member = memberDAO.findOne(memberId);
-            member.setDisponibility(memberParams.getDisponibility());
+
+            member.setAvailability(memberParams.getAvailability());
+
             memberDAO.save(member);
 
         } catch (Exception e){

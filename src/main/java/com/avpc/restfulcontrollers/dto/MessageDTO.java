@@ -2,13 +2,14 @@ package com.avpc.restfulcontrollers.dto;
 
 import com.avpc.model.Member;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Jordi on 13/11/2016.
  */
-public class MessageDTO {
+public class MessageDTO implements Serializable {
 
     private Long id;
     private String message;
