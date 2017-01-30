@@ -13,8 +13,8 @@ public class MessageDTO implements Serializable {
 
     private Long id;
     private String message;
-    private List<Long> destination_members;
-    private Long send_member;
+    private List<Long> destinationMembers;
+    private Long sendMember;
     private Date date;
 
     public Long getId() {
@@ -33,20 +33,20 @@ public class MessageDTO implements Serializable {
         this.message = message;
     }
 
-    public List<Long> getDestination_members() {
-        return destination_members;
+    public List<Long> getDestinationMembers() {
+        return destinationMembers;
     }
 
-    public void setDestination_members(List<Long> destination_members) {
-        this.destination_members = destination_members;
+    public void setDestinationMembers(List<Long> destinationMembers) {
+        this.destinationMembers = destinationMembers;
     }
 
-    public Long getSend_member() {
-        return send_member;
+    public Long getSendMember() {
+        return sendMember;
     }
 
-    public void setSend_member(Long send_member) {
-        this.send_member = send_member;
+    public void setSendMember(Long sendMember) {
+        this.sendMember = sendMember;
     }
 
     public Date getDate() {

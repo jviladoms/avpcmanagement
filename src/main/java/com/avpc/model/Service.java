@@ -11,7 +11,7 @@ import java.util.List;
 public class Service {
     @Id
     @GeneratedValue
-    @Column(name = "service_id")
+    @Column(name = "serviceId")
     private Long id;
 
     @Column(nullable=false)
@@ -36,7 +36,7 @@ public class Service {
     private String material;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "SERVICE_MEMBERS", joinColumns = { @JoinColumn(name = "service_id") }, inverseJoinColumns = { @JoinColumn(name = "member_id") })
+    @JoinTable(name = "SERVICE_MEMBERS", joinColumns = { @JoinColumn(name = "serviceId") }, inverseJoinColumns = { @JoinColumn(name = "memberId") })
     private List<Member> membersInService;
 
     public Long getId() {

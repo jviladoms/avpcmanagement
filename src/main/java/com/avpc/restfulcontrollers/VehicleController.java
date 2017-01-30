@@ -29,7 +29,7 @@ public class VehicleController {
             vehicle.setBrand(vehicleParams.getBrand());
             vehicle.setCredential(vehicleParams.getCredential());
             vehicle.setModel(vehicleParams.getModel());
-            vehicle.setRegistration_number(vehicleParams.getRegistration_number());
+            vehicle.setRegistrationNumber(vehicleParams.getRegistration_number());
             vehicleDAO.save(vehicle);
 
         } catch (Exception e){
@@ -68,7 +68,7 @@ public class VehicleController {
             vehicle.setBrand(vehicleParams.getBrand());
             vehicle.setCredential(vehicleParams.getCredential());
             vehicle.setModel(vehicleParams.getModel());
-            vehicle.setRegistration_number(vehicleParams.getRegistration_number());
+            vehicle.setRegistrationNumber(vehicleParams.getRegistration_number());
             vehicleDAO.save(vehicle);
 
         } catch (Exception e){

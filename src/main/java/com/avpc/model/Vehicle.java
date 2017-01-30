@@ -15,7 +15,7 @@ public class Vehicle {
 
     @Id
     @GeneratedValue
-    @Column(name = "member_id")
+    @Column(name = "vehicleId")
     private Long id;
 
     @Column
@@ -28,7 +28,7 @@ public class Vehicle {
     private String model;
 
     @Column
-    private String registration_number;
+    private String registrationNumber;
 
     @Column
     private Boolean deleted = false;
@@ -65,12 +65,12 @@ public class Vehicle {
         this.model = model;
     }
 
-    public String getRegistration_number() {
-        return registration_number;
+    public String getRegistrationNumber() {
+        return registrationNumber;
     }
 
-    public void setRegistration_number(String registration_number) {
-        this.registration_number = registration_number;
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
     }
 
     public Boolean getDeleted() {

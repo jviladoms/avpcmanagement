@@ -12,18 +12,18 @@ import java.util.List;
 public class Message {
     @Id
     @GeneratedValue
-    @Column(name="message_id")
+    @Column(name="messageId")
     private Long id;
 
     @Column(nullable = false)
     private String message;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "MESSAGE_MEMBERS", joinColumns = { @JoinColumn(name = "message_id") }, inverseJoinColumns = { @JoinColumn(name = "member_id") })
-    private List<Member> destination_members;
+    @JoinTable(name = "message_members", joinColumns = { @JoinColumn(name = "messageId") }, inverseJoinColumns = { @JoinColumn(name = "memberId") })
+    private List<Member> destinationMembers;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Member send_member;
+    private Member sendMember;
 
     @Column(nullable=false)
     private Date date;
@@ -44,20 +44,20 @@ public class Message {
         this.message = message;
     }
 
-    public List<Member> getDestination_members() {
-        return destination_members;
+    public List<Member> getDestinationMembers() {
+        return destinationMembers;
     }
 
-    public void setDestination_members(List<Member> destination_members) {
-        this.destination_members = destination_members;
+    public void setDestinationMembers(List<Member> destinationMembers) {
+        this.destinationMembers = destinationMembers;
     }
 
-    public Member getSend_member() {
-        return send_member;
+    public Member getSendMember() {
+        return sendMember;
     }
 
-    public void setSend_member(Member send_member) {
-        this.send_member = send_member;
+    public void setSendMember(Member sendMember) {
+        this.sendMember = sendMember;
     }
 
     public Date getDate() {

@@ -57,6 +57,24 @@ public class MemberController {
         }
     }
 
+    @RequestMapping(value ="/members/login", method = RequestMethod.POST)
+    @CrossOrigin
+    public void loginMember(@RequestBody MemberDTO memberParams) throws IOException {
+
+        try{
+            Member member = new Member();
+
+            String email = memberParams.getEmail();
+            String password = memberParams.getPassword();
+
+            // TODO:
+            System.out.println("email=" + email + ", " + password);
+
+        } catch (IllegalArgumentException e) {
+            response.sendError(HttpStatus.CONFLICT.value());
+        }
+    }
+
     @RequestMapping(value ="/members/{memberId}", method = RequestMethod.GET)
     @ResponseBody
     @CrossOrigin
@@ -66,7 +84,7 @@ public class MemberController {
 
         try{
             member = memberDAO.findOne(memberId);
-            member.setServices(serviceDAO.findBymembersInServiceIn(member).size());
+            member.setServices(serviceDAO.findByMembersInServiceIn(member).size());
         } catch (Exception e){
             log.error("ERROR");
         }
@@ -83,7 +101,7 @@ public class MemberController {
 
         try{
                 memberDAO.findAll().forEach(member -> listMember.add(member));
-                listMember.forEach(member -> member.setServices(serviceDAO.findBymembersInServiceIn(member).size()));
+                listMember.forEach(member -> member.setServices(serviceDAO.findByMembersInServiceIn(member).size()));
                 return listMember;
         } catch (Exception e){
             log.error("ERROR");

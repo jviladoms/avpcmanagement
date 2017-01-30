@@ -34,14 +34,14 @@ public class MessageController {
         try{
             Message message = new Message();
             message.setMessage(messageDTO.getMessage());
-            message.setSend_member(memberDAO.findOne(messageDTO.getSend_member()));
+            message.setSendMember(memberDAO.findOne(messageDTO.getSendMember()));
             message.setDate(messageDTO.getDate());
 
-            List<Member> members = getMembers(messageDTO.getDestination_members());
-            message.setDestination_members(members);
+            List<Member> members = getMembers(messageDTO.getDestinationMembers());
+            message.setDestinationMembers(members);
 
             if(members.size() > 0){
-                message.setDestination_members(members);
+                message.setDestinationMembers(members);
                 messageDAO.save(message);
             } else {
                 throw new Exception("no valid message");
@@ -93,13 +93,13 @@ public class MessageController {
         try {
             message = messageDAO.findOne(messageDTO.getId());
             message.setMessage(messageDTO.getMessage());
-            message.setSend_member(memberDAO.findOne(messageDTO.getSend_member()));
+            message.setSendMember(memberDAO.findOne(messageDTO.getSendMember()));
 
-            List<Member> members = getMembers(messageDTO.getDestination_members());
-            message.setDestination_members(members);
+            List<Member> members = getMembers(messageDTO.getDestinationMembers());
+            message.setDestinationMembers(members);
 
             if (members.size() > 0) {
-                message.setDestination_members(members);
+                message.setDestinationMembers(members);
                 messageDAO.save(message);
             } else {
                 throw new Exception("no valid message");

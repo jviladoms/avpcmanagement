@@ -15,7 +15,7 @@ import java.util.List;
 @Transactional
 public interface ServiceDAO extends CrudRepository<Service, Long> {
     List<Service> findByStartDateBetween(Date start,Date end);
-    List<Service> findBymembersInServiceIn(Member member);
+    List<Service> findByMembersInServiceIn(Member member);
 }
 
 

@@ -29,6 +29,7 @@ public class MemberDTO implements Serializable {
     private Double latitude;
     private Boolean availability;
     private String photoURL;
+    private String password;
 
 
     public Long getId() {
@@ -194,4 +195,8 @@ public class MemberDTO implements Serializable {
     public Boolean getDeleted() {
         return deletionDate != null ? true : false;
     }
+
+    public String getPassword() { return password; }
+
+    public void setPassword(String password) { this.password = password; }
 }
