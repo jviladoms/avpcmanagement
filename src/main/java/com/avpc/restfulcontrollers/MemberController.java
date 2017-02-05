@@ -50,6 +50,7 @@ public class MemberController {
             member.setSurname1(memberParams.getSurname1());
             member.setSurname2(memberParams.getSurname2());
             member.setUserGroup(memberParams.getUserGroup());
+            member.setDni(memberParams.getDni());
 
             memberDAO.save(member);
         } catch (IllegalArgumentException e) {
@@ -129,9 +130,10 @@ public class MemberController {
             member.setCity(memberParams.getCity());
             member.setEmail(memberParams.getEmail());
             member.setLandPhoneNumber(memberParams.getLandPhoneNumber());
-            member.setMobilePhoneNumber(memberParams.getLandPhoneNumber());
+            member.setMobilePhoneNumber(memberParams.getMobilePhoneNumber());
             member.setPostalCode(memberParams.getPostalCode());
             member.setUserGroup(memberParams.getUserGroup());
+            member.setDni(memberParams.getDni());
 
             memberDAO.save(member);
 

@@ -7,8 +7,11 @@ import com.avpc.model.dao.ServiceDAO;
 import com.avpc.restfulcontrollers.dto.ServiceDTO;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,18 +30,25 @@ public class ServiceController {
     @Autowired
     private MemberDAO memberDAO;
 
+    private HttpServletResponse response;
+
     private static final Logger log = Logger.getLogger(MemberController.class);
 
     @RequestMapping(value ="/service", method = RequestMethod.POST)
-    public String addMember(@RequestBody ServiceDTO serviceDTO) {
+    @CrossOrigin
+    public void addService(@RequestBody ServiceDTO serviceDTO) throws IOException {
 
         try{
             Service service = new Service();
             service.setStartDate(serviceDTO.getStartDate());
-            service.setFinalDate(serviceDTO.getEndDate());
+            service.setFinalDate(serviceDTO.getFinalDate());
             service.setComments(serviceDTO.getComments());
+            service.setServiceDescription(serviceDTO.getServiceDescription());
+            service.setLocalization(serviceDTO.getLocalization());
+            service.setMaterial(serviceDTO.getMaterial());
+            service.setTypeOfService(serviceDTO.getTypeOfService());
 
-            List<Member> members = getMembers(serviceDTO.getMembers());
+            List<Member> members = getMembers(serviceDTO.getMembersInService());
 
             if(members.size() > 0){
                 service.setMembersInService(members);
@@ -49,13 +59,13 @@ public class ServiceController {
 
         } catch (Exception e){
             log.error(e.getMessage());
-            return "ERROR: " + e.getMessage();
+            response.sendError(HttpStatus.CONFLICT.value());
         }
-        return "OK";
     }
 
     @RequestMapping(value ="/service", method = RequestMethod.GET)
     @ResponseBody
+    @CrossOrigin
     public List<Service> getMember(@RequestParam(value="id",required=false) Long serviceId) {
 
         List<Service> listService = new ArrayList<>();
@@ -76,6 +86,7 @@ public class ServiceController {
 
     @RequestMapping(value ="/service/find_between_dates", method = RequestMethod.GET)
     @ResponseBody
+    @CrossOrigin
     public List<Service> getBetweenDays(@RequestParam(value="start_date") Date start_date,
                                          @RequestParam(value="end_date") Date end_date) {
 
@@ -84,19 +95,24 @@ public class ServiceController {
         return listService;
     }
 
-    @RequestMapping(value ="/service", method = RequestMethod.PUT)
+    @RequestMapping(value ="/service/{serviceId}", method = RequestMethod.PUT)
     @ResponseBody
-    public Service updateMember(@RequestBody ServiceDTO serviceDTO) {
+    @CrossOrigin
+    public Service updateMember(@PathVariable(value="serviceId") Long serviceId, @RequestBody ServiceDTO serviceDTO) {
 
         Service service = null;
 
         try{
-            service = serviceDAO.findOne(serviceDTO.getId());
+            service = serviceDAO.findOne(serviceId);
             service.setStartDate(serviceDTO.getStartDate());
-            service.setFinalDate(serviceDTO.getEndDate());
+            service.setFinalDate(serviceDTO.getFinalDate());
             service.setComments(serviceDTO.getComments());
+            service.setServiceDescription(serviceDTO.getServiceDescription());
+            service.setLocalization(serviceDTO.getLocalization());
+            service.setMaterial(serviceDTO.getMaterial());
+            service.setTypeOfService(serviceDTO.getTypeOfService());
 
-            List<Member> members = getMembers(serviceDTO.getMembers());
+            List<Member> members = getMembers(serviceDTO.getMembersInService());
 
             if(members.size() > 0){
                 service.setMembersInService(members);
@@ -114,12 +130,13 @@ public class ServiceController {
         return service;
     }
 
-    @RequestMapping(value ="/service", method = RequestMethod.DELETE)
+    @RequestMapping(value ="/service/{serviceId}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deleteMember(Long memberId) {
+    @CrossOrigin
+    public String deleteMember(@PathVariable(value="serviceId") Long serviceId) {
 
         try{
-            serviceDAO.delete(memberId);
+            serviceDAO.delete(serviceId);
         } catch (Exception e){
             return "ERROR";
         }

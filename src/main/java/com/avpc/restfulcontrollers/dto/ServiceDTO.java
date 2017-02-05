@@ -12,10 +12,22 @@ import java.util.List;
 public class ServiceDTO implements Serializable {
 
     private Long id;
+
     private Date startDate;
-    private Date endDate;
+
+    private Date finalDate;
+
     private String comments;
-    private Iterable<Long> members;
+
+    private String typeOfService;
+
+    private String localization;
+
+    private String serviceDescription;
+
+    private String material;
+
+    private Iterable<Long> membersInService;
 
     public Long getId() {
         return id;
@@ -33,12 +45,12 @@ public class ServiceDTO implements Serializable {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Date getFinalDate() {
+        return finalDate;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setFinalDate(Date finalDate) {
+        this.finalDate = finalDate;
     }
 
     public String getComments() {
@@ -49,11 +61,43 @@ public class ServiceDTO implements Serializable {
         this.comments = comments;
     }
 
-    public Iterable<Long> getMembers() {
-        return members;
+    public String getTypeOfService() {
+        return typeOfService;
     }
 
-    public void setMembers(Iterable<Long> members) {
-        this.members = members;
+    public void setTypeOfService(String typeOfService) {
+        this.typeOfService = typeOfService;
+    }
+
+    public String getLocalization() {
+        return localization;
+    }
+
+    public void setLocalization(String localization) {
+        this.localization = localization;
+    }
+
+    public String getServiceDescription() {
+        return serviceDescription;
+    }
+
+    public void setServiceDescription(String serviceDescription) {
+        this.serviceDescription = serviceDescription;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public Iterable<Long> getMembersInService() {
+        return membersInService;
+    }
+
+    public void setMembersInService(Iterable<Long> membersInService) {
+        this.membersInService = membersInService;
     }
 }
