@@ -30,9 +30,6 @@ public class Vehicle {
     @Column
     private String registrationNumber;
 
-    @Column
-    private Boolean deleted = false;
-
     public Long getId() {
         return id;
     }
@@ -71,13 +68,5 @@ public class Vehicle {
 
     public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
     }
 }

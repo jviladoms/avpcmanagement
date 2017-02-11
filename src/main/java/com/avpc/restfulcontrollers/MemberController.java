@@ -149,7 +149,6 @@ public class MemberController {
     }
 
     @RequestMapping(value ="/{memberId}/location", method = RequestMethod.PUT)
-    @ResponseBody
     @CrossOrigin
     public void updateMemberLocation(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams, HttpServletResponse response) throws IOException {
 
@@ -192,7 +191,6 @@ public class MemberController {
     }
 
     @RequestMapping(value ="/{memberId}", method = RequestMethod.DELETE)
-    @ResponseBody
     @CrossOrigin
     public void deleteMember(@PathVariable(value="memberId") Long memberId, HttpServletResponse response) throws IOException{
         try{

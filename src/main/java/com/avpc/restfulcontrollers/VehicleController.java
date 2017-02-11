@@ -6,24 +6,26 @@ import com.avpc.model.dao.VehicleDAO;
 import com.avpc.restfulcontrollers.dto.VehicleDTO;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Jordi on 31/10/2016.
- */
-
 @RestController
+@RequestMapping(value ="/vehicle")
 public class VehicleController {
     private static final Logger log = Logger.getLogger(MemberController.class);
 
     @Autowired
     private VehicleDAO vehicleDAO;
 
-    @RequestMapping(value ="/vehicle", method = RequestMethod.POST)
-    public String addVehicle(@RequestBody VehicleDTO vehicleParams) {
+    @RequestMapping(value ="/", method = RequestMethod.POST)
+    @CrossOrigin
+    public void addVehicle(@RequestBody VehicleDTO vehicleParams,
+                           HttpServletResponse response) throws IOException {
         try{
             Vehicle vehicle = new Vehicle();
             vehicle.setBrand(vehicleParams.getBrand());
@@ -31,40 +33,59 @@ public class VehicleController {
             vehicle.setModel(vehicleParams.getModel());
             vehicle.setRegistrationNumber(vehicleParams.getRegistration_number());
             vehicleDAO.save(vehicle);
-
         } catch (Exception e){
-            return new StringBuilder().append("ERROR: ").append(e.getMessage()).toString();
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
-        return "OK";
     }
 
-    @RequestMapping(value ="/vehicle", method = RequestMethod.GET)
+    @RequestMapping(value ="/{vehicleId}", method = RequestMethod.GET)
     @ResponseBody
-    public List<Vehicle> findVehicle(@RequestParam(value="id",required=false) Long vehicleId) {
+    @CrossOrigin
+    public Vehicle findVehicle(@PathVariable(value="vehicleId") Long vehicleId,
+                                     HttpServletResponse response) throws IOException {
+
+        Vehicle vehicle = null;
+
+        try{
+            vehicle =vehicleDAO.findOne(vehicleId);
+        } catch (IllegalArgumentException e){
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
+        }
+
+        return vehicle;
+    }
+
+    @RequestMapping(value ="/", method = RequestMethod.GET)
+    @ResponseBody
+    @CrossOrigin
+    public List<Vehicle> findVehicle(HttpServletResponse response) throws IOException {
         List<Vehicle> listVehicles = new ArrayList<>();
 
         try{
-            if (vehicleId == null) {
-                vehicleDAO.findAll().forEach(member -> listVehicles.add(member));
-                return listVehicles;
-            } else {
-                listVehicles.add(vehicleDAO.findOne(vehicleId));
-            }
+            vehicleDAO.findAll().forEach(member -> listVehicles.add(member));
+            return listVehicles;
+
         } catch (Exception e){
-            log.error(new StringBuilder().append("ERROR: ").append(e.getMessage()).toString());
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
 
         return listVehicles;
     }
 
-    @RequestMapping(value ="/vehicle", method = RequestMethod.PUT)
+    @RequestMapping(value ="/{vehicleId}", method = RequestMethod.PUT)
     @ResponseBody
-    public Vehicle updateVehicle(@RequestBody VehicleDTO vehicleParams) {
+    @CrossOrigin
+    public Vehicle updateVehicle(@PathVariable(value="vehicleId") Long vehicleId,
+                                 @RequestBody VehicleDTO vehicleParams,
+                                 HttpServletResponse response) throws IOException {
 
         Vehicle vehicle =  null;
 
         try{
-            vehicle = vehicleDAO.findOne(vehicleParams.getId());
+            vehicle = vehicleDAO.findOne(vehicleId);
             vehicle.setBrand(vehicleParams.getBrand());
             vehicle.setCredential(vehicleParams.getCredential());
             vehicle.setModel(vehicleParams.getModel());
@@ -72,23 +93,22 @@ public class VehicleController {
             vehicleDAO.save(vehicle);
 
         } catch (Exception e){
-            log.error(new StringBuilder().append("ERROR: ").append(e.getMessage()).toString());
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
 
         return vehicle;
     }
 
-    @RequestMapping(value ="/vehicle", method = RequestMethod.DELETE)
-    @ResponseBody
-    public String deleteMember(Long vehicleId) {
+    @RequestMapping(value ="/{vehicleId}", method = RequestMethod.DELETE)
+    @CrossOrigin
+    public void deleteMember(@PathVariable(value="vehicleId") Long vehicleId,
+                               HttpServletResponse response) throws IOException{
         try{
-            Vehicle vehicle = vehicleDAO.findOne(vehicleId);
-            vehicle.setDeleted(true);
-            vehicleDAO.save(vehicle);
+            vehicleDAO.delete(vehicleId);
         } catch (Exception e){
-            log.error(new StringBuilder().append("ERROR: ").append(e.getMessage()).toString());
-            return new StringBuilder().append("ERROR: ").append(e.getMessage()).toString();
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
-        return "OK";
     }
 }

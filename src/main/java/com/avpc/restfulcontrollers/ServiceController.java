@@ -140,7 +140,6 @@ public class ServiceController {
     }
 
     @RequestMapping(value ="/{serviceId}", method = RequestMethod.DELETE)
-    @ResponseBody
     @CrossOrigin
     public void deleteMember(@PathVariable(value="serviceId") Long serviceId,
                              HttpServletResponse response) throws IOException{
