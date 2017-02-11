@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value ="/service")
 public class ServiceController {
@@ -30,8 +31,7 @@ public class ServiceController {
 
     private static final Logger log = Logger.getLogger(MemberController.class);
 
-    @RequestMapping(value ="/", method = RequestMethod.POST)
-    @CrossOrigin
+    @RequestMapping(method = RequestMethod.POST)
     public void addService(@RequestBody ServiceDTO serviceDTO, HttpServletResponse response) throws IOException {
 
         try{
@@ -59,9 +59,8 @@ public class ServiceController {
         }
     }
 
-    @RequestMapping(value ="/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    @CrossOrigin
     public List<Service> getMember(@RequestParam(value="id",required=false) Long serviceId,
                                    HttpServletResponse response) throws IOException {
 
@@ -84,7 +83,6 @@ public class ServiceController {
 
     @RequestMapping(value ="/find_between_dates", method = RequestMethod.GET)
     @ResponseBody
-    @CrossOrigin
     public List<Service> getBetweenDays(@RequestParam(value="start_date") Date start_date,
                                          @RequestParam(value="end_date") Date end_date,
                                         HttpServletResponse response) throws IOException {
@@ -103,7 +101,6 @@ public class ServiceController {
 
     @RequestMapping(value ="/{serviceId}", method = RequestMethod.PUT)
     @ResponseBody
-    @CrossOrigin
     public Service updateMember(@PathVariable(value="serviceId") Long serviceId,
                                 @RequestBody ServiceDTO serviceDTO,
                                 HttpServletResponse response) throws IOException {
@@ -140,7 +137,6 @@ public class ServiceController {
     }
 
     @RequestMapping(value ="/{serviceId}", method = RequestMethod.DELETE)
-    @CrossOrigin
     public void deleteMember(@PathVariable(value="serviceId") Long serviceId,
                              HttpServletResponse response) throws IOException{
 

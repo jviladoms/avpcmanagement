@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value ="/vehicle")
 public class VehicleController {
@@ -22,8 +23,7 @@ public class VehicleController {
     @Autowired
     private VehicleDAO vehicleDAO;
 
-    @RequestMapping(value ="/", method = RequestMethod.POST)
-    @CrossOrigin
+    @RequestMapping(method = RequestMethod.POST)
     public void addVehicle(@RequestBody VehicleDTO vehicleParams,
                            HttpServletResponse response) throws IOException {
         try{
@@ -41,7 +41,6 @@ public class VehicleController {
 
     @RequestMapping(value ="/{vehicleId}", method = RequestMethod.GET)
     @ResponseBody
-    @CrossOrigin
     public Vehicle findVehicle(@PathVariable(value="vehicleId") Long vehicleId,
                                      HttpServletResponse response) throws IOException {
 
@@ -57,9 +56,8 @@ public class VehicleController {
         return vehicle;
     }
 
-    @RequestMapping(value ="/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    @CrossOrigin
     public List<Vehicle> findVehicle(HttpServletResponse response) throws IOException {
         List<Vehicle> listVehicles = new ArrayList<>();
 
@@ -77,7 +75,6 @@ public class VehicleController {
 
     @RequestMapping(value ="/{vehicleId}", method = RequestMethod.PUT)
     @ResponseBody
-    @CrossOrigin
     public Vehicle updateVehicle(@PathVariable(value="vehicleId") Long vehicleId,
                                  @RequestBody VehicleDTO vehicleParams,
                                  HttpServletResponse response) throws IOException {
@@ -101,7 +98,6 @@ public class VehicleController {
     }
 
     @RequestMapping(value ="/{vehicleId}", method = RequestMethod.DELETE)
-    @CrossOrigin
     public void deleteMember(@PathVariable(value="vehicleId") Long vehicleId,
                                HttpServletResponse response) throws IOException{
         try{

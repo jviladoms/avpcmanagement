@@ -11,13 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Jordi on 29/10/2016.
- */
+@CrossOrigin
 @RestController
 @RequestMapping(value ="/members")
 public class MemberController {
@@ -31,7 +28,7 @@ public class MemberController {
     private ServiceDAO serviceDAO;
 
 
-    @RequestMapping(value ="/", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @CrossOrigin
     public void addMember(@RequestBody MemberDTO memberParams, HttpServletResponse response) throws IOException {
 
@@ -60,7 +57,6 @@ public class MemberController {
     }
 
     @RequestMapping(value ="/login", method = RequestMethod.POST)
-    @CrossOrigin
     public void loginMember(@RequestBody MemberDTO memberParams, HttpServletResponse response) throws IOException {
 
         try{
@@ -80,7 +76,6 @@ public class MemberController {
 
     @RequestMapping(value ="/{memberId}", method = RequestMethod.GET)
     @ResponseBody
-    @CrossOrigin
     public Member findMember(@PathVariable(value="memberId",required=false) Long memberId, HttpServletResponse response) throws IOException{
 
         Member member = null;
@@ -96,9 +91,8 @@ public class MemberController {
         return member;
     }
 
-    @RequestMapping(value ="/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    @CrossOrigin
     public List<Member> findMember(HttpServletResponse response) throws IOException{
 
         List<Member> listMember = new ArrayList<>();
@@ -116,7 +110,6 @@ public class MemberController {
 
     @RequestMapping(value ="/{memberId}", method = RequestMethod.PUT)
     @ResponseBody
-    @CrossOrigin
     public Member updateMember(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams, HttpServletResponse response) throws IOException {
 
         Member member = null;
@@ -149,7 +142,6 @@ public class MemberController {
     }
 
     @RequestMapping(value ="/{memberId}/location", method = RequestMethod.PUT)
-    @CrossOrigin
     public void updateMemberLocation(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams, HttpServletResponse response) throws IOException {
 
         Member member = null;
@@ -170,7 +162,6 @@ public class MemberController {
 
     @RequestMapping(value ="/{memberId}/availability", method = RequestMethod.PUT)
     @ResponseBody
-    @CrossOrigin
     public Member updateMemberAvailability(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams, HttpServletResponse response) throws IOException{
 
         Member member = null;
@@ -191,7 +182,6 @@ public class MemberController {
     }
 
     @RequestMapping(value ="/{memberId}", method = RequestMethod.DELETE)
-    @CrossOrigin
     public void deleteMember(@PathVariable(value="memberId") Long memberId, HttpServletResponse response) throws IOException{
         try{
             memberDAO.delete(memberId);

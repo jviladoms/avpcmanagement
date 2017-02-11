@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Jordi on 13/11/2016.
  */
+@CrossOrigin
 @RestController
 @RequestMapping(value ="/message")
 public class MessageController {
@@ -33,8 +34,7 @@ public class MessageController {
 
     private static final Logger log = Logger.getLogger(MemberController.class);
 
-    @RequestMapping(value ="/", method = RequestMethod.POST)
-    @CrossOrigin
+    @RequestMapping(method = RequestMethod.POST)
     public void addMessage(@RequestBody MessageDTO messageDTO,
                              HttpServletResponse response) throws IOException {
 
@@ -62,7 +62,6 @@ public class MessageController {
 
     @RequestMapping(value ="/find_by_user/{userId}", method = RequestMethod.GET)
     @ResponseBody
-    @CrossOrigin
     public List<Message> getMessage(@PathVariable(value="userId") Long userId,
                                     HttpServletResponse response) throws IOException {
 
@@ -81,7 +80,6 @@ public class MessageController {
 
     @RequestMapping(value ="/{messageId}", method = RequestMethod.GET)
     @ResponseBody
-    @CrossOrigin
     public Message getMessageWithId(@PathVariable(value="messageId") Long messageId,
                               HttpServletResponse response) throws IOException {
 
@@ -99,7 +97,6 @@ public class MessageController {
 
     @RequestMapping(value ="/find_between_dates", method = RequestMethod.GET)
     @ResponseBody
-    @CrossOrigin
     public List<Message> getBetweenDays(@RequestParam(value="start_date") Date start_date,
                                         @RequestParam(value="end_date") Date end_date,
                                         HttpServletResponse response) throws IOException{
@@ -116,7 +113,6 @@ public class MessageController {
     }
 
     @RequestMapping(value ="/{messageId}", method = RequestMethod.PUT)
-    @CrossOrigin
     public void updateMessage(@PathVariable(value="messageId") Long messageId,
                               @RequestBody MessageDTO messageDTO,
                               HttpServletResponse response) throws IOException {
@@ -143,7 +139,6 @@ public class MessageController {
     }
 
     @RequestMapping(value ="/{messageId}", method = RequestMethod.DELETE)
-    @CrossOrigin
     public void deleteMessage(@PathVariable(value="messageId") Long messageId,
                               HttpServletResponse response) throws IOException {
         try{
