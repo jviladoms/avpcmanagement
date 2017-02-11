@@ -19,6 +19,7 @@ import java.util.List;
  * Created by Jordi on 29/10/2016.
  */
 @RestController
+@RequestMapping(value ="/members")
 public class MemberController {
 
     private static final Logger log = Logger.getLogger(MemberController.class);
@@ -29,11 +30,10 @@ public class MemberController {
     @Autowired
     private ServiceDAO serviceDAO;
 
-    private HttpServletResponse response;
 
-    @RequestMapping(value ="/members", method = RequestMethod.POST)
+    @RequestMapping(value ="/", method = RequestMethod.POST)
     @CrossOrigin
-    public void addMember(@RequestBody MemberDTO memberParams) throws IOException {
+    public void addMember(@RequestBody MemberDTO memberParams, HttpServletResponse response) throws IOException {
 
         try{
             Member member = new Member();
@@ -54,13 +54,14 @@ public class MemberController {
 
             memberDAO.save(member);
         } catch (IllegalArgumentException e) {
+            log.error(e.getMessage());
             response.sendError(HttpStatus.CONFLICT.value());
         }
     }
 
-    @RequestMapping(value ="/members/login", method = RequestMethod.POST)
+    @RequestMapping(value ="/login", method = RequestMethod.POST)
     @CrossOrigin
-    public void loginMember(@RequestBody MemberDTO memberParams) throws IOException {
+    public void loginMember(@RequestBody MemberDTO memberParams, HttpServletResponse response) throws IOException {
 
         try{
             Member member = new Member();
@@ -72,14 +73,15 @@ public class MemberController {
             System.out.println("email=" + email + ", " + password);
 
         } catch (IllegalArgumentException e) {
+            log.error(e.getMessage());
             response.sendError(HttpStatus.CONFLICT.value());
         }
     }
 
-    @RequestMapping(value ="/members/{memberId}", method = RequestMethod.GET)
+    @RequestMapping(value ="/{memberId}", method = RequestMethod.GET)
     @ResponseBody
     @CrossOrigin
-    public Member findMember(@PathVariable(value="memberId",required=false) Long memberId) {
+    public Member findMember(@PathVariable(value="memberId",required=false) Long memberId, HttpServletResponse response) throws IOException{
 
         Member member = null;
 
@@ -87,34 +89,35 @@ public class MemberController {
             member = memberDAO.findOne(memberId);
             member.setServices(serviceDAO.findByMembersInServiceIn(member).size());
         } catch (Exception e){
-            log.error("ERROR");
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
 
         return member;
     }
 
-    @RequestMapping(value ="/members", method = RequestMethod.GET)
+    @RequestMapping(value ="/", method = RequestMethod.GET)
     @ResponseBody
     @CrossOrigin
-    public List<Member> findMember() {
+    public List<Member> findMember(HttpServletResponse response) throws IOException{
 
         List<Member> listMember = new ArrayList<>();
 
         try{
-                memberDAO.findAll().forEach(member -> listMember.add(member));
-                listMember.forEach(member -> member.setServices(serviceDAO.findByMembersInServiceIn(member).size()));
-                return listMember;
+            memberDAO.findAll().forEach(member -> listMember.add(member));
+            listMember.forEach(member -> member.setServices(serviceDAO.findByMembersInServiceIn(member).size()));
         } catch (Exception e){
-            log.error("ERROR");
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
 
         return listMember;
     }
 
-    @RequestMapping(value ="/members/{memberId}", method = RequestMethod.PUT)
+    @RequestMapping(value ="/{memberId}", method = RequestMethod.PUT)
     @ResponseBody
     @CrossOrigin
-    public Member updateMember(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams) throws IOException {
+    public Member updateMember(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams, HttpServletResponse response) throws IOException {
 
         Member member = null;
 
@@ -138,17 +141,17 @@ public class MemberController {
             memberDAO.save(member);
 
         } catch (IllegalArgumentException e){
-            log.error("ERROR");
+            log.error(e.getMessage());
             response.sendError(HttpStatus.CONFLICT.value());
         }
 
         return member;
     }
 
-    @RequestMapping(value ="/members/{memberId}/location", method = RequestMethod.PUT)
+    @RequestMapping(value ="/{memberId}/location", method = RequestMethod.PUT)
     @ResponseBody
     @CrossOrigin
-    public void updateMemberLocation(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams) throws IOException {
+    public void updateMemberLocation(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams, HttpServletResponse response) throws IOException {
 
         Member member = null;
 
@@ -161,15 +164,15 @@ public class MemberController {
             memberDAO.save(member);
 
         } catch (Exception e){
-            log.error("ERROR: " + e.getMessage());
+            log.error(e.getMessage());
             response.sendError(HttpStatus.CONFLICT.value());
         }
     }
 
-    @RequestMapping(value ="/members/{memberId}/availability", method = RequestMethod.PUT)
+    @RequestMapping(value ="/{memberId}/availability", method = RequestMethod.PUT)
     @ResponseBody
     @CrossOrigin
-    public Member updateMemberAvailability(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams) {
+    public Member updateMemberAvailability(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams, HttpServletResponse response) throws IOException{
 
         Member member = null;
 
@@ -181,20 +184,21 @@ public class MemberController {
             memberDAO.save(member);
 
         } catch (Exception e){
-            log.error("ERROR");
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
 
         return member;
     }
 
-    @RequestMapping(value ="/members/{memberId}", method = RequestMethod.DELETE)
+    @RequestMapping(value ="/{memberId}", method = RequestMethod.DELETE)
     @ResponseBody
     @CrossOrigin
-    public void deleteMember(@PathVariable(value="memberId") Long memberId) throws IOException{
+    public void deleteMember(@PathVariable(value="memberId") Long memberId, HttpServletResponse response) throws IOException{
         try{
             memberDAO.delete(memberId);
         } catch (IllegalArgumentException e){
-            log.error("ERROR");
+            log.error(e.getMessage());
             response.sendError(HttpStatus.CONFLICT.value());
         }
     }
