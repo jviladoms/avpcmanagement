@@ -5,11 +5,15 @@ import com.avpc.model.dao.MemberDAO;
 import com.avpc.model.dao.MessageDAO;
 import com.avpc.restfulcontrollers.dto.MessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.avpc.model.Member;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +22,9 @@ import java.util.stream.Collectors;
 /**
  * Created by Jordi on 13/11/2016.
  */
+@CrossOrigin
 @RestController
+@RequestMapping(value ="/message")
 public class MessageController {
     @Autowired
     private MessageDAO messageDAO;
@@ -28,8 +34,9 @@ public class MessageController {
 
     private static final Logger log = Logger.getLogger(MemberController.class);
 
-    @RequestMapping(value ="/message", method = RequestMethod.POST)
-    public String addMessage(@RequestBody MessageDTO messageDTO) {
+    @RequestMapping(method = RequestMethod.POST)
+    public void addMessage(@RequestBody MessageDTO messageDTO,
+                             HttpServletResponse response) throws IOException {
 
         try{
             Message message = new Message();
@@ -44,54 +51,75 @@ public class MessageController {
                 message.setDestinationMembers(members);
                 messageDAO.save(message);
             } else {
-                throw new Exception("no valid message");
+                response.sendError(HttpStatus.BAD_REQUEST.value());
             }
 
-        } catch (Exception e){
+        } catch (IllegalArgumentException e){
             log.error(e.getMessage());
-            return "ERROR: " + e.getMessage();
+            response.sendError(HttpStatus.CONFLICT.value());
         }
-        return "OK";
     }
 
-    @RequestMapping(value ="/message", method = RequestMethod.GET)
+    @RequestMapping(value ="/find_by_user/{userId}", method = RequestMethod.GET)
     @ResponseBody
-    public List<Message> getMessage(@RequestParam(value="user_id",required=false) Long userId) {
+    public List<Message> getMessage(@PathVariable(value="userId") Long userId,
+                                    HttpServletResponse response) throws IOException {
 
-        final List<Message> listMessage = new ArrayList<>();
+        List<Message> listMessages = new ArrayList<>();
 
         try{
-            if (userId == null){
-                messageDAO.findAll().forEach(message -> listMessage.add(message));
-                return listMessage;
-            } else {
-                return messageDAO.findAllByDestinationMembers(userId);
-            }
-        } catch (Exception e){
+            listMessages = messageDAO.findAllByDestinationMembers(userId);
+
+        } catch (IllegalArgumentException e){
             log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
 
-        return listMessage;
+        return listMessages;
     }
 
-    @RequestMapping(value ="/message/find_between_dates", method = RequestMethod.GET)
+    @RequestMapping(value ="/{messageId}", method = RequestMethod.GET)
     @ResponseBody
-    public List<Message> getBetweenDays(@RequestParam(value="start_date") Date start_date,
-                                        @RequestParam(value="end_date") Date end_date) {
-
-        List<Message> listMessage = messageDAO.findAllByDateBetween(start_date,end_date);
-
-        return listMessage;
-    }
-
-    @RequestMapping(value ="/message", method = RequestMethod.PUT)
-    @ResponseBody
-    public Message updateMessage(@RequestBody MessageDTO messageDTO) {
+    public Message getMessageWithId(@PathVariable(value="messageId") Long messageId,
+                              HttpServletResponse response) throws IOException {
 
         Message message = null;
 
+        try{
+            message = messageDAO.findOne(messageId);
+        } catch (IllegalArgumentException e){
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
+        }
+
+        return message;
+    }
+
+    @RequestMapping(value ="/find_between_dates", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Message> getBetweenDays(@RequestParam(value="start_date") Date start_date,
+                                        @RequestParam(value="end_date") Date end_date,
+                                        HttpServletResponse response) throws IOException{
+        List<Message> listMessage = null;
+
+        try{
+            listMessage = messageDAO.findAllByDateBetween(start_date,end_date);
+        }catch(IllegalArgumentException e){
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
+        }
+
+        return listMessage;
+    }
+
+    @RequestMapping(value ="/{messageId}", method = RequestMethod.PUT)
+    public void updateMessage(@PathVariable(value="messageId") Long messageId,
+                              @RequestBody MessageDTO messageDTO,
+                              HttpServletResponse response) throws IOException {
+        Message message = null;
+
         try {
-            message = messageDAO.findOne(messageDTO.getId());
+            message = messageDAO.findOne(messageId);
             message.setMessage(messageDTO.getMessage());
             message.setSendMember(memberDAO.findOne(messageDTO.getSendMember()));
 
@@ -102,26 +130,23 @@ public class MessageController {
                 message.setDestinationMembers(members);
                 messageDAO.save(message);
             } else {
-                throw new Exception("no valid message");
+                response.sendError(HttpStatus.BAD_REQUEST.value());
             }
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
-
-        return message;
     }
 
-    @RequestMapping(value ="/message", method = RequestMethod.DELETE)
-    @ResponseBody
-    public String deleteMessage(Long messageId) {
-
+    @RequestMapping(value ="/{messageId}", method = RequestMethod.DELETE)
+    public void deleteMessage(@PathVariable(value="messageId") Long messageId,
+                              HttpServletResponse response) throws IOException {
         try{
             messageDAO.delete(messageId);
-        } catch (Exception e){
-            return "ERROR";
+        } catch (IllegalArgumentException e){
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
-
-        return "OK";
     }
 
     private List<Member> getMembers(Iterable<Long> ids){

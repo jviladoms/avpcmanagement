@@ -12,7 +12,6 @@ public class VehicleDTO implements Serializable {
     private String credential;
     private String model;
     private String registration_number;
-    private Boolean deleted;
 
     public Long getId() {
         return id;

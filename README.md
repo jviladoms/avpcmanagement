@@ -16,3 +16,7 @@ To install this application you need to install gradle,docker and docker-compose
     -  docker-compose up -d
 
 There is also available a script called create-docker.sh that runs automatically the instructions below.
+
+## Swagger
+
+After run this application a Swagger tool with the documentation is available at http://localhost:8080/swagger-ui.html

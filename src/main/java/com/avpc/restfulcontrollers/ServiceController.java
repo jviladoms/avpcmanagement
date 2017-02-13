@@ -5,6 +5,7 @@ import com.avpc.model.Service;
 import com.avpc.model.dao.MemberDAO;
 import com.avpc.model.dao.ServiceDAO;
 import com.avpc.restfulcontrollers.dto.ServiceDTO;
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,11 +18,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by Jordi on 29/10/2016.
- */
-
+@CrossOrigin
 @RestController
+@RequestMapping(value ="/service")
 public class ServiceController {
 
     @Autowired
@@ -30,13 +29,10 @@ public class ServiceController {
     @Autowired
     private MemberDAO memberDAO;
 
-    private HttpServletResponse response;
-
     private static final Logger log = Logger.getLogger(MemberController.class);
 
-    @RequestMapping(value ="/service", method = RequestMethod.POST)
-    @CrossOrigin
-    public void addService(@RequestBody ServiceDTO serviceDTO) throws IOException {
+    @RequestMapping(method = RequestMethod.POST)
+    public void addService(@RequestBody ServiceDTO serviceDTO, HttpServletResponse response) throws IOException {
 
         try{
             Service service = new Service();
@@ -54,19 +50,19 @@ public class ServiceController {
                 service.setMembersInService(members);
                 serviceDAO.save(service);
             } else {
-                throw new Exception("no valid members");
+                response.sendError(HttpStatus.BAD_REQUEST.value());
             }
 
-        } catch (Exception e){
+        } catch (IllegalArgumentException e ){
             log.error(e.getMessage());
             response.sendError(HttpStatus.CONFLICT.value());
         }
     }
 
-    @RequestMapping(value ="/service", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    @CrossOrigin
-    public List<Service> getMember(@RequestParam(value="id",required=false) Long serviceId) {
+    public List<Service> getMember(@RequestParam(value="id",required=false) Long serviceId,
+                                   HttpServletResponse response) throws IOException {
 
         List<Service> listService = new ArrayList<>();
 
@@ -77,28 +73,37 @@ public class ServiceController {
             } else {
                 listService.add(serviceDAO.findOne(serviceId));
             }
-        } catch (Exception e){
+        } catch (IllegalArgumentException e){
             log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
 
         return listService;
     }
 
-    @RequestMapping(value ="/service/find_between_dates", method = RequestMethod.GET)
+    @RequestMapping(value ="/find_between_dates", method = RequestMethod.GET)
     @ResponseBody
-    @CrossOrigin
     public List<Service> getBetweenDays(@RequestParam(value="start_date") Date start_date,
-                                         @RequestParam(value="end_date") Date end_date) {
+                                         @RequestParam(value="end_date") Date end_date,
+                                        HttpServletResponse response) throws IOException {
 
-        List<Service> listService = serviceDAO.findByStartDateBetween(start_date,end_date);
+        List<Service> listService = null;
+        try{
+            listService = serviceDAO.findByStartDateBetween(start_date,end_date);
+        } catch(IllegalArgumentException e) {
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
+        }
+
 
         return listService;
     }
 
-    @RequestMapping(value ="/service/{serviceId}", method = RequestMethod.PUT)
+    @RequestMapping(value ="/{serviceId}", method = RequestMethod.PUT)
     @ResponseBody
-    @CrossOrigin
-    public Service updateMember(@PathVariable(value="serviceId") Long serviceId, @RequestBody ServiceDTO serviceDTO) {
+    public Service updateMember(@PathVariable(value="serviceId") Long serviceId,
+                                @RequestBody ServiceDTO serviceDTO,
+                                HttpServletResponse response) throws IOException {
 
         Service service = null;
 
@@ -118,30 +123,30 @@ public class ServiceController {
                 service.setMembersInService(members);
                 serviceDAO.save(service);
             } else {
-                throw new Exception("no valid members");
+                response.sendError(HttpStatus.BAD_REQUEST.value());
             }
 
             serviceDAO.save(service);
 
-        } catch (Exception e){
+        }  catch (IllegalArgumentException e){
             log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
 
         return service;
     }
 
-    @RequestMapping(value ="/service/{serviceId}", method = RequestMethod.DELETE)
-    @ResponseBody
-    @CrossOrigin
-    public String deleteMember(@PathVariable(value="serviceId") Long serviceId) {
+    @RequestMapping(value ="/{serviceId}", method = RequestMethod.DELETE)
+    public void deleteMember(@PathVariable(value="serviceId") Long serviceId,
+                             HttpServletResponse response) throws IOException{
 
         try{
             serviceDAO.delete(serviceId);
-        } catch (Exception e){
-            return "ERROR";
+        } catch (IllegalArgumentException e){
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
 
-        return "OK";
     }
 
     private List<Member> getMembers(Iterable<Long> ids){
