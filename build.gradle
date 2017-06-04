@@ -41,5 +41,5 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.7'
     compile ("io.springfox:springfox-swagger2:2.4.0")
     compile ("io.springfox:springfox-swagger-ui:2.4.0")
-
+    compile 'com.google.firebase:firebase-admin:5.0.0'
 }
