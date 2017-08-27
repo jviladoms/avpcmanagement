@@ -15,4 +15,39 @@ public class WelcomeController {
         model.put("name", "jviladoms");
         return "index";
     }
+
+    @RequestMapping(value = "/login")
+    public String login(ModelMap model){
+        return "login";
+    }
+
+    @RequestMapping(value = "/admin/inici")
+    public String inici(ModelMap model){
+        return "Inici";
+    }
+
+    @RequestMapping(value = "/admin/voluntaris")
+    public String voluntaris(ModelMap model){
+        return "Voluntaris";
+    }
+
+    @RequestMapping(value = "/admin/vehicles")
+    public String vehicles(ModelMap model){
+        return "Vehicles";
+    }
+
+    @RequestMapping(value = "/admin/serveis")
+    public String serveis(ModelMap model){
+        return "Serveis";
+    }
+
+    @RequestMapping(value = "/admin/mapa")
+    public String mapa(ModelMap model){
+        return "Mapa";
+    }
+
+    @RequestMapping(value = "/admin/missatges")
+    public String misatges(ModelMap model){
+        return "Missatges";
+    }
 }

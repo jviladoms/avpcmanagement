@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="${bootst}" />
 
     <!-- Custom styles for this template -->
-    <c:url value="jumbotron.css" var="jstlCss" />
+    <c:url value="/styles/jumbotron.css" var="jstlCss" />
     	<link href="${jstlCss}" rel="stylesheet" />
 
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -40,15 +40,16 @@
           <a class="navbar-brand" href="#">AVPC Sant Vicenç de Castellet</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" action="Inici.html">
+          <form class="navbar-form navbar-right" action="/login">
             <div class="form-group">
-              <input type="text" placeholder="Usuari" class="form-control">
+              <input type="text" placeholder="Usuari" name="username" class="form-control">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
+              <input type="password" placeholder="Password" name="password" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Entra</button>
           </form>
+          <a href="/admin/inici"> administració </a>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
