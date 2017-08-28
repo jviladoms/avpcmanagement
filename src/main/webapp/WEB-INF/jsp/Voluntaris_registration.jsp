@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html ng-app="avpc" lang="en">
+<html lang="en">
 <head>
     <title>Voluntaris | Voluntaris</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="images/icons/favicon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
+    <link rel="shortcut icon" href="/images/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/favicon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/favicon-114x114.png">
     <!--Loading bootstrap css-->
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
-    <link type="text/css" rel="stylesheet" href="styles/jquery-ui-1.10.4.custom.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/animate.css">
-    <link type="text/css" rel="stylesheet" href="styles/all.css">
-    <link type="text/css" rel="stylesheet" href="styles/main.css">
-    <link type="text/css" rel="stylesheet" href="styles/style-responsive.css">
-    <link type="text/css" rel="stylesheet" href="styles/zabuto_calendar.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/pace.css">
-    <link type="text/css" rel="stylesheet" href="styles/jquery.news-ticker.css">
-     <link type="text/css" rel="stylesheet" href="styles/jplist-custom.css">
+    <link type="text/css" rel="stylesheet" href="/styles/jquery-ui-1.10.4.custom.min.css">
+    <link type="text/css" rel="stylesheet" href="/styles/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="/styles/animate.css">
+    <link type="text/css" rel="stylesheet" href="/styles/all.css">
+    <link type="text/css" rel="stylesheet" href="/styles/main.css">
+    <link type="text/css" rel="stylesheet" href="/styles/style-responsive.css">
+    <link type="text/css" rel="stylesheet" href="/styles/zabuto_calendar.min.css">
+    <link type="text/css" rel="stylesheet" href="/styles/pace.css">
+    <link type="text/css" rel="stylesheet" href="/styles/jquery.news-ticker.css">
+     <link type="text/css" rel="stylesheet" href="/styles/jplist-custom.css">
 </head>
 <body>
     <div>
@@ -68,7 +68,7 @@
                     <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
                         
                     </li>
-                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Jordi  Viladoms Ferrandiz</span>&nbsp;<span class="caret"></span></a>
+                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Jordi  Viladoms Ferrandiz</span>&nbsp;<span class="caret"></span></a>
                        <ul class="dropdown-menu dropdown-user pull-right">
                             <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
                             <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
@@ -199,7 +199,7 @@
                                         <div class="col-lg-12">
                                             <div class="panel">
                                                 <div class="panel-body">
-                                                    <form id="registermember">
+                                                    <form id="registermember" action="/admin/register_member" method="post">
                                                         <input id="memberid" type="hidden" class="form-control" value="{{memberData.id}}"/></div>
                                                         <div class="form-body pal">
                                                             <div class="form-group">
@@ -355,47 +355,6 @@
 
 
 </script>
-    <script>
-        $("#registermember").submit(function(e) {
-
-            var url = "http://localhost:8080/members";
-
-            var data = {
-                "tip": $("#tip").val(),
-                "address": $("#address").val(),
-                "birthDate": $("#birthdate").val(),
-                "city": $("#city").val(),
-                "email": $("#email").val(),
-                "landPhoneNumber": $("#landPhoneNumber").val(),
-                "mobilePhoneNumber": $("#mobilePhoneNumber").val(),
-                "name": $("#name").val(),
-                "postalCode": $("#postalCode").val(),
-                "surname1": $("#surname1").val(),
-                "surname2": $("#surname2").val(),
-                "userGroup": $("#userGroup").val(),
-                "dni": $("#dni").val(),
-            };
-            var log = JSON.stringify(data);
-            console.log(log);
-            $.ajax({
-                type: "POST",
-                url: url,
-                dataType : 'json',
-                contentType: 'application/json',
-                data: JSON.stringify(data),
-                success: function(data)
-                {
-                    alert("Voluntari afegit correctament");
-                },
-                error: function(data)
-                {
-                    alert("Error al afegir el voluntari");
-                }
-            });
-
-            e.preventDefault();
-        });
-    </script>
     </div>
 </body>
 </html>

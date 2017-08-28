@@ -1,32 +1,35 @@
 <!DOCTYPE html>
-<html ng-app="avpc" lang="en">
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<html lang="en">
 <head>
     <title>Voluntaris | Voluntaris</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="images/icons/favicon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
+    <link rel="shortcut icon" href="/images/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/favicon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/favicon-114x114.png">
     <!--Loading bootstrap css-->
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
-    <link type="text/css" rel="stylesheet" href="styles/jquery-ui-1.10.4.custom.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/animate.css">
-    <link type="text/css" rel="stylesheet" href="styles/all.css">
-    <link type="text/css" rel="stylesheet" href="styles/main.css">
-    <link type="text/css" rel="stylesheet" href="styles/style-responsive.css">
-    <link type="text/css" rel="stylesheet" href="styles/zabuto_calendar.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/pace.css">
-    <link type="text/css" rel="stylesheet" href="styles/jquery.news-ticker.css">
-     <link type="text/css" rel="stylesheet" href="styles/jplist-custom.css">
+    <link type="text/css" rel="stylesheet" href="/styles/jquery-ui-1.10.4.custom.min.css">
+    <link type="text/css" rel="stylesheet" href="/styles/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="/styles/animate.css">
+    <link type="text/css" rel="stylesheet" href="/styles/all.css">
+    <link type="text/css" rel="stylesheet" href="/styles/main.css">
+    <link type="text/css" rel="stylesheet" href="/styles/style-responsive.css">
+    <link type="text/css" rel="stylesheet" href="/styles/zabuto_calendar.min.css">
+    <link type="text/css" rel="stylesheet" href="/styles/pace.css">
+    <link type="text/css" rel="stylesheet" href="/styles/jquery.news-ticker.css">
+     <link type="text/css" rel="stylesheet" href="/styles/jplist-custom.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-    <script src="script/voluntari.js"></script>
+    <script src="/script/voluntari.js"></script>
 </head>
-<body ng-controller="member">
+<body>
     <div>
         <!--BEGIN THEME SETTING-->
         <div id="theme-setting">
@@ -70,7 +73,7 @@
                     <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
                         
                     </li>
-                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Jordi Viladoms Ferrandiz</span>&nbsp;<span class="caret"></span></a>
+                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Jordi Viladoms Ferrandiz</span>&nbsp;<span class="caret"></span></a>
                        <ul class="dropdown-menu dropdown-user pull-right">
                             <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
                             <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
@@ -202,73 +205,73 @@
                                         <div class="col-lg-12">
                                             <div class="panel">
                                                 <div class="panel-body">
-                                                    <form id="updatemember">
-                                                        <input id="memberid" type="hidden" class="form-control" value="{{memberData.id}}"/></div>
+                                                    <form id="updatemember" action="/admin/update_member/${member.id}" method="post">
+                                                        <input id="memberid" type="hidden" class="form-control" value="${memberData.id}"/></div>
                                                         <div class="form-body pal">
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="tip" name="tip" type="text" placeholder="tip" class="form-control" value="{{memberData.tip}}"/></div>
+                                                                    <input id="tip" name="tip" type="text" placeholder="tip" class="form-control" value="${member.id}"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="name" name="name" type="text" placeholder="Nom" class="form-control" value="{{memberData.name}}"/></div>
+                                                                    <input id="name" name="name" type="text" placeholder="Nom" class="form-control" value="${member.name}"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="surname1" name="surname1" type="text" placeholder="Primer cognom" class="form-control" value="{{memberData.surname1}}"/></div>
+                                                                    <input id="surname1" name="surname1" type="text" placeholder="Primer cognom" class="form-control" value="${member.surname1}"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="surname2" name="surname2" type="text" placeholder="Segon cognom" class="form-control" value="{{memberData.surname2}}"/></div>
+                                                                    <input id="surname2" name="surname2" type="text" placeholder="Segon cognom" class="form-control" value="${member.surname2}"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-credit-card"></i>
-                                                                    <input id="dni" name="dni" type="text" placeholder="DNI" class="form-control" value="{{memberData.vat}}"/></div>
+                                                                    <input id="dni" name="dni" type="text" placeholder="DNI" class="form-control" value="${member.dni}"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-calendar"></i>
-                                                                    <input id="birthdate" name="birthdate" type="datetime" placeholder="Data naixement" class="form-control" value="{{memberData.birthDate | date:'yyyy-MM-dd'}}"/></div>
+                                                                    <input id="birthdate" name="birthdate" type="datetime" placeholder="Data naixement" class="form-control" value="${member.birthDate}"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-certificate"></i>
-                                                                    <input id="address" name="address" type="text" placeholder="Adreça" class="form-control" value="{{memberData.address}}"/></div>
+                                                                    <input id="address" name="address" type="text" placeholder="Adreça" class="form-control" value="${member.address}"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-map-marker"></i>
-                                                                    <input id="city" name="city" type="text" placeholder="Ciutat" class="form-control" value="{{memberData.city}}"/></div>
+                                                                    <input id="city" name="city" type="text" placeholder="Ciutat" class="form-control" value="${member.city}"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-map-marker"></i>
-                                                                    <input id="postalCode" name="postalCode" type="text" placeholder="Codi Postal" class="form-control" value="{{memberData.postalCode}}"/></div>
+                                                                    <input id="postalCode" name="postalCode" type="text" placeholder="Codi Postal" class="form-control" value="${member.postalCode}"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-envelope"></i>
-                                                                    <input id="email" name="email" type="text" placeholder="Email address" class="form-control" value="{{memberData.email}}"/></div>
+                                                                    <input id="email" name="email" type="text" placeholder="Email address" class="form-control" value="${member.email}"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-phone"></i>
-                                                                    <input id="landPhoneNumber" name="landPhoneNumber" type="text" placeholder="Telefon fix" class="form-control" value="{{memberData.landPhoneNumber}}"/></div>
+                                                                    <input id="landPhoneNumber" name="landPhoneNumber" type="text" placeholder="Telefon fix" class="form-control" value="${member.landPhoneNumber}"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-mobile-phone"></i>
-                                                                    <input id="mobilePhoneNumber" name="mobilePhoneNumber" type="text" placeholder="Telefon mòbil" class="form-control" value="{{memberData.mobilePhoneNumber}}"/></div>
+                                                                    <input id="mobilePhoneNumber" name="mobilePhoneNumber" type="text" placeholder="Telefon mòbil" class="form-control" value="${member.mobilePhoneNumber}"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-certificate"></i>
-                                                                    <input id="userGroup" name="userGroup" type="text" placeholder="Categoria" class="form-control" value="{{memberData.userGroup}}"/></div>
+                                                                    <input id="userGroup" name="userGroup" type="text" placeholder="Categoria" class="form-control" value="${member.userGroup}"/></div>
                                                             </div>
 
                                                             <hr />
@@ -276,7 +279,7 @@
                                                             <button type="submit" class="btn btn-primary">
                                                                 Modificar
                                                             </button>
-                                                            <button type="button" class="btn btn-primary" onclick="deleteMember()">
+                                                            <button type="button" class="btn btn-primary" onclick="window.location.href='/admin/delete_member/${memberId}'">
                                                                 Eliminar Voluntari
                                                             </button>
                                                         </div>
@@ -357,68 +360,5 @@
 
 
 </script>
-        <script>
-            $("#updatemember").submit(function(e) {
-
-                var url = "http://localhost:8080/members/" + $("#memberid").val();
-
-                var data = {
-                    "tip": $("#tip").val(),
-                    "address": $("#address").val(),
-                    "birthDate": $("#birthdate").val(),
-                    "city": $("#city").val(),
-                    "email": $("#email").val(),
-                    "landPhoneNumber": $("#landPhoneNumber").val(),
-                    "mobilePhoneNumber": $("#mobilePhoneNumber").val(),
-                    "name": $("#name").val(),
-                    "postalCode": $("#postalCode").val(),
-                    "surname1": $("#surname1").val(),
-                    "surname2": $("#surname2").val(),
-                    "userGroup": $("#userGroup").val(),
-                    "dni": $("#dni").val(),
-                };
-                var log = JSON.stringify(data);
-                console.log(log);
-                $.ajax({
-                    type: "PUT",
-                    url: url,
-                    dataType : 'json',
-                    contentType: 'application/json',
-                    data: JSON.stringify(data),
-                    success: function(data) {
-                        alert("Voluntari modificat correctament");
-                    },
-                    error: function(data)
-                    {
-                        alert("Error en la modificació");
-                    }
-                });
-
-                e.preventDefault();
-            });
-        </script>
-        <script>
-            function deleteMember() {
-
-                var r = confirm("Esta segur que desitja eliminar aquest voluntari?");
-                if (r == true) {
-                    var url = "http://localhost:8080/members/" + $("#memberid").val();
-
-                    $.ajax({
-                        type: "DELETE",
-                        url: url,
-                        contentType: 'application/json',
-                        success: function(data) {
-                            alert("Voluntari esborrat correctament");
-                            window.location.href='./Voluntaris.html'
-                        },
-                        error: function(data)
-                        {
-                            alert("Error en l'esborrat");
-                        }
-                    });
-                }
-            }
-        </script>
 </body>
 </html>
