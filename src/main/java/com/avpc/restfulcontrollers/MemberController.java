@@ -4,6 +4,7 @@ import com.avpc.model.Member;
 import com.avpc.model.dao.MemberDAO;
 import com.avpc.model.dao.ServiceDAO;
 import com.avpc.restfulcontrollers.dto.MemberDTO;
+import com.avpc.services.MemberService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,9 @@ public class MemberController {
 
     @Autowired
     private ServiceDAO serviceDAO;
+
+    @Autowired
+    private MemberService memberService;
 
 
     @RequestMapping(value ="/", method = RequestMethod.POST)
@@ -99,19 +103,8 @@ public class MemberController {
     @RequestMapping(value ="/", method = RequestMethod.GET)
     @ResponseBody
     @CrossOrigin
-    public List<Member> findMember(HttpServletResponse response) throws IOException{
-
-        List<Member> listMember = new ArrayList<>();
-
-        try{
-            memberDAO.findAll().forEach(member -> listMember.add(member));
-            listMember.forEach(member -> member.setServices(serviceDAO.findByMembersInServiceIn(member).size()));
-        } catch (Exception e){
-            log.error(e.getMessage());
-            response.sendError(HttpStatus.CONFLICT.value());
-        }
-
-        return listMember;
+    public List<Member> findMember(HttpServletResponse response){
+        return memberService.findMember();
     }
 
     @RequestMapping(value ="/{memberId}", method = RequestMethod.PUT)

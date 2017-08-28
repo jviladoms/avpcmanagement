@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html ng-app="avpc" lang="en">
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<html lang="en">
 <head>
     <title>Voluntaris | Voluntaris</title>
     <meta charset="utf-8">
@@ -203,17 +206,19 @@
                                     <div class="col-lg-12">
                                         <div class="panel">
                                             <div class="panel-body">
-                                                <div id="grid-layout-table-1" class="box" ng-controller="members">
+                                                <div id="grid-layout-table-1" class="box">
                                                     <div class="box text-shadow">
                                                         <table class="demo-tbl">
                                                             <!--<item>n</item>-->
-                                                            <button type="button" onclick="window.location.href='./Voluntaris_registration.html'" class="btn btn-default">Afegir voluntari<i class="fa fa-plus mls"></i></button>
-                                                            <tr class="tbl-item" ng-repeat="member in membersarray"><!--<img/>-->
-                                                                <td class="img"><img src="/images/avatar/sensefoto.jpg" alt="" title="" class="img-responsive img-thumbnail"/><div class="text-center">{{member.tip}}</div> <div class="text-center">{{member.userGroup}}</div></td>
-                                                                <!--<data></data>-->
-                                                                <td class="td-block"><p class="date">Data Naixement: {{member.birthDate | date:'dd/MM/yyyy'}}</p>
+                                                            <button type="button" onclick="window.location.href='/admin/voluntaris_registration'" class="btn btn-default">Afegir voluntari<i class="fa fa-plus mls"></i></button>
+                                                            <c:forEach items="${members}" var="member">
+                                                            <tr class="tbl-item"><!--<img/>-->
 
-                                                                    <p class="title">{{member.name}} {{member.surname1}} {{member.surname2}}</p>
+                                                                <td class="img"><img src="/images/avatar/sensefoto.jpg" alt="" title="" class="img-responsive img-thumbnail"/><div class="text-center">${member.id}</div> <div class="text-center">${member.userGroup}</div></td>
+                                                                <!--<data></data>-->
+                                                                <td class="td-block"><p class="date">Data Naixement: ${member.birthDate}</p>
+
+                                                                    <p class="title">${member.name} ${member.surname1} ${member.surname2}</p>
 
                                                                     <p class="desc">
 
@@ -221,23 +226,24 @@
                                                                         <input type="hidden" id="memberId" value="{{member.id}}">
                                                                         <div class="col-lg-4">
                                                                             <h7 class="box-heading">Email</h7>
-                                                                            <div class="well well-sm">{{member.email}}</div>
+                                                                            <div class="well well-sm">${member.email}</div>
                                                                         </div>
                                                                         <div class="col-lg-4">
                                                                             <h7 class="box-heading">Telefon</h7>
-                                                                            <div class="well well-sm">{{member.mobilePhoneNumber}}</div>
+                                                                            <div class="well well-sm">${member.mobilePhoneNumber}</div>
                                                                         </div>
                                                                         <div class="col-lg-4">
                                                                             <h7 class="box-heading">Serveis</h7>
-                                                                            <div class="well well-sm">{{member.services}}</div>
+                                                                            <div class="well well-sm">${member.services}</div>
                                                                         </div>
                                                                         <div class="col-lg-4">
-                                                                            <a class="btn-xs btn-default" href="Voluntaris_update.html#?memberId={{member.id}}">Configuració</a>
+                                                                            <a class="btn-xs btn-default" href="/admin/member_update/${member.id}">Configuració</a>
                                                                         </div>
                                                                     </div>
 
                                                                 </td>
                                                             </tr>
+                                                            </c:forEach>
                                                         </table>
                                                     </div>
                                                     </div>
