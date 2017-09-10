@@ -1,13 +1,7 @@
 package com.avpc.model;
 
-/**
- * Created by Jordi on 29/10/2016.
- */
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.Date;
 import javax.persistence.*;
-
 
 @Entity
 public class Member {
@@ -18,6 +12,9 @@ public class Member {
 
     @Column(unique = true, nullable = false)
     private String dni;
+
+    @Column(nullable = false)
+    private String tip;
 
     @Column(nullable = false)
     private String name;

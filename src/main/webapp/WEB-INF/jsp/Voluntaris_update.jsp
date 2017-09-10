@@ -130,37 +130,37 @@
                 <ul id="side-menu" class="nav">
                     
                      <div class="clearfix"></div>
-                    <li><a href="Inici.html"><i class="fa fa-desktop fa-fw">
+                    <li><a href="/admin/inici"><i class="fa fa-desktop fa-fw">
                         <div class="icon-bg bg-pink"></div>
                     </i><span class="menu-title">Inici</span></a>
                        
                     </li>
-                    <li><a href="Voluntaris.html"><i class="fa fa-phone-square fa-fw">
+                    <li><a href="/admin/voluntaris"><i class="fa fa-phone-square fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Voluntaris</span></a>
                        
                     </li>
-                    <li><a href="Vehicles.html"><i class="fa fa-automobile fa-fw">
+                    <li><a href="/admin/vehicles"><i class="fa fa-automobile fa-fw">
                         <div class="icon-bg bg-violet"></div>
                     </i><span class="menu-title">Vehicles</span></a>
                       
                     </li>
-                    <li><a href="Missatges.html"><i class="fa fa-mobile-phone fa-fw">
+                    <li><a href="/admin/missatges"><i class="fa fa-mobile-phone fa-fw">
                         <div class="icon-bg bg-blue"></div>
                     </i><span class="menu-title">Missatges</span></a>
                           
                     </li>
-                    <li><a href="Serveis.html"><i class="fa fa-fire-extinguisher fa-fw">
+                    <li><a href="/admin/serveis"><i class="fa fa-fire-extinguisher fa-fw">
                         <div class="icon-bg bg-red"></div>
                     </i><span class="menu-title">Serveis</span></a>
                       
                     </li>
-                    <li><a href="Documents.html"><i class="fa fa-paperclip fa-fw">
+                    <li><a href="/admin/documents"><i class="fa fa-paperclip fa-fw">
                         <div class="icon-bg bg-yellow"></div>
                     </i><span class="menu-title">Documents</span></a>
                        
                     </li>
-                    <li><a href="Mapa.html"><i class="fa fa-map-marker fa-fw">
+                    <li><a href="/admin/mapa"><i class="fa fa-map-marker fa-fw">
                         <div class="icon-bg bg-grey"></div>
                     </i><span class="menu-title">Mapa Voluntaris</span></a>
                       
@@ -279,7 +279,7 @@
                                                             <button type="submit" class="btn btn-primary">
                                                                 Modificar
                                                             </button>
-                                                            <button type="button" class="btn btn-primary" onclick="window.location.href='/admin/delete_member/${memberId}'">
+                                                            <button type="button" class="btn btn-primary" onclick="window.location.href='/admin/delete_member/${member.id}'">
                                                                 Eliminar Voluntari
                                                             </button>
                                                         </div>

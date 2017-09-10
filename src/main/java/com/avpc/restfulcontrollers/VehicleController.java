@@ -2,12 +2,15 @@ package com.avpc.restfulcontrollers;
 
 
 import com.avpc.model.Vehicle;
-import com.avpc.model.dao.VehicleDAO;
 import com.avpc.restfulcontrollers.dto.VehicleDTO;
+import com.avpc.services.VehicleService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,38 +23,34 @@ public class VehicleController {
     private static final Logger log = Logger.getLogger(MemberController.class);
 
     @Autowired
-    private VehicleDAO vehicleDAO;
+    private VehicleService vehicleService;
 
     @RequestMapping(value ="/vehicle", method = RequestMethod.POST)
-    public String addVehicle(@RequestBody VehicleDTO vehicleParams) {
+    public Vehicle addVehicle(@RequestBody VehicleDTO vehicleDTO, HttpServletResponse response) throws IOException {
+        Vehicle vehicle = null;
         try{
-            Vehicle vehicle = new Vehicle();
-            vehicle.setBrand(vehicleParams.getBrand());
-            vehicle.setCredential(vehicleParams.getCredential());
-            vehicle.setModel(vehicleParams.getModel());
-            vehicle.setRegistrationNumber(vehicleParams.getRegistration_number());
-            vehicleDAO.save(vehicle);
-
+            vehicle = vehicleService.addVehicle(vehicleDTO);
         } catch (Exception e){
-            return new StringBuilder().append("ERROR: ").append(e.getMessage()).toString();
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
-        return "OK";
+        return vehicle;
     }
 
     @RequestMapping(value ="/vehicle", method = RequestMethod.GET)
     @ResponseBody
-    public List<Vehicle> findVehicle(@RequestParam(value="id",required=false) Long vehicleId) {
+    public List<Vehicle> findVehicle(@RequestParam(value="id",required=false) Long vehicleId, HttpServletResponse response) throws IOException {
         List<Vehicle> listVehicles = new ArrayList<>();
 
         try{
             if (vehicleId == null) {
-                vehicleDAO.findAll().forEach(member -> listVehicles.add(member));
-                return listVehicles;
+                listVehicles = vehicleService.getAllVehicles();
             } else {
-                listVehicles.add(vehicleDAO.findOne(vehicleId));
+                listVehicles.add(vehicleService.getVehicle(vehicleId));
             }
         } catch (Exception e){
-            log.error(new StringBuilder().append("ERROR: ").append(e.getMessage()).toString());
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
 
         return listVehicles;
@@ -59,20 +58,15 @@ public class VehicleController {
 
     @RequestMapping(value ="/vehicle", method = RequestMethod.PUT)
     @ResponseBody
-    public Vehicle updateVehicle(@RequestBody VehicleDTO vehicleParams) {
+    public Vehicle updateVehicle(@RequestBody VehicleDTO vehicleParams, HttpServletResponse response) throws IOException {
 
         Vehicle vehicle =  null;
 
         try{
-            vehicle = vehicleDAO.findOne(vehicleParams.getId());
-            vehicle.setBrand(vehicleParams.getBrand());
-            vehicle.setCredential(vehicleParams.getCredential());
-            vehicle.setModel(vehicleParams.getModel());
-            vehicle.setRegistrationNumber(vehicleParams.getRegistration_number());
-            vehicleDAO.save(vehicle);
-
+            vehicle = vehicleService.updateVehicle(vehicleParams);
         } catch (Exception e){
-            log.error(new StringBuilder().append("ERROR: ").append(e.getMessage()).toString());
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
 
         return vehicle;
@@ -80,14 +74,12 @@ public class VehicleController {
 
     @RequestMapping(value ="/vehicle", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deleteMember(Long vehicleId) {
+    public String deleteMember(Long vehicleId, HttpServletResponse response) throws IOException {
         try{
-            Vehicle vehicle = vehicleDAO.findOne(vehicleId);
-            vehicle.setDeleted(true);
-            vehicleDAO.save(vehicle);
+            vehicleService.deleteVehicle(vehicleId);
         } catch (Exception e){
-            log.error(new StringBuilder().append("ERROR: ").append(e.getMessage()).toString());
-            return new StringBuilder().append("ERROR: ").append(e.getMessage()).toString();
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
         return "OK";
     }

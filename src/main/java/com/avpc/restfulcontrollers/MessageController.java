@@ -1,74 +1,55 @@
 package com.avpc.restfulcontrollers;
 
 import com.avpc.model.Message;
-import com.avpc.model.dao.MemberDAO;
-import com.avpc.model.dao.MessageDAO;
+
 import com.avpc.restfulcontrollers.dto.MessageDTO;
+import com.avpc.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
-import com.avpc.model.Member;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
-
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
-/**
- * Created by Jordi on 13/11/2016.
- */
 @RestController
 public class MessageController {
     @Autowired
-    private MessageDAO messageDAO;
-
-    @Autowired
-    private MemberDAO memberDAO;
+    private MessageService messageService;
 
     private static final Logger log = Logger.getLogger(MemberController.class);
 
     @RequestMapping(value ="/message", method = RequestMethod.POST)
-    public String addMessage(@RequestBody MessageDTO messageDTO) {
+    public Message addMessage(@RequestBody MessageDTO messageDTO, HttpServletResponse response) throws IOException {
+        Message message = null;
 
         try{
-            Message message = new Message();
-            message.setMessage(messageDTO.getMessage());
-            message.setSendMember(memberDAO.findOne(messageDTO.getSendMember()));
-            message.setDate(messageDTO.getDate());
-
-            List<Member> members = getMembers(messageDTO.getDestinationMembers());
-            message.setDestinationMembers(members);
-
-            if(members.size() > 0){
-                message.setDestinationMembers(members);
-                messageDAO.save(message);
-            } else {
-                throw new Exception("no valid message");
-            }
-
+          message = messageService.addMessage(messageDTO);
         } catch (Exception e){
             log.error(e.getMessage());
-            return "ERROR: " + e.getMessage();
+            response.sendError(HttpStatus.CONFLICT.value());
         }
-        return "OK";
+        return message;
     }
 
     @RequestMapping(value ="/message", method = RequestMethod.GET)
     @ResponseBody
-    public List<Message> getMessage(@RequestParam(value="user_id",required=false) Long userId) {
+    public List<Message> getMessage(@RequestParam(value="user_id",required=false) Long userId, HttpServletResponse response) throws IOException {
 
-        final List<Message> listMessage = new ArrayList<>();
+        List<Message> listMessage = new ArrayList<>();
 
         try{
             if (userId == null){
-                messageDAO.findAll().forEach(message -> listMessage.add(message));
-                return listMessage;
+                listMessage = messageService.findAllMessages();
             } else {
-                return messageDAO.findAllByDestinationMembers(userId);
+                listMessage = messageService.findUserIdMessages(userId);
             }
         } catch (Exception e){
             log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
 
         return listMessage;
@@ -77,35 +58,31 @@ public class MessageController {
     @RequestMapping(value ="/message/find_between_dates", method = RequestMethod.GET)
     @ResponseBody
     public List<Message> getBetweenDays(@RequestParam(value="start_date") Date start_date,
-                                        @RequestParam(value="end_date") Date end_date) {
+                                        @RequestParam(value="end_date") Date end_date, HttpServletResponse response) throws IOException {
 
-        List<Message> listMessage = messageDAO.findAllByDateBetween(start_date,end_date);
+        List<Message> listMessage = null;
+
+        try{
+            listMessage = messageService.findMessagesBetweenDays(start_date,end_date);
+        } catch (Exception e){
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
+        }
 
         return listMessage;
     }
 
     @RequestMapping(value ="/message", method = RequestMethod.PUT)
     @ResponseBody
-    public Message updateMessage(@RequestBody MessageDTO messageDTO) {
+    public Message updateMessage(@RequestBody MessageDTO messageDTO, HttpServletResponse response) throws IOException {
 
         Message message = null;
 
         try {
-            message = messageDAO.findOne(messageDTO.getId());
-            message.setMessage(messageDTO.getMessage());
-            message.setSendMember(memberDAO.findOne(messageDTO.getSendMember()));
-
-            List<Member> members = getMembers(messageDTO.getDestinationMembers());
-            message.setDestinationMembers(members);
-
-            if (members.size() > 0) {
-                message.setDestinationMembers(members);
-                messageDAO.save(message);
-            } else {
-                throw new Exception("no valid message");
-            }
+            messageService.updateMessage(messageDTO);
         } catch (Exception e) {
             log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
 
         return message;
@@ -113,20 +90,13 @@ public class MessageController {
 
     @RequestMapping(value ="/message", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deleteMessage(Long messageId) {
+    public void deleteMessage(Long messageId, HttpServletResponse response) throws IOException {
 
         try{
-            messageDAO.delete(messageId);
+            messageService.deleteMessage(messageId);
         } catch (Exception e){
-            return "ERROR";
+            log.error(e.getMessage());
+            response.sendError(HttpStatus.CONFLICT.value());
         }
-
-        return "OK";
-    }
-
-    private List<Member> getMembers(Iterable<Long> ids){
-        List<Member> members = new ArrayList<>();
-        ids.forEach(member -> members.add(memberDAO.findOne(member)));
-        return members.stream().filter(member -> member != null).collect(Collectors.toList());
     }
 }
