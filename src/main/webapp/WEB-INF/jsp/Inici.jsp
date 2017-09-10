@@ -134,7 +134,7 @@
                     <ul id="side-menu" class="nav">
 
                         <div class="clearfix"></div>
-                        <li><a href="Inici.html"><i class="fa fa-desktop fa-fw">
+                        <li><a href="/admin/inici"><i class="fa fa-desktop fa-fw">
                             <div class="icon-bg bg-pink"></div>
                         </i><span class="menu-title">Inici</span></a>
 
