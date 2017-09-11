@@ -40,6 +40,7 @@ public class MemberService {
         Member member = new Member();
 
         member.setName(memberParams.getName());
+        member.setTip(memberParams.getTip());
         member.setAddress(memberParams.getAddress());
         member.setBirthDate(memberParams.getBirthDate());
         member.setAddress(memberParams.getAddress());
@@ -70,6 +71,7 @@ public class MemberService {
         member = memberDAO.findOne(memberId);
 
         member.setName(memberParams.getName());
+        member.setTip(memberParams.getTip());
         member.setSurname1(memberParams.getSurname1());
         member.setSurname2(memberParams.getSurname2());
         member.setAddress(memberParams.getAddress());
@@ -83,7 +85,9 @@ public class MemberService {
         member.setUserGroup(memberParams.getUserGroup());
         member.setDni(memberParams.getDni());
 
-        return memberDAO.save(member);
+        memberDAO.save(member);
+
+        return member;
     }
 
     public Member updateMemberLocation(MemberDTO memberParams, Long memberId){

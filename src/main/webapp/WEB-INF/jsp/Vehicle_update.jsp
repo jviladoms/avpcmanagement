@@ -205,84 +205,38 @@
                                         <div class="col-lg-12">
                                             <div class="panel">
                                                 <div class="panel-body">
-                                                   <c:if test="${fromUpdate}"> member ${member.name} successfully changed</c:if>
-                                                   <c:if test="${fromRegister}"> member ${member.name} successfully added</c:if>
-                                                    <form id="updatemember" action="/admin/update_member/${member.id}" method="post">
-                                                        <input id="memberid" type="hidden" class="form-control" value="${memberData.id}"/></div>
+                                                   <c:if test="${fromUpdate}"> vehicle ${vehicle.credential} successfully changed</c:if>
+                                                   <c:if test="${fromRegister}"> member ${vehicle.credential} successfully added</c:if>
+                                                    <form id="updatevehicle" action="/admin/update_vehicle/${vehicle.id}" method="post">
+                                                        <input id="memberid" type="hidden" class="form-control" value="${vehicle.id}"/></div>
                                                         <div class="form-body pal">
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="tip" name="tip" type="text" placeholder="tip" class="form-control" value="${member.tip}"/></div>
+                                                                    <input id="brand" name="brand" type="text" placeholder="brand" class="form-control" value="${vehicle.brand}"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="name" name="name" type="text" placeholder="Nom" class="form-control" value="${member.name}"/></div>
+                                                                    <input id="credential" name="credential" type="text" placeholder="Nom" class="form-control" value="${vehicle.credential}"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="surname1" name="surname1" type="text" placeholder="Primer cognom" class="form-control" value="${member.surname1}"/></div>
+                                                                    <input id="model" name="model" type="text" placeholder="model" class="form-control" value="${vehicle.model}"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="surname2" name="surname2" type="text" placeholder="Segon cognom" class="form-control" value="${member.surname2}"/></div>
+                                                                    <input id="registrationNumber" name="registrationNumber" type="text" placeholder="registrationNumber" class="form-control" value="${vehicle.registrationNumber}"/></div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-credit-card"></i>
-                                                                    <input id="dni" name="dni" type="text" placeholder="DNI" class="form-control" value="${member.dni}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                    <input id="birthdate" name="birthdate" type="datetime" placeholder="Data naixement" class="form-control" value="${member.birthDate}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-certificate"></i>
-                                                                    <input id="address" name="address" type="text" placeholder="Adreça" class="form-control" value="${member.address}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-map-marker"></i>
-                                                                    <input id="city" name="city" type="text" placeholder="Ciutat" class="form-control" value="${member.city}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-map-marker"></i>
-                                                                    <input id="postalCode" name="postalCode" type="text" placeholder="Codi Postal" class="form-control" value="${member.postalCode}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-envelope"></i>
-                                                                    <input id="email" name="email" type="text" placeholder="Email address" class="form-control" value="${member.email}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-phone"></i>
-                                                                    <input id="landPhoneNumber" name="landPhoneNumber" type="text" placeholder="Telefon fix" class="form-control" value="${member.landPhoneNumber}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-mobile-phone"></i>
-                                                                    <input id="mobilePhoneNumber" name="mobilePhoneNumber" type="text" placeholder="Telefon mòbil" class="form-control" value="${member.mobilePhoneNumber}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-certificate"></i>
-                                                                    <input id="userGroup" name="userGroup" type="text" placeholder="Categoria" class="form-control" value="${member.userGroup}"/></div>
-                                                            </div>
-
                                                             <hr />
                                                         <div class=" text-right pal">
                                                             <button type="submit" class="btn btn-primary">
-                                                                Modificar
+                                                                Modificar Vehicle
                                                             </button>
-                                                            <button type="button" class="btn btn-primary" onclick="window.location.href='/admin/delete_member/${member.id}'">
-                                                                Eliminar Voluntari
+                                                            <button type="button" class="btn btn-primary" onclick="window.location.href='/admin/delete_vehicle/${vehicle.id}'">
+                                                                Eliminar Vehicle
                                                             </button>
                                                         </div>
                                                     </form>

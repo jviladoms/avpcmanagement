@@ -1,28 +1,32 @@
 <!DOCTYPE html>
-<html ng-app="avpc" lang="en">
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<html lang="en">
 <head>
     <title>Serveis | Serveis</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="images/icons/favicon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
+    <link rel="shortcut icon" href="/images/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/favicon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/favicon-114x114.png">
     <!--Loading bootstrap css-->
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
-    <link type="text/css" rel="stylesheet" href="styles/jquery-ui-1.10.4.custom.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/animate.css">
-    <link type="text/css" rel="stylesheet" href="styles/all.css">
-    <link type="text/css" rel="stylesheet" href="styles/main.css">
-    <link type="text/css" rel="stylesheet" href="styles/style-responsive.css">
-    <link type="text/css" rel="stylesheet" href="styles/zabuto_calendar.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/pace.css">
-    <link type="text/css" rel="stylesheet" href="styles/jquery.news-ticker.css">
-     <link type="text/css" rel="stylesheet" href="styles/jplist-custom.css">
+    <link type="text/css" rel="stylesheet" href="/styles/jquery-ui-1.10.4.custom.min.css">
+    <link type="text/css" rel="stylesheet" href="/styles/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="/styles/animate.css">
+    <link type="text/css" rel="stylesheet" href="/styles/all.css">
+    <link type="text/css" rel="stylesheet" href="/styles/main.css">
+    <link type="text/css" rel="stylesheet" href="/styles/style-responsive.css">
+    <link type="text/css" rel="stylesheet" href="/styles/zabuto_calendar.min.css">
+    <link type="text/css" rel="stylesheet" href="/styles/pace.css">
+    <link type="text/css" rel="stylesheet" href="/styles/jquery.news-ticker.css">
+     <link type="text/css" rel="stylesheet" href="/styles/jplist-custom.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
     <script src="script/voluntaris.js"></script>
 </head>
@@ -70,7 +74,7 @@
                     <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
                         
                     </li>
-                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Jordi  Viladoms Ferrandiz</span>&nbsp;<span class="caret"></span></a>
+                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Jordi  Viladoms Ferrandiz</span>&nbsp;<span class="caret"></span></a>
                        <ul class="dropdown-menu dropdown-user pull-right">
                             <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
                             <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
@@ -127,37 +131,37 @@
                 <ul id="side-menu" class="nav">
                     
                      <div class="clearfix"></div>
-                    <li><a href="Inici.html"><i class="fa fa-desktop fa-fw">
+                    <li><a href="/admin/inici"><i class="fa fa-desktop fa-fw">
                         <div class="icon-bg bg-pink"></div>
                     </i><span class="menu-title">Inici</span></a>
                        
                     </li>
-                    <li><a href="Voluntaris.html"><i class="fa fa-phone-square fa-fw">
+                    <li><a href="/admin/voluntaris"><i class="fa fa-phone-square fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Voluntaris</span></a>
                        
                     </li>
-                    <li><a href="Vehicles.html"><i class="fa fa-automobile fa-fw">
+                    <li><a href="/admin/vehicles"><i class="fa fa-automobile fa-fw">
                         <div class="icon-bg bg-violet"></div>
                     </i><span class="menu-title">Vehicles</span></a>
                       
                     </li>
-                    <li><a href="Missatges.html"><i class="fa fa-mobile-phone fa-fw">
+                    <li><a href="/admin/missatges"><i class="fa fa-mobile-phone fa-fw">
                         <div class="icon-bg bg-blue"></div>
                     </i><span class="menu-title">Missatges</span></a>
                           
                     </li>
-                    <li><a href="Serveis.html"><i class="fa fa-fire-extinguisher fa-fw">
+                    <li><a href="/admin/serveis"><i class="fa fa-fire-extinguisher fa-fw">
                         <div class="icon-bg bg-red"></div>
                     </i><span class="menu-title">Serveis</span></a>
                       
                     </li>
-                    <li><a href="Documents.html"><i class="fa fa-paperclip fa-fw">
+                    <li><a href="/admin/documents"><i class="fa fa-paperclip fa-fw">
                         <div class="icon-bg bg-yellow"></div>
                     </i><span class="menu-title">Documents</span></a>
                        
                     </li>
-                    <li><a href="Mapa.html"><i class="fa fa-map-marker fa-fw">
+                    <li><a href="/admin/mapa"><i class="fa fa-map-marker fa-fw">
                         <div class="icon-bg bg-grey"></div>
                     </i><span class="menu-title">Mapa Voluntaris</span></a>
                       
@@ -201,53 +205,49 @@
                                         <div class="col-lg-12">
                                             <div class="panel">
                                                 <div class="panel-body">
-                                                    <form id="registerService">
+                                                    <form:form id="registerService" modelAttribute="service" action="/admin/addService" method="post">
                                                         <div class="form-body pal">
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="serviceDescription" name="serviceDescription" type="text" placeholder="Descripció del servei" class="form-control" /></div>
+                                                                    <form:input id="serviceDescription" path="serviceDescription" type="text" placeholder="Descripció del servei" class="form-control" /></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="typeOfService" name="typeOfService" type="text" placeholder="Tipus de servei" class="form-control" /></div>
+                                                                    <form:input id="typeOfService" path="typeOfService" type="text" placeholder="Tipus de servei" class="form-control" /></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="startDate" name="startDate" type="datetime" placeholder="Dia i hora d'inici" class="form-control" /></div>
+                                                                    <form:input id="startDate" path="startDate" type="datetime" placeholder="Dia i hora d'inici" class="form-control" /></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="finalDate" name="finalDate" type="datetime" placeholder="Dia i hora final" class="form-control" /></div>
+                                                                    <form:input id="finalDate" path="finalDate" type="datetime" placeholder="Dia i hora final" class="form-control" /></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-credit-card"></i>
-                                                                    <input id="localization" name="localization" type="text" placeholder="Lloc" class="form-control"/></div>
+                                                                    <form:input id="localization" path="localization" type="text" placeholder="Lloc" class="form-control"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-calendar"></i>
-                                                                    <input id="material" name="material" type="text" placeholder="Material utilitzat" class="form-control"/></div>
+                                                                    <form:input id="material" path="material" type="text" placeholder="Material utilitzat" class="form-control"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-certificate"></i>
-                                                                    <input id="comments" name="comments" type="text" placeholder="Comentaris" class="form-control"/></div>
+                                                                    <form:input id="comments" path="comments" type="text" placeholder="Comentaris" class="form-control"/></div>
                                                             </div>
 
                                                             <hr />
 
                                                             Voluntaris al Servei <br>
-                                                            <div  ng-controller="members">
-
-                                                                <div ng-repeat="member in membersarray">
-                                                                    <input type="checkbox"  name="members" value="{{member.id}}"> {{member.name}} {{member.surname1}} {{member.surname2}}<br>
-                                                                </div>
-
+                                                            <div>
+                                                                <form:checkboxes items="${membersList}" path="membersInService" itemLabel="surname1"/>
                                                             </div>
 
                                                             <hr />
@@ -258,7 +258,7 @@
                                                                 Afegir voluntari</button>
                                                         </div>
 
-                                                    </form>
+                                                    </form:form>
                                                 </div>
                                             </div>
                                         </div>
@@ -336,53 +336,6 @@
 
 
 </script>
-    <script>
-        $("#registerService").submit(function(e) {
-
-            var membersarray = new Array();
-            var url = "http://localhost:8080/service";
-
-            $("input:checkbox[name=members]:checked").each(function(){
-                membersarray.push($(this).val());
-
-                console.log(membersarray.toString());
-            });
-
-
-            var myJsonString = JSON.stringify(membersarray);
-            var data = {
-                "serviceDescription": $("#serviceDescription").val(),
-                "typeOfService": $("#typeOfService").val(),
-                "startDate": $("#startDate").val(),
-                "finalDate": $("#finalDate").val(),
-                "localization": $("#localization").val(),
-                "material": $("#material").val(),
-                "comments": $("#comments").val(),
-                "membersInService" : membersarray
-            };
-
-            var log = JSON.stringify(data);
-            console.log(log);
-            $.ajax({
-                type: "POST",
-                url: url,
-                dataType : 'json',
-                contentType: 'application/json',
-                data: JSON.stringify(data),
-                success: function(data)
-                {
-                    alert("Servei afegit correctament");
-                },
-                error: function(data)
-                {
-                    alert("Error al afegir el Servei");
-                }
-            });
-
-            e.preventDefault();
-        });
-
-    </script>
     </div>
 </body>
 </html>

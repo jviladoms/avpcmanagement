@@ -36,16 +36,20 @@ public class ServiceController {
         }
     }
 
-    @RequestMapping(value ="/", method = RequestMethod.GET)
+    @RequestMapping(value ="/{serviceId}", method = RequestMethod.GET)
     @ResponseBody
     @CrossOrigin
-    public List<Service> getService(@RequestParam(value="id",required=false) Long serviceId,
+    public List<Service> getService(@PathVariable(value="serviceId",required=false) Long serviceId,
                                    HttpServletResponse response) throws IOException {
 
         List<Service> listService = new ArrayList<>();
 
         try{
-            listService = servicesService.getService(serviceId);
+            if (serviceId == null){
+                listService = servicesService.getServices();
+            } else {
+                listService.add(servicesService.getService(serviceId));
+            }
         } catch (IllegalArgumentException e){
             log.error(e.getMessage());
             response.sendError(HttpStatus.CONFLICT.value());

@@ -56,14 +56,14 @@ public class VehicleController {
         return listVehicles;
     }
 
-    @RequestMapping(value ="/vehicle", method = RequestMethod.PUT)
+    @RequestMapping(value ="/vehicle/{vehicleId}", method = RequestMethod.PUT)
     @ResponseBody
-    public Vehicle updateVehicle(@RequestBody VehicleDTO vehicleParams, HttpServletResponse response) throws IOException {
+    public Vehicle updateVehicle(@PathVariable(value="vehicleId",required=false) Long vehicleId, @RequestBody VehicleDTO vehicleParams, HttpServletResponse response) throws IOException {
 
         Vehicle vehicle =  null;
 
         try{
-            vehicle = vehicleService.updateVehicle(vehicleParams);
+            vehicle = vehicleService.updateVehicle(vehicleId, vehicleParams);
         } catch (Exception e){
             log.error(e.getMessage());
             response.sendError(HttpStatus.CONFLICT.value());

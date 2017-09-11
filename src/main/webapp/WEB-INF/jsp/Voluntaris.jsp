@@ -211,6 +211,7 @@
                                                         <table class="demo-tbl">
                                                             <!--<item>n</item>-->
                                                             <button type="button" onclick="window.location.href='/admin/voluntaris_registration'" class="btn btn-default">Afegir voluntari<i class="fa fa-plus mls"></i></button>
+                                                            <c:if test="${fromDelete}"> member ${member.name} successfully Deleted</c:if>
                                                             <c:forEach items="${members}" var="member">
                                                             <tr class="tbl-item"><!--<img/>-->
 

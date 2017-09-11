@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html ng-app="avpc" lang="en">
 <head>
     <title>Serveis | Serveis</title>
@@ -207,31 +210,36 @@
                                                     <div class="box text-shadow">
                                                         <table class="demo-tbl">
                                                             <!--<item>n</item>-->
-                                                            <button type="button" onclick="window.location.href='./Serveis_registration.html'" class="btn btn-default">Afegir servei<i class="fa fa-plus mls"></i></button>
-                                                            <tr class="tbl-item" ng-repeat="service in servicearray"><!--<img/>-->
+                                                            <button type="button" onclick="window.location.href='/admin/serveis_registration'" class="btn btn-default">Afegir servei<i class="fa fa-plus mls"></i></button>
+                                                            <c:forEach items="${services}" var="service">
+                                                            <tr class="tbl-item"><!--<img/>-->
                                                                 <td class="img"><img src="/images/avatar/sensefoto.jpg" alt="" title="" class="img-responsive img-thumbnail"/></td>
                                                                 <!--<data></data>-->
-                                                                <td class="td-block"><p class="date">Data Servei: {{service.startDate | date:'dd/MM/yyyy'}}</p>
+                                                                <td class="td-block"><p class="date">Data Servei: ${service.startDate}</p>
 
-                                                                    <p class="title">{{service.serviceDescription}}</p>
+                                                                    <p class="title">${service.serviceDescription}</p>
 
                                                                     <p class="desc">
 
                                                                     <div class="row">
-                                                                        <input type="hidden" id="serviceId" value="{{service.id}}">
+                                                                        <input type="hidden" id="serviceId" value="${service.id}">
                                                                         <div class="col-lg-4">
                                                                             <h7 class="box-heading">Comentaris</h7>
-                                                                            <div class="well well-sm">{{service.comments}}</div>
+                                                                            <div class="well well-sm">${service.comments}</div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-lg-4">
                                                                             <h7 class="box-heading">Voluntaris</h7>
-                                                                            <div ng-repeat="members in service.membersInService" class="list">{{members.name}} {{members.surname1}} {{members.surname2}}</div>
+                                                                            <c:forEach items="${service.membersInService}" var="member">
+                                                                            <div class="list">${member.name} ${member.surname1} ${member.surname2}</div>
+                                                                            </c:forEach>
                                                                         </div>
                                                                     </div>
+                                                                    <a class="btn-xs btn-default" href="/admin/serveis_update/${service.id}">Configuració</a>
                                                                 </td>
                                                             </tr>
+                                                            </c:forEach>
                                                         </table>
                                                     </div>
                                                 </div>

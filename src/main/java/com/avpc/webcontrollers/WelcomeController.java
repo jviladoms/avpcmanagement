@@ -46,16 +46,6 @@ public class WelcomeController {
         return "Inici";
     }
 
-    @RequestMapping(value = "/admin/vehicles")
-    public String vehicles(ModelMap model){
-        return "Vehicles";
-    }
-
-    @RequestMapping(value = "/admin/serveis")
-    public String serveis(ModelMap model){
-        return "Serveis";
-    }
-
     @RequestMapping(value = "/admin/mapa")
     public String mapa(ModelMap model){
         return "Mapa";
