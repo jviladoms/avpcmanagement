@@ -35,8 +35,8 @@ public class Service {
     @Column(nullable=true)
     private String material;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "SERVICE_MEMBERS", joinColumns = { @JoinColumn(name = "member_id") }, inverseJoinColumns = { @JoinColumn(name = "service_id") })
+    @OneToMany
+    @JoinTable(name = "SERVICE_MEMBERS", joinColumns = { @JoinColumn(name = "service_id") }, inverseJoinColumns = { @JoinColumn(name = "member_id") })
     private List<Member> membersInService;
 
     public Long getId() {

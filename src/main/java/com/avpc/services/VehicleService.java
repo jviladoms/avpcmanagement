@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,7 +22,7 @@ public class VehicleService {
         vehicle.setBrand(vehicleDTO.getBrand());
         vehicle.setCredential(vehicleDTO.getCredential());
         vehicle.setModel(vehicleDTO.getModel());
-        vehicle.setRegistrationNumber(vehicleDTO.getRegistration_number());
+        vehicle.setRegistrationNumber(vehicleDTO.getRegistrationNumber());
         return vehicleDAO.save(vehicle);
     }
 
@@ -30,19 +31,19 @@ public class VehicleService {
     }
 
     public List<Vehicle> getAllVehicles(){
-        List<Vehicle> vehicleList = null;
-        vehicleDAO.findAll().forEach(member -> vehicleList.add(member));
+        List<Vehicle> vehicleList = new ArrayList<>();
+        vehicleDAO.findAll().forEach(vehicle -> vehicleList.add(vehicle));
 
         return vehicleList;
     }
 
-    public Vehicle updateVehicle(VehicleDTO vehicleDTO){
+    public Vehicle updateVehicle(Long vehicleId, VehicleDTO vehicleDTO){
         Vehicle vehicle;
-        vehicle = vehicleDAO.findOne(vehicleDTO.getId());
+        vehicle = vehicleDAO.findOne(vehicleId);
         vehicle.setBrand(vehicleDTO.getBrand());
         vehicle.setCredential(vehicleDTO.getCredential());
         vehicle.setModel(vehicleDTO.getModel());
-        vehicle.setRegistrationNumber(vehicleDTO.getRegistration_number());
+        vehicle.setRegistrationNumber(vehicleDTO.getRegistrationNumber());
         return vehicleDAO.save(vehicle);
     }
 

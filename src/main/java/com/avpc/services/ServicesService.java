@@ -45,16 +45,13 @@ public class ServicesService {
         return service;
     }
 
-    public List<Service> getService(Long serviceId) throws IllegalArgumentException{
+    public Service getService(Long serviceId) throws IllegalArgumentException{
+        return serviceDAO.findOne(serviceId);
+    }
+
+    public List<Service> getServices() throws IllegalArgumentException{
         List<Service> listService = new ArrayList<>();
-
-        if (serviceId == null){
-                serviceDAO.findAll().forEach(service -> listService.add(service));
-                return listService;
-        } else {
-            listService.add(serviceDAO.findOne(serviceId));
-        }
-
+        serviceDAO.findAll().forEach(service -> listService.add(service));
         return listService;
     }
 
@@ -83,6 +80,23 @@ public class ServicesService {
         } else {
             throw new RuntimeException("No service found");
         }
+
+        return serviceDAO.save(service);
+    }
+
+    public Service updateService(Service modifiedService){
+
+        Service service;
+
+        service = serviceDAO.findOne(modifiedService.getId());
+        service.setStartDate(modifiedService.getStartDate());
+        service.setFinalDate(modifiedService.getFinalDate());
+        service.setComments(modifiedService.getComments());
+        service.setServiceDescription(modifiedService.getServiceDescription());
+        service.setLocalization(modifiedService.getLocalization());
+        service.setMaterial(modifiedService.getMaterial());
+        service.setTypeOfService(modifiedService.getTypeOfService());
+        service.setMembersInService(modifiedService.getMembersInService());
 
         return serviceDAO.save(service);
     }

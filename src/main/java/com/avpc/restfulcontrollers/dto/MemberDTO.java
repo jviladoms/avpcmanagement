@@ -11,6 +11,7 @@ public class MemberDTO implements Serializable {
 
     private Long id;
     private String dni;
+    private String tip;
     private String name;
     private String surname1;
     private String surname2;
@@ -199,4 +200,12 @@ public class MemberDTO implements Serializable {
     public String getPassword() { return password; }
 
     public void setPassword(String password) { this.password = password; }
+
+    public String getTip() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
 }

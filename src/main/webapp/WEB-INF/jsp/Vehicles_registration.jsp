@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
     <title>Voluntaris | Voluntaris</title>
@@ -26,8 +23,6 @@
     <link type="text/css" rel="stylesheet" href="/styles/pace.css">
     <link type="text/css" rel="stylesheet" href="/styles/jquery.news-ticker.css">
      <link type="text/css" rel="stylesheet" href="/styles/jplist-custom.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-    <script src="/script/voluntari.js"></script>
 </head>
 <body>
     <div>
@@ -73,7 +68,7 @@
                     <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
                         
                     </li>
-                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Jordi Viladoms Ferrandiz</span>&nbsp;<span class="caret"></span></a>
+                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Jordi  Viladoms Ferrandiz</span>&nbsp;<span class="caret"></span></a>
                        <ul class="dropdown-menu dropdown-user pull-right">
                             <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
                             <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
@@ -175,12 +170,12 @@
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
                         <div class="page-title">
-                            Configuració dades voluntari</div>
+                            Registre de nou voluntari</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="hidden"><a href="#">Voluntaris</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="active">Voluntaris</li>
+                        <li class="hidden"><a href="#">Vehicles</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="active">Vehicles</li>
                     </ol>
                     <div class="clearfix">
                     </div>
@@ -198,93 +193,44 @@
                                 </div>
 
                             </div>
-
                             <div class="col-lg-12">
                                 <div class="page-content">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="panel">
                                                 <div class="panel-body">
-                                                   <c:if test="${fromUpdate}"> member ${member.name} successfully changed</c:if>
-                                                   <c:if test="${fromRegister}"> member ${member.name} successfully added</c:if>
-                                                    <form id="updatemember" action="/admin/update_member/${member.id}" method="post">
-                                                        <input id="memberid" type="hidden" class="form-control" value="${memberData.id}"/></div>
+                                                    <form id="registermember" action="/admin/register_vehicle" method="post">
                                                         <div class="form-body pal">
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="tip" name="tip" type="text" placeholder="tip" class="form-control" value="${member.tip}"/></div>
+                                                                    <input id="brand" name="brand" type="text" placeholder="brand" class="form-control" /></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="name" name="name" type="text" placeholder="Nom" class="form-control" value="${member.name}"/></div>
+                                                                    <input id="credential" name="credential" type="text" placeholder="credential" class="form-control" /></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="surname1" name="surname1" type="text" placeholder="Primer cognom" class="form-control" value="${member.surname1}"/></div>
+                                                                    <input id="model" name="model" type="text" placeholder="model" class="form-control" /></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="surname2" name="surname2" type="text" placeholder="Segon cognom" class="form-control" value="${member.surname2}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-credit-card"></i>
-                                                                    <input id="dni" name="dni" type="text" placeholder="DNI" class="form-control" value="${member.dni}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                    <input id="birthdate" name="birthdate" type="datetime" placeholder="Data naixement" class="form-control" value="${member.birthDate}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-certificate"></i>
-                                                                    <input id="address" name="address" type="text" placeholder="Adreça" class="form-control" value="${member.address}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-map-marker"></i>
-                                                                    <input id="city" name="city" type="text" placeholder="Ciutat" class="form-control" value="${member.city}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-map-marker"></i>
-                                                                    <input id="postalCode" name="postalCode" type="text" placeholder="Codi Postal" class="form-control" value="${member.postalCode}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-envelope"></i>
-                                                                    <input id="email" name="email" type="text" placeholder="Email address" class="form-control" value="${member.email}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-phone"></i>
-                                                                    <input id="landPhoneNumber" name="landPhoneNumber" type="text" placeholder="Telefon fix" class="form-control" value="${member.landPhoneNumber}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-mobile-phone"></i>
-                                                                    <input id="mobilePhoneNumber" name="mobilePhoneNumber" type="text" placeholder="Telefon mòbil" class="form-control" value="${member.mobilePhoneNumber}"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-certificate"></i>
-                                                                    <input id="userGroup" name="userGroup" type="text" placeholder="Categoria" class="form-control" value="${member.userGroup}"/></div>
+                                                                    <input id="registrationNumber" name="registrationNumber" type="text" placeholder="registrationNumber" class="form-control" /></div>
                                                             </div>
 
+
                                                             <hr />
+
+                                                        </div>
                                                         <div class=" text-right pal">
                                                             <button type="submit" class="btn btn-primary">
-                                                                Modificar
-                                                            </button>
-                                                            <button type="button" class="btn btn-primary" onclick="window.location.href='/admin/delete_member/${member.id}'">
-                                                                Eliminar Voluntari
-                                                            </button>
+                                                                Afegir vehicle</button>
                                                         </div>
+
                                                     </form>
                                                 </div>
                                             </div>
@@ -344,6 +290,8 @@
     <script src="script/jplist.min.js"></script>
     <script src="script/jplist.js"></script>
     <script src="script/animation.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+        <script src="script/voluntaris.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="script/main.js"></script>
     <script>        (function (i, s, o, g, r, a, m) {
@@ -362,5 +310,6 @@
 
 
 </script>
+    </div>
 </body>
 </html>

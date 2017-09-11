@@ -44,6 +44,7 @@ public class MemberWebController {
             log.error(e.getMessage());
         }
 
+        model.put("fromRegister", true);
         model.put("member", member);
         return "Voluntaris_update";
     }
@@ -53,12 +54,12 @@ public class MemberWebController {
         Member member = null;
 
         try{
-            memberService.updateMember(memberParams,memberId);
-
+            member = memberService.updateMember(memberParams,memberId);
         } catch (IllegalArgumentException e){
             log.error(e.getMessage());
         }
 
+        model.put("fromUpdate", true);
         model.put("member", member);
         return "Voluntaris_update";
     }
@@ -81,6 +82,7 @@ public class MemberWebController {
     public String delete_member(@PathVariable(value="memberId",required=false) Long memberId, ModelMap model){
         try{
             memberDAO.delete(memberId);
+            model.put("fromDelete",true);
             model.put("members", memberService.findMembers());
         } catch (IllegalArgumentException e){
             log.error(e.getMessage());

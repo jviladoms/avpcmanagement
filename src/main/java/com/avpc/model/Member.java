@@ -241,4 +241,12 @@ public class Member {
     public void setServices(Integer services) {
         this.services = services;
     }
+
+    public String getTip() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
 }
