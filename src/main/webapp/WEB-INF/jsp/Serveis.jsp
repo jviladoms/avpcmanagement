@@ -213,7 +213,7 @@
                                                             <button type="button" onclick="window.location.href='/admin/serveis_registration'" class="btn btn-default">Afegir servei<i class="fa fa-plus mls"></i></button>
                                                             <c:forEach items="${services}" var="service">
                                                             <tr class="tbl-item"><!--<img/>-->
-                                                                <td class="img"><img src="/images/avatar/sensefoto.jpg" alt="" title="" class="img-responsive img-thumbnail"/></td>
+                                                                <td class="img"><img src="/image/display?name=${service.id}" alt="" title="" class="img-responsive img-thumbnail"/></td>
                                                                 <!--<data></data>-->
                                                                 <td class="td-block"><p class="date">Data Servei: ${service.startDate}</p>
 

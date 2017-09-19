@@ -215,7 +215,7 @@
                                                             <c:forEach items="${members}" var="member">
                                                             <tr class="tbl-item"><!--<img/>-->
 
-                                                                <td class="img"><img src="/images/avatar/sensefoto.jpg" alt="" title="" class="img-responsive img-thumbnail"/><div class="text-center">${member.id}</div> <div class="text-center">${member.userGroup}</div></td>
+                                                                <td class="img"><img src="/member/image/display?name=${member.id}" alt="" title="" class="img-responsive img-thumbnail"/><div class="text-center">${member.id}</div> <div class="text-center">${member.userGroup}</div></td>
                                                                 <!--<data></data>-->
                                                                 <td class="td-block"><p class="date">Data Naixement: ${member.birthDate}</p>
 

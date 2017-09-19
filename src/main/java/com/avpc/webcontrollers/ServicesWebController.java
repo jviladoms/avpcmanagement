@@ -12,11 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +77,70 @@ public class ServicesWebController {
         model.put("service", service);
 
         return "Serveis_update";
+    }
+
+    @RequestMapping(value = "/admin/serveis/uploadFile", method = RequestMethod.POST)
+    public @ResponseBody String uploadFileHandler(@RequestParam("service") Long serviceId,
+                             @RequestParam("file") MultipartFile file) {
+
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+
+                // Creating the directory to store file
+                String rootPath = System.getProperty("image.storage.folder");
+                File dir = new File(rootPath + File.separator + "serveis");
+                if (!dir.exists())
+                    dir.mkdirs();
+
+                // Create the file on server
+                File serverFile = new File(dir.getAbsolutePath()
+                        + File.separator + serviceId);
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile));
+                stream.write(bytes);
+                stream.close();
+
+                Service service = serviceDAO.findOne(serviceId);
+
+                service.setPhotoURL(serverFile.getAbsolutePath());
+                serviceDAO.save(service);
+
+                log.info("Server File Location="
+                        + serverFile.getAbsolutePath());
+
+            } catch (Exception e) {
+                log.error("You failed to upload " + serviceId + " => " + e.getMessage());
+            }
+        }
+
+        return "Serveis_update";
+    }
+
+    @RequestMapping(value = "/serveis/image/display",method=RequestMethod.GET)
+    @ResponseBody
+    public byte[] memberImageDisplay(@RequestParam String name,HttpServletResponse response)  {
+        System.out.println("Show is invoked");
+        response.setContentType("image/jpeg");
+        File file;
+        byte arr[]={};
+        try{
+            String rootPath = System.getProperty("image.storage.folder");
+            file = new File(rootPath + File.separator + "serveis" + File.separator + name);
+            if(file.isFile()){
+                System.out.println("File is found");
+            }
+            else{
+                name = "no-image.jpg";
+                file = new File(rootPath+name);
+            }
+            arr= new byte[(int)file.length()];
+            FileInputStream fis = new FileInputStream(file);
+            fis.read(arr,0,arr.length);
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return arr;
     }
 
     @ModelAttribute("membersList")
