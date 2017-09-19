@@ -207,6 +207,12 @@
                                                 <div class="panel-body">
                                                    <c:if test="${fromUpdate}"> member ${member.name} successfully changed</c:if>
                                                    <c:if test="${fromRegister}"> member ${member.name} successfully added</c:if>
+                                                   <form action="/admin/member/uploadFile" method="post" enctype="multipart/form-data">
+                                                           <input type="file" name="file" />
+                                                           <input type="hidden" name="member" value="${member.id}">
+                                                           <input type="submit" value="upload" />
+                                                   </form>
+                                                  <img src="/member/image/display?name=${member.id}" alt="" title="" class="img-responsive img-thumbnail"/>
                                                     <form id="updatemember" action="/admin/update_member/${member.id}" method="post">
                                                         <input id="memberid" type="hidden" class="form-control" value="${memberData.id}"/></div>
                                                         <div class="form-body pal">

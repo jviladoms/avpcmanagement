@@ -35,6 +35,9 @@ public class Service {
     @Column(nullable=true)
     private String material;
 
+    @Column(nullable= true)
+    private String photoURL;
+
     @OneToMany
     @JoinTable(name = "SERVICE_MEMBERS", joinColumns = { @JoinColumn(name = "service_id") }, inverseJoinColumns = { @JoinColumn(name = "member_id") })
     private List<Member> membersInService;
@@ -109,5 +112,13 @@ public class Service {
 
     public void setMembersInService(List<Member> membersInService) {
         this.membersInService = membersInService;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
     }
 }

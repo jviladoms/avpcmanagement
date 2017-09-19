@@ -205,6 +205,12 @@
                                         <div class="col-lg-12">
                                             <div class="panel">
                                                 <div class="panel-body">
+                                                    <form action="/admin/serveis/uploadFile" method="post" enctype="multipart/form-data">
+                                                                <input type="file" name="file" />
+                                                                <input type="hidden" name="service" value="${service.id}">
+                                                                <input type="submit" value="upload" />
+                                                    </form>
+                                                    <img src="/serveis/image/display?name=${service.id}" alt="" title="" class="img-responsive img-thumbnail"/>
                                                     <form:form id="registerService" modelAttribute="service" action="/admin/update_serveis" method="post">
                                                         <div class="form-body pal">
                                                             <form:input id="id" path="id" type="hidden" class="form-control"/></div>
