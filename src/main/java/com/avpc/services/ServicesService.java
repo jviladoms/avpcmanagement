@@ -97,6 +97,7 @@ public class ServicesService {
         service.setMaterial(modifiedService.getMaterial());
         service.setTypeOfService(modifiedService.getTypeOfService());
         service.setMembersInService(modifiedService.getMembersInService());
+        service.setVehiclesInService(modifiedService.getVehiclesInService());
 
         return serviceDAO.save(service);
     }

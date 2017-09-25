@@ -9,9 +9,14 @@ import com.avpc.services.MemberService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by jviladoms on 11/8/17.
@@ -32,7 +37,9 @@ public class WelcomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showWelcomePage(ModelMap model) {
-        model.put("name", "jviladoms");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        auth.getName();
+        model.put("name", auth.getName());
         return "index";
     }
 
@@ -41,8 +48,15 @@ public class WelcomeController {
         return "login";
     }
 
-    @RequestMapping(value = "/admin/inici")
-    public String inici(ModelMap model){
+    @RequestMapping(value = "/user/inici")
+    public String inici(HttpServletRequest request, ModelMap model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Member member = memberDAO.findByDni(auth.getName());
+
+        request.getSession().setAttribute("username",member.getFullName());
+        request.getSession().setAttribute("userid",member.getId());
+        model.put("name", member.getFullName());
+        model.put("member", member);
         return "Inici";
     }
 
@@ -51,8 +65,4 @@ public class WelcomeController {
         return "Mapa";
     }
 
-    @RequestMapping(value = "/admin/missatges")
-    public String misatges(ModelMap model){
-        return "Missatges";
-    }
 }

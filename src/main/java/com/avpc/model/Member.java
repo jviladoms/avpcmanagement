@@ -73,6 +73,11 @@ public class Member {
     @Column(nullable = true)
     private Integer services;
 
+    @Column(nullable = true)
+    private String password;
+
+    @Column(nullable = true)
+    private String role;
 
     public Long getId() {
         return id;
@@ -248,5 +253,25 @@ public class Member {
 
     public void setTip(String tip) {
         this.tip = tip;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFullName() {
+        return String.format("%s %s %s", name, surname1, surname2);
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

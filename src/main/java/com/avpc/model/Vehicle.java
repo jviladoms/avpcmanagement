@@ -33,6 +33,9 @@ public class Vehicle {
     @Column
     private Boolean deleted = false;
 
+    @Column(nullable= true)
+    private String photoURL;
+
     public Long getId() {
         return id;
     }
@@ -79,5 +82,13 @@ public class Vehicle {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
     }
 }

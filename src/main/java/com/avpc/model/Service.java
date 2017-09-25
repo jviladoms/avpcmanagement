@@ -1,5 +1,7 @@
 package com.avpc.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -15,9 +17,11 @@ public class Service {
     private Long id;
 
     @Column(nullable=false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date startDate;
 
     @Column(nullable=true)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date finalDate;
 
     @Column(nullable=true)
@@ -38,9 +42,13 @@ public class Service {
     @Column(nullable= true)
     private String photoURL;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "SERVICE_MEMBERS", joinColumns = { @JoinColumn(name = "service_id") }, inverseJoinColumns = { @JoinColumn(name = "member_id") })
     private List<Member> membersInService;
+
+    @ManyToMany
+    @JoinTable(name = "SERVICE_VEHICLES", joinColumns = { @JoinColumn(name = "service_id") }, inverseJoinColumns = { @JoinColumn(name = "vehicle_id") })
+    private List<Vehicle> vehiclesInService;
 
     public Long getId() {
         return id;
@@ -120,5 +128,13 @@ public class Service {
 
     public void setPhotoURL(String photoURL) {
         this.photoURL = photoURL;
+    }
+
+    public List<Vehicle> getVehiclesInService() {
+        return vehiclesInService;
+    }
+
+    public void setVehiclesInService(List<Vehicle> vehiclesInService) {
+        this.vehiclesInService = vehiclesInService;
     }
 }

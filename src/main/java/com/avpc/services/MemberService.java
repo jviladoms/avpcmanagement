@@ -6,6 +6,7 @@ import com.avpc.model.dao.ServiceDAO;
 import com.avpc.restfulcontrollers.dto.MemberDTO;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,6 +22,9 @@ public class MemberService {
 
     @Autowired
     private ServiceDAO serviceDAO;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<Member> findMembers(){
         List<Member> listMembers = new ArrayList<>();
@@ -53,7 +57,13 @@ public class MemberService {
         member.setSurname2(memberParams.getSurname2());
         member.setUserGroup(memberParams.getUserGroup());
         member.setDni(memberParams.getDni());
+        member.setRole(memberParams.getRole());
+        member.setPassword(passwordEncoder.encode("hola"));
 
+        return memberDAO.save(member);
+    }
+
+    public Member addMember(Member member){
         return memberDAO.save(member);
     }
 
@@ -84,11 +94,25 @@ public class MemberService {
         member.setPostalCode(memberParams.getPostalCode());
         member.setUserGroup(memberParams.getUserGroup());
         member.setDni(memberParams.getDni());
+        member.setRole(memberParams.getRole());
 
         memberDAO.save(member);
 
         return member;
     }
+
+    public void updatePassword(Long memberId, String oldpassword, String newPassword){
+        Member member;
+        member = memberDAO.findOne(memberId);
+
+        if(passwordEncoder.matches(oldpassword,member.getPassword())){
+            member.setPassword(passwordEncoder.encode(newPassword));
+            memberDAO.save(member);
+        } else {
+            throw new RuntimeException();
+        }
+    }
+
 
     public Member updateMemberLocation(MemberDTO memberParams, Long memberId){
         Member member;
@@ -111,5 +135,9 @@ public class MemberService {
 
     public void deleteMember(Long memberId){
         memberDAO.delete(memberId);
+    }
+
+    public Member findMemberByDni(String dni){
+        return memberDAO.findByDni(dni);
     }
 }
