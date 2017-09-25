@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
-    <title>Serveis | Serveis</title>
+    <title>Voluntaris | Voluntaris</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +28,7 @@
     <link type="text/css" rel="stylesheet" href="/styles/jplist-custom.css">
     <link type="text/css" href="/styles/jquery.simple-dtpicker.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-    <script src="/script/voluntaris.js"></script>
+    <script src="/script/voluntari.js"></script>
 </head>
 <body>
     <div>
@@ -77,8 +76,8 @@
                     </li>
                     <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/member/image/display?name=<%= request.getSession().getAttribute("userid") %>" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs"><%= request.getSession().getAttribute("username") %></span>&nbsp;<span class="caret"></span></a>
                                             <ul class="dropdown-menu dropdown-user pull-right">
-                                                <li><a href="/admin/member_password/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-user"></i>Canviar Password</a></li>
-                                                <li><a href="/admin/member_update/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-calendar"></i>El meu perfil</a></li>
+                                                <li><a href="/user/member_password/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-user"></i>Canviar Password</a></li>
+                                                <li><a href="/user/member_update/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-calendar"></i>El meu perfil</a></li>
                                                 <li class="divider"></li>
                                                 <li><a href="/logout"><i class="fa fa-key"></i>Log Out</a></li>
                                             </ul>
@@ -174,7 +173,7 @@
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
                         <div class="page-title">
-                            Registre de nou voluntari</div>
+                            Configuració dades voluntari</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -197,71 +196,33 @@
                                 </div>
 
                             </div>
+
                             <div class="col-lg-12">
                                 <div class="page-content">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="panel">
                                                 <div class="panel-body">
-                                                    <form:form id="registerService" modelAttribute="service" action="/admin/addService" method="post">
+                                                   <c:if test="${success}"> password successfully changed</c:if>
+                                                    <form id="updatepassword" action="/admin/update_member_password/${member.id}" method="post">
                                                         <div class="form-body pal">
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <form:input id="serviceDescription" path="serviceDescription" type="text" placeholder="Descripció del servei" class="form-control" /></div>
+                                                                    <input id="oldPassword" name="oldPassword" type="password" placeholder="oldPassword" class="form-control"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
                                                                     <i class="fa fa-user"></i>
-                                                                    <form:input id="typeOfService" path="typeOfService" type="text" placeholder="Tipus de servei" class="form-control" /></div>
+                                                                    <input id="newPassword" name="newPassword" type="password" placeholder="newPassword" class="form-control"/></div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-user"></i>
-                                                                    <form:input id="startDate" path="startDate" type="datetime" placeholder="Dia i hora d'inici" class="form-control" /></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-user"></i>
-                                                                    <form:input id="finalDate" path="finalDate" type="datetime" placeholder="Dia i hora final" class="form-control" /></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-credit-card"></i>
-                                                                    <form:input id="localization" path="localization" type="text" placeholder="Lloc" class="form-control"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                    <form:input id="material" path="material" type="text" placeholder="Material utilitzat" class="form-control"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-certificate"></i>
-                                                                    <form:input id="comments" path="comments" type="text" placeholder="Comentaris" class="form-control"/></div>
-                                                            </div>
-
                                                             <hr />
-
-                                                            Voluntaris al Servei <br>
-                                                            <div>
-                                                                <form:checkboxes items="${membersList}" path="membersInService" itemLabel="surname1"/>
-                                                            </div>
-
-                                                            Vehicles al Servei <br>
-                                                             <div>
-                                                                 <form:checkboxes items="${vehiclesList}" path="vehiclesInService" itemLabel="credential"/>
-                                                             </div>
-
-                                                            <hr />
-
-                                                        </div>
                                                         <div class=" text-right pal">
                                                             <button type="submit" class="btn btn-primary">
-                                                                Afegir voluntari</button>
+                                                                Modificar
+                                                            </button>
                                                         </div>
-
-                                                    </form:form>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -321,7 +282,6 @@
     <script src="/script/jplist.js"></script>
     <script src="/script/animation.js"></script>
     <script src="/script/jquery.simple-dtpicker.js"></script>
-
     <!--CORE JAVASCRIPT-->
     <script src="/script/main.js"></script>
     <script>        (function (i, s, o, g, r, a, m) {
@@ -339,19 +299,12 @@
         ga('send', 'pageview');
 
 $(function(){
-			$('#startDate').appendDtpicker({
-             "inline": true,
+			$('#birthDate').appendDtpicker({
+             inline: true,
+             disableEntry: true,
              format: 'YYYY-mm-dd HH:mm'
             });
-			$("#finalDate").appendDtpicker({
-              "inline": true,
-              format: 'YYYY-mm-dd HH:mm:s'
-            });
 		});
-
 </script>
-</script>
-
-    </div>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.avpc.webcontrollers;
 
 import com.avpc.model.Member;
 import com.avpc.model.Service;
+import com.avpc.model.Vehicle;
 import com.avpc.model.dao.ServiceDAO;
 import com.avpc.restfulcontrollers.dto.ServiceDTO;
 import com.avpc.services.MemberService;
@@ -9,6 +10,7 @@ import com.avpc.services.ServicesService;
 import com.avpc.services.VehicleService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -34,7 +36,13 @@ public class ServicesWebController {
     MemberService memberService;
 
     @Autowired
+    VehicleService vehicleService;
+
+    @Autowired
     ServiceDAO serviceDAO;
+
+    @Value("${image.storage.folder}")
+    private String rootPath;
 
     @RequestMapping(value = "/admin/serveis")
     public String services(ModelMap model){
@@ -87,8 +95,6 @@ public class ServicesWebController {
             try {
                 byte[] bytes = file.getBytes();
 
-                // Creating the directory to store file
-                String rootPath = System.getProperty("image.storage.folder");
                 File dir = new File(rootPath + File.separator + "serveis");
                 if (!dir.exists())
                     dir.mkdirs();
@@ -125,7 +131,6 @@ public class ServicesWebController {
         File file;
         byte arr[]={};
         try{
-            String rootPath = System.getProperty("image.storage.folder");
             file = new File(rootPath + File.separator + "serveis" + File.separator + name);
             if(file.isFile()){
                 System.out.println("File is found");
@@ -147,5 +152,11 @@ public class ServicesWebController {
     public List<Member> getMembersList()
     {
         return memberService.findMembers();
+    }
+
+    @ModelAttribute("vehiclesList")
+    public List<Vehicle> getVehicleList()
+    {
+        return vehicleService.getAllVehicles();
     }
 }

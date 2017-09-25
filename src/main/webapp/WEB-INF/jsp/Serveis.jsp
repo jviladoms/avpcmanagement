@@ -73,17 +73,14 @@
                     <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
 
                     </li>
-                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Jordi Viladoms Ferrandiz</span>&nbsp;<span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-user pull-right">
-                            <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
-                            <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
-                            <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
-                            <li class="divider"></li>
-                            <li><a href="#"><i class="fa fa-lock"></i>Lock Screen</a></li>
-                            <li><a href="Login.html"><i class="fa fa-key"></i>Log Out</a></li>
-                        </ul>
-                    </li>
+                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/member/image/display?name=<%= request.getSession().getAttribute("userid") %>" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs"><%= request.getSession().getAttribute("username") %></span>&nbsp;<span class="caret"></span></a>
+                                            <ul class="dropdown-menu dropdown-user pull-right">
+                                                <li><a href="/user/member_password/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-user"></i>Canviar Password</a></li>
+                                                <li><a href="/user/member_update/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-calendar"></i>El meu perfil</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="/logout"><i class="fa fa-key"></i>Log Out</a></li>
+                                            </ul>
+                     </li>
                     <li id="topbar-chat" class="hidden-xs"><a href="javascript:void(0)" data-step="4" data-intro="&lt;b&gt;Form chat&lt;/b&gt; keep you connecting with other coworker" data-position="left" class="btn-chat"><i class="fa fa-comments"></i><span class="badge badge-info">3</span></a></li>
                 </ul>
             </div>
@@ -130,7 +127,7 @@
                 <ul id="side-menu" class="nav">
 
                     <div class="clearfix"></div>
-                    <li><a href="/admin/inici"><i class="fa fa-desktop fa-fw">
+                    <li><a href="/user/inici"><i class="fa fa-desktop fa-fw">
                         <div class="icon-bg bg-pink"></div>
                     </i><span class="menu-title">Inici</span></a>
 
@@ -145,7 +142,7 @@
                     </i><span class="menu-title">Vehicles</span></a>
 
                     </li>
-                    <li><a href="/admin/missatges"><i class="fa fa-mobile-phone fa-fw">
+                    <li><a href="/user/missatges"><i class="fa fa-mobile-phone fa-fw">
                         <div class="icon-bg bg-blue"></div>
                     </i><span class="menu-title">Missatges</span></a>
 
@@ -213,7 +210,7 @@
                                                             <button type="button" onclick="window.location.href='/admin/serveis_registration'" class="btn btn-default">Afegir servei<i class="fa fa-plus mls"></i></button>
                                                             <c:forEach items="${services}" var="service">
                                                             <tr class="tbl-item"><!--<img/>-->
-                                                                <td class="img"><img src="/image/display?name=${service.id}" alt="" title="" class="img-responsive img-thumbnail"/></td>
+                                                                <td class="col-lg-2"><img src="/serveis/image/display?name=${service.id}" alt="" title="" class="img-responsive img-thumbnail"/></td>
                                                                 <!--<data></data>-->
                                                                 <td class="td-block"><p class="date">Data Servei: ${service.startDate}</p>
 
@@ -266,44 +263,44 @@
         <!--END PAGE WRAPPER-->
     </div>
 </div>
-<script src="script/jquery-1.10.2.min.js"></script>
-<script src="script/jquery-migrate-1.2.1.min.js"></script>
-<script src="script/jquery-ui.js"></script>
-<script src="script/bootstrap.min.js"></script>
-<script src="script/bootstrap-hover-dropdown.js"></script>
-<script src="script/html5shiv.js"></script>
-<script src="script/respond.min.js"></script>
-<script src="script/jquery.metisMenu.js"></script>
-<script src="script/jquery.slimscroll.js"></script>
-<script src="script/jquery.cookie.js"></script>
-<script src="script/icheck.min.js"></script>
-<script src="script/custom.min.js"></script>
-<script src="script/jquery.news-ticker.js"></script>
-<script src="script/jquery.menu.js"></script>
-<script src="script/pace.min.js"></script>
-<script src="script/holder.js"></script>
-<script src="script/responsive-tabs.js"></script>
-<script src="script/jquery.flot.js"></script>
-<script src="script/jquery.flot.categories.js"></script>
-<script src="script/jquery.flot.pie.js"></script>
-<script src="script/jquery.flot.tooltip.js"></script>
-<script src="script/jquery.flot.resize.js"></script>
-<script src="script/jquery.flot.fillbetween.js"></script>
-<script src="script/jquery.flot.stack.js"></script>
-<script src="script/jquery.flot.spline.js"></script>
-<script src="script/zabuto_calendar.min.js"></script>
-<script src="script/index.js"></script>
-<script src="script/highcharts.js"></script>
-<script src="script/data.js"></script>
-<script src="script/drilldown.js"></script>
-<script src="script/exporting.js"></script>
-<script src="script/highcharts-more.js"></script>
-<script src="script/charts-highchart-pie.js"></script>
-<script src="script/charts-highchart-more.js"></script>
-<script src="script/modernizr.min.js"></script>
-<script src="script/animation.js"></script>
+<script src="/script/jquery-1.10.2.min.js"></script>
+<script src="/script/jquery-migrate-1.2.1.min.js"></script>
+<script src="/script/jquery-ui.js"></script>
+<script src="/script/bootstrap.min.js"></script>
+<script src="/script/bootstrap-hover-dropdown.js"></script>
+<script src="/script/html5shiv.js"></script>
+<script src="/script/respond.min.js"></script>
+<script src="/script/jquery.metisMenu.js"></script>
+<script src="/script/jquery.slimscroll.js"></script>
+<script src="/script/jquery.cookie.js"></script>
+<script src="/script/icheck.min.js"></script>
+<script src="/script/custom.min.js"></script>
+<script src="/script/jquery.news-ticker.js"></script>
+<script src="/script/jquery.menu.js"></script>
+<script src="/script/pace.min.js"></script>
+<script src="/script/holder.js"></script>
+<script src="/script/responsive-tabs.js"></script>
+<script src="/script/jquery.flot.js"></script>
+<script src="/script/jquery.flot.categories.js"></script>
+<script src="/script/jquery.flot.pie.js"></script>
+<script src="/script/jquery.flot.tooltip.js"></script>
+<script src="/script/jquery.flot.resize.js"></script>
+<script src="/script/jquery.flot.fillbetween.js"></script>
+<script src="/script/jquery.flot.stack.js"></script>
+<script src="/script/jquery.flot.spline.js"></script>
+<script src="/script/zabuto_calendar.min.js"></script>
+<script src="/script/index.js"></script>
+<script src="/script/highcharts.js"></script>
+<script src="/script/data.js"></script>
+<script src="/script/drilldown.js"></script>
+<script src="/script/exporting.js"></script>
+<script src="/script/highcharts-more.js"></script>
+<script src="/script/charts-highchart-pie.js"></script>
+<script src="/script/charts-highchart-more.js"></script>
+<script src="/script/modernizr.min.js"></script>
+<script src="/script/animation.js"></script>
 <!--CORE JAVASCRIPT-->
-<script src="script/main.js"></script>
+<script src="/script/main.js"></script>
 <script>        (function (i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
     i[r] = i[r] || function () {

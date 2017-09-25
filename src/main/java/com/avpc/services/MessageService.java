@@ -4,8 +4,6 @@ import com.avpc.model.Member;
 import com.avpc.model.Message;
 import com.avpc.model.dao.MemberDAO;
 import com.avpc.model.dao.MessageDAO;
-import com.avpc.model.dao.VehicleDAO;
-import com.avpc.restfulcontrollers.dto.MemberDTO;
 import com.avpc.restfulcontrollers.dto.MessageDTO;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +26,7 @@ public class MessageService {
 
     public Message addMessage(MessageDTO messageDTO){
         Message message = new Message();
-        message.setMessage(messageDTO.getMessage());
+        message.setMessageString(messageDTO.getMessage());
         message.setSendMember(memberDAO.findOne(messageDTO.getSendMember()));
         message.setDate(messageDTO.getDate());
 
@@ -43,6 +41,10 @@ public class MessageService {
         }
 
         return message;
+    }
+
+    public Message addMessage(Message message){
+        return messageDAO.save(message);
     }
 
     public List<Message> findUserIdMessages(Long userId){
@@ -64,7 +66,7 @@ public class MessageService {
         Message message;
 
         message = messageDAO.findOne(messageDTO.getId());
-        message.setMessage(messageDTO.getMessage());
+        message.setMessageString(messageDTO.getMessage());
         message.setSendMember(memberDAO.findOne(messageDTO.getSendMember()));
 
         List<Member> members = getMembers(messageDTO.getDestinationMembers());

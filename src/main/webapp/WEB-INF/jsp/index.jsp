@@ -37,19 +37,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">AVPC Sant Vicenç de Castellet</a>
+          <a class="navbar-brand" href="/user/inici">AVPC Sant Vicenç de Castellet</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" action="/login">
-            <div class="form-group">
-              <input type="text" placeholder="Usuari" name="username" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" name="password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Entra</button>
+          <form class="navbar-form navbar-right" action="/user/inici" method="get">
+            <button type="submit" class="btn btn-success">Administració</button>
           </form>
-          <a href="/admin/inici"> administració </a>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>

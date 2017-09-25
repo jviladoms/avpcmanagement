@@ -16,13 +16,13 @@ public class Message {
     private Long id;
 
     @Column(nullable = false)
-    private String message;
+    private String messageString;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "message_members", joinColumns = { @JoinColumn(name = "messageId") }, inverseJoinColumns = { @JoinColumn(name = "memberId") })
     private List<Member> destinationMembers;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Member sendMember;
 
     @Column(nullable=false)
@@ -36,12 +36,12 @@ public class Message {
         this.id = id;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMessageString() {
+        return messageString;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessageString(String messageString) {
+        this.messageString = messageString;
     }
 
     public List<Member> getDestinationMembers() {

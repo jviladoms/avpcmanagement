@@ -4,9 +4,13 @@ import com.avpc.model.Member;
 import com.avpc.model.Service;
 import com.avpc.model.dao.MemberDAO;
 import com.avpc.restfulcontrollers.dto.MemberDTO;
+import com.avpc.restfulcontrollers.dto.PasswordDTO;
 import com.avpc.services.MemberService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +32,9 @@ public class MemberWebController {
 
     @Autowired
     MemberDAO memberDAO;
+
+    @Value("${image.storage.folder}")
+    private String rootPath;
 
     @RequestMapping(value = "/admin/voluntaris")
     public String voluntaris(ModelMap model){
@@ -69,12 +76,77 @@ public class MemberWebController {
         return "Voluntaris_update";
     }
 
+    @RequestMapping(value = "/user/update_member", method = RequestMethod.POST)
+    public String update_member(@ModelAttribute MemberDTO memberParams, ModelMap model){
+        Member member = null;
+        try{
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            member = memberService.findMemberByDni(auth.getName());
+            member = memberService.updateMember(memberParams,member.getId());
+        } catch (IllegalArgumentException e){
+            log.error(e.getMessage());
+        }
+
+        model.put("fromUpdate", true);
+        model.put("member", member);
+        return "Voluntaris_update";
+    }
+
+    @RequestMapping(value = "/user/update_member_password", method = RequestMethod.POST)
+    public String update_member(@ModelAttribute PasswordDTO passwordDTO, ModelMap model){
+        Member member = null;
+
+        try{
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            member = memberService.findMemberByDni(auth.getName());
+            memberService.updatePassword(member.getId(), passwordDTO.getOldPassword(),passwordDTO.getNewPassword());
+        } catch (Exception e){
+            log.error(e.getMessage());
+            model.put("success", false);
+            return "Voluntaris_password";
+        }
+
+        model.put("success", true);
+        return "Voluntaris_password";
+    }
+
+    @RequestMapping(value = "/user/member_password")
+    public String update_password(ModelMap model){
+        Member member = null;
+
+        try{
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            member = memberService.findMemberByDni(auth.getName());
+            model.put("member", member);
+            return "Voluntaris_password";
+        } catch (IllegalArgumentException e){
+            log.error(e.getMessage());
+        }
+
+        return "Inici";
+    }
+
     @RequestMapping(value = "/admin/member_update/{memberId}")
     public String member_update(@PathVariable(value="memberId",required=false) Long memberId, ModelMap model){
         Member member = null;
 
         try{
             member = memberService.findMember(memberId);
+        } catch (Exception e){
+            log.error(e.getMessage());
+        }
+
+        model.put("member", member);
+        return "Voluntaris_update";
+    }
+
+    @RequestMapping(value = "/user/member_update")
+    public String member_update(ModelMap model){
+        Member member = null;
+
+        try{
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            member = memberService.findMemberByDni(auth.getName());
         } catch (Exception e){
             log.error(e.getMessage());
         }
@@ -96,28 +168,26 @@ public class MemberWebController {
     }
 
     @RequestMapping(value = "/admin/member/uploadFile", method = RequestMethod.POST)
-    public String uploadFileHandler(@RequestParam("member") Long memberId,
+    public String uploadFileHandler(@RequestParam("member") Long serviceId,
                              @RequestParam("file") MultipartFile file) {
 
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
 
-                // Creating the directory to store file
-                String rootPath = System.getProperty("image.storage.folder");
                 File dir = new File(rootPath + File.separator + "member");
                 if (!dir.exists())
                     dir.mkdirs();
 
                 // Create the file on server
                 File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + memberId);
+                        + File.separator + serviceId);
                 BufferedOutputStream stream = new BufferedOutputStream(
                         new FileOutputStream(serverFile));
                 stream.write(bytes);
                 stream.close();
 
-                Member member = memberDAO.findOne(memberId);
+                Member member = memberDAO.findOne(serviceId);
 
                 member.setPhotoURL(serverFile.getAbsolutePath());
                 memberDAO.save(member);
@@ -126,7 +196,7 @@ public class MemberWebController {
                         + serverFile.getAbsolutePath());
 
             } catch (Exception e) {
-                log.error("You failed to upload " + memberId + " => " + e.getMessage());
+                log.error("You failed to upload " + serviceId + " => " + e.getMessage());
             }
         }
 
@@ -141,7 +211,6 @@ public class MemberWebController {
         File file;
         byte arr[]={};
         try{
-            String rootPath = System.getProperty("image.storage.folder");
             file = new File(rootPath + File.separator + "member" + File.separator + name);
             if(file.isFile()){
                 System.out.println("File is found");

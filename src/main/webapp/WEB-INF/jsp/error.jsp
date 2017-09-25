@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
-    <title>Serveis | Serveis</title>
+    <title>Voluntaris | Voluntaris</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,10 +26,14 @@
     <link type="text/css" rel="stylesheet" href="/styles/zabuto_calendar.min.css">
     <link type="text/css" rel="stylesheet" href="/styles/pace.css">
     <link type="text/css" rel="stylesheet" href="/styles/jquery.news-ticker.css">
-    <link type="text/css" rel="stylesheet" href="/styles/jplist-custom.css">
-    <link type="text/css" href="/styles/jquery.simple-dtpicker.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-    <script src="/script/voluntaris.js"></script>
+     <link type="text/css" rel="stylesheet" href="/styles/jplist-custom.css">
+    <style>
+        #map {
+            height: 800px;
+            width: 100%;
+        }
+    </style>
+
 </head>
 <body>
     <div>
@@ -132,37 +136,37 @@
                     <li><a href="/user/inici"><i class="fa fa-desktop fa-fw">
                         <div class="icon-bg bg-pink"></div>
                     </i><span class="menu-title">Inici</span></a>
-                       
+
                     </li>
                     <li><a href="/admin/voluntaris"><i class="fa fa-phone-square fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Voluntaris</span></a>
-                       
+
                     </li>
                     <li><a href="/admin/vehicles"><i class="fa fa-automobile fa-fw">
                         <div class="icon-bg bg-violet"></div>
                     </i><span class="menu-title">Vehicles</span></a>
-                      
+
                     </li>
-                    <li><a href="/user/missatges"><i class="fa fa-mobile-phone fa-fw">
+                    <li><a href="/admin/missatges"><i class="fa fa-mobile-phone fa-fw">
                         <div class="icon-bg bg-blue"></div>
                     </i><span class="menu-title">Missatges</span></a>
-                          
+
                     </li>
                     <li><a href="/admin/serveis"><i class="fa fa-fire-extinguisher fa-fw">
                         <div class="icon-bg bg-red"></div>
                     </i><span class="menu-title">Serveis</span></a>
-                      
+
                     </li>
-                    <li><a href="/admin/documents"><i class="fa fa-paperclip fa-fw">
+                    <li><a href="Documents.html"><i class="fa fa-paperclip fa-fw">
                         <div class="icon-bg bg-yellow"></div>
                     </i><span class="menu-title">Documents</span></a>
-                       
+
                     </li>
                     <li><a href="/admin/mapa"><i class="fa fa-map-marker fa-fw">
                         <div class="icon-bg bg-grey"></div>
                     </i><span class="menu-title">Mapa Voluntaris</span></a>
-                      
+
                     </li>
                     </ul>
             </div>
@@ -174,7 +178,7 @@
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
                         <div class="page-title">
-                            Registre de nou voluntari</div>
+                            Mapa de Voluntaris</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -190,84 +194,21 @@
                     <div id="tab-general">
                         <div class="row mbl">
                             <div class="col-lg-12">
-
                                 <div class="col-md-12">
                                     <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
                                     </div>
                                 </div>
-
                             </div>
                             <div class="col-lg-12">
                                 <div class="page-content">
-                                    <div class="row">
+                                    <div class="row mbl">
                                         <div class="col-lg-12">
-                                            <div class="panel">
-                                                <div class="panel-body">
-                                                    <form:form id="registerService" modelAttribute="service" action="/admin/addService" method="post">
-                                                        <div class="form-body pal">
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-user"></i>
-                                                                    <form:input id="serviceDescription" path="serviceDescription" type="text" placeholder="Descripció del servei" class="form-control" /></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-user"></i>
-                                                                    <form:input id="typeOfService" path="typeOfService" type="text" placeholder="Tipus de servei" class="form-control" /></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-user"></i>
-                                                                    <form:input id="startDate" path="startDate" type="datetime" placeholder="Dia i hora d'inici" class="form-control" /></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-user"></i>
-                                                                    <form:input id="finalDate" path="finalDate" type="datetime" placeholder="Dia i hora final" class="form-control" /></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-credit-card"></i>
-                                                                    <form:input id="localization" path="localization" type="text" placeholder="Lloc" class="form-control"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                    <form:input id="material" path="material" type="text" placeholder="Material utilitzat" class="form-control"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-certificate"></i>
-                                                                    <form:input id="comments" path="comments" type="text" placeholder="Comentaris" class="form-control"/></div>
-                                                            </div>
-
-                                                            <hr />
-
-                                                            Voluntaris al Servei <br>
-                                                            <div>
-                                                                <form:checkboxes items="${membersList}" path="membersInService" itemLabel="surname1"/>
-                                                            </div>
-
-                                                            Vehicles al Servei <br>
-                                                             <div>
-                                                                 <form:checkboxes items="${vehiclesList}" path="vehiclesInService" itemLabel="credential"/>
-                                                             </div>
-
-                                                            <hr />
-
-                                                        </div>
-                                                        <div class=" text-right pal">
-                                                            <button type="submit" class="btn btn-primary">
-                                                                Afegir voluntari</button>
-                                                        </div>
-
-                                                    </form:form>
-                                                </div>
-                                            </div>
+                                            ERROR!!!!
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -277,6 +218,7 @@
                     <div class="copyright">
                        2017 © AVPC Sant Vicenç de Castellet
                 </div>
+                    </div>
                 <!--END FOOTER-->
             </div>
             <!--END PAGE WRAPPER-->
@@ -320,10 +262,8 @@
     <script src="/script/jplist.min.js"></script>
     <script src="/script/jplist.js"></script>
     <script src="/script/animation.js"></script>
-    <script src="/script/jquery.simple-dtpicker.js"></script>
-
     <!--CORE JAVASCRIPT-->
-    <script src="/script/main.js"></script>
+    <script src="script/main.js"></script>
     <script>        (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
@@ -338,20 +278,7 @@
         ga('create', 'UA-145464-12', 'auto');
         ga('send', 'pageview');
 
-$(function(){
-			$('#startDate').appendDtpicker({
-             "inline": true,
-             format: 'YYYY-mm-dd HH:mm'
-            });
-			$("#finalDate").appendDtpicker({
-              "inline": true,
-              format: 'YYYY-mm-dd HH:mm:s'
-            });
-		});
 
 </script>
-</script>
-
-    </div>
 </body>
 </html>

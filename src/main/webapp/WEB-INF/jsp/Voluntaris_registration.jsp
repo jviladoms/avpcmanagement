@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
     <title>Voluntaris | Voluntaris</title>
@@ -22,7 +25,8 @@
     <link type="text/css" rel="stylesheet" href="/styles/zabuto_calendar.min.css">
     <link type="text/css" rel="stylesheet" href="/styles/pace.css">
     <link type="text/css" rel="stylesheet" href="/styles/jquery.news-ticker.css">
-     <link type="text/css" rel="stylesheet" href="/styles/jplist-custom.css">
+    <link type="text/css" rel="stylesheet" href="/styles/jplist-custom.css">
+    <link type="text/css" href="/styles/jquery.simple-dtpicker.css" rel="stylesheet" />
 </head>
 <body>
     <div>
@@ -68,17 +72,14 @@
                     <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
                         
                     </li>
-                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Jordi  Viladoms Ferrandiz</span>&nbsp;<span class="caret"></span></a>
-                       <ul class="dropdown-menu dropdown-user pull-right">
-                            <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
-                            <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
-                            <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
-                            <li class="divider"></li>
-                            <li><a href="#"><i class="fa fa-lock"></i>Lock Screen</a></li>
-                            <li><a href="Login.html"><i class="fa fa-key"></i>Log Out</a></li>
-                        </ul>
-                    </li>
+                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/member/image/display?name=<%= request.getSession().getAttribute("userid") %>" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs"><%= request.getSession().getAttribute("username") %></span>&nbsp;<span class="caret"></span></a>
+                                            <ul class="dropdown-menu dropdown-user pull-right">
+                                                <li><a href="/admin/member_password/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-user"></i>Canviar Password</a></li>
+                                                <li><a href="/admin/member_update/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-calendar"></i>El meu perfil</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="/logout"><i class="fa fa-key"></i>Log Out</a></li>
+                                            </ul>
+                     </li>
                     <li id="topbar-chat" class="hidden-xs"><a href="javascript:void(0)" data-step="4" data-intro="&lt;b&gt;Form chat&lt;/b&gt; keep you connecting with other coworker" data-position="left" class="btn-chat"><i class="fa fa-comments"></i><span class="badge badge-info">3</span></a></li>
                 </ul>
             </div>
@@ -125,7 +126,7 @@
                 <ul id="side-menu" class="nav">
                     
                      <div class="clearfix"></div>
-                    <li><a href="/admin/inici"><i class="fa fa-desktop fa-fw">
+                    <li><a href="/user/inici"><i class="fa fa-desktop fa-fw">
                         <div class="icon-bg bg-pink"></div>
                     </i><span class="menu-title">Inici</span></a>
                        
@@ -140,7 +141,7 @@
                     </i><span class="menu-title">Vehicles</span></a>
                       
                     </li>
-                    <li><a href="/admin/missatges"><i class="fa fa-mobile-phone fa-fw">
+                    <li><a href="/user/missatges"><i class="fa fa-mobile-phone fa-fw">
                         <div class="icon-bg bg-blue"></div>
                     </i><span class="menu-title">Missatges</span></a>
                           
@@ -200,76 +201,92 @@
                                             <div class="panel">
                                                 <div class="panel-body">
                                                     <form id="registermember" action="/admin/register_member" method="post">
+                                                        <div class="page-title">
+                                                        Introdueix les dades del nou voluntari
+                                                        </div>
                                                         <input id="memberid" type="hidden" class="form-control" value="{{memberData.id}}"/></div>
                                                         <div class="form-body pal">
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
-                                                                    <i class="fa fa-user"></i>
-                                                                    <input id="tip" name="tip" type="text" placeholder="tip" class="form-control" /></div>
+                                                                <label for="dni" style="font-weight:bold;">DNI</label>
+                                                                <input id="dni" name="dni" type="text" class="form-control"/></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
-                                                                    <i class="fa fa-user"></i>
-                                                                    <input id="name" name="name" type="text" placeholder="Nom" class="form-control" /></div>
+                                                                    <label for="tip" style="font-weight:bold;" >TIP</label>
+                                                                    <input id="tip" name="tip" type="text"  class="form-control" /></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
-                                                                    <i class="fa fa-user"></i>
-                                                                    <input id="surname1" name="surname1" type="text" placeholder="Primer cognom" class="form-control" /></div>
+                                                                    <label for="name" style="font-weight:bold;" >Nom</label>
+                                                                    <input id="name" name="name" type="text"  class="form-control" /></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
-                                                                    <i class="fa fa-user"></i>
-                                                                    <input id="surname2" name="surname2" type="text" placeholder="Segon cognom" class="form-control" /></div>
+                                                                    <label for="surname1" style="font-weight:bold;">Primer cognom</label>
+                                                                    <input id="surname1" name="surname1" type="text"  class="form-control" /></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
-                                                                    <i class="fa fa-credit-card"></i>
-                                                                    <input id="dni" name="dni" type="text" placeholder="DNI" class="form-control"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                    <input id="birthdate" name="birthdate" type="datetime" placeholder="Data naixement dd-MM-yyyy" class="form-control"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-certificate"></i>
-                                                                    <input id="address" name="address" type="text" placeholder="Adreça" class="form-control"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-map-marker"></i>
-                                                                    <input id="city" name="city" type="text" placeholder="Ciutat" class="form-control"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-map-marker"></i>
-                                                                    <input id="postalCode" name="postalCode" type="text" placeholder="Codi Postal" class="form-control"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-envelope"></i>
-                                                                    <input id="email" name="email" type="text" placeholder="Email address" class="form-control"/></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-phone"></i>
-                                                                    <input id="landPhoneNumber" name="landPhoneNumber" type="text" placeholder="Telefon fix" class="form-control" /></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-mobile-phone"></i>
-                                                                    <input id="mobilePhoneNumber" name="mobilePhoneNumber" type="text" placeholder="Telefon mòbil" class="form-control" /></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon right">
-                                                                    <i class="fa fa-certificate"></i>
-                                                                    <input id="userGroup" name="userGroup" type="text" placeholder="Categoria" class="form-control" /></div>
+                                                                    <label for="surname2" style="font-weight:bold;">Segon cognom</label>
+                                                                    <input id="surname2" name="surname2" type="text"  class="form-control" /></div>
                                                             </div>
 
+                                                            <div class="form-group">
+                                                                <div class="input-icon right">
+                                                                    <label for="birthDate" style="font-weight:bold;">Data aniversari</label>
+                                                                    <input id="birthDate" name="birthDate" type="datetime" class="form-control"/></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-icon right">
+                                                                    <label for="address" style="font-weight:bold;">Adreça</label>
+                                                                    <input id="address" name="address" type="text" class="form-control"/></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-icon right">
+                                                                    <label for="city" style="font-weight:bold;">Ciutat</label>
+                                                                    <input id="city" name="city" type="text" class="form-control"/></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-icon right">
+                                                                    <label for="postalCode" style="font-weight:bold;">Codi Postal</label>
+                                                                    <input id="postalCode" name="postalCode" type="text"  class="form-control"/></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-icon right">
+                                                                    <label for="postalCode" style="font-weight:bold;">Codi Postal</label>
+                                                                    <input id="email" name="email" type="text" class="form-control"/></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-icon right">
+                                                                    <label for="landPhoneNumber" style="font-weight:bold;">Telefon fix</label>
+                                                                    <input id="landPhoneNumber" name="landPhoneNumber" type="text" class="form-control" /></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-icon right">
+                                                                    <label for="mobilePhoneNumber" style="font-weight:bold;">Telefon mòbil</label>
+                                                                    <input id="mobilePhoneNumber" name="mobilePhoneNumber" type="text" class="form-control" /></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-icon right">
+                                                                   <label for="userGroup" style="font-weight:bold;">Rang</label>
+                                                                    <select id="userGroup" name="userGroup" type="text" class="form-control" />
+                                                                        <option value="VOL">VOLUNTARI</option>
+                                                                        <option value="CDG">CAP DE GRUP</option>
+                                                                        <option value="CDS">CAP DE SECCIO</option>
+                                                                        <option value="CDU">CAP UNITAT</option>
+                                                                    </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-icon right">
+                                                                    <label for="role" style="font-weight:bold;">Tipus d'usuari</label>
+                                                                    <select id="role" name="role" type="text" placeholder="Rol" class="form-control" />
+                                                                        <option value="ADMIN">ADMIN</option>
+                                                                        <option value="USER">USER</option>
+                                                                    </select
+                                                                </div>
+                                                            </div>
                                                             <hr />
-
                                                         </div>
                                                         <div class=" text-right pal">
                                                             <button type="submit" class="btn btn-primary">
@@ -297,48 +314,49 @@
             <!--END PAGE WRAPPER-->
         </div>
     </div>
-    <script src="script/jquery-1.10.2.min.js"></script>
-    <script src="script/jquery-migrate-1.2.1.min.js"></script>
-    <script src="script/jquery-ui.js"></script>
-    <script src="script/bootstrap.min.js"></script>
-    <script src="script/bootstrap-hover-dropdown.js"></script>
-    <script src="script/html5shiv.js"></script>
-    <script src="script/respond.min.js"></script>
-    <script src="script/jquery.metisMenu.js"></script>
-    <script src="script/jquery.slimscroll.js"></script>
-    <script src="script/jquery.cookie.js"></script>
-    <script src="script/icheck.min.js"></script>
-    <script src="script/custom.min.js"></script>
-    <script src="script/jquery.news-ticker.js"></script>
-    <script src="script/jquery.menu.js"></script>
-    <script src="script/pace.min.js"></script>
-    <script src="script/holder.js"></script>
-    <script src="script/responsive-tabs.js"></script>
-    <script src="script/jquery.flot.js"></script>
-    <script src="script/jquery.flot.categories.js"></script>
-    <script src="script/jquery.flot.pie.js"></script>
-    <script src="script/jquery.flot.tooltip.js"></script>
-    <script src="script/jquery.flot.resize.js"></script>
-    <script src="script/jquery.flot.fillbetween.js"></script>
-    <script src="script/jquery.flot.stack.js"></script>
-    <script src="script/jquery.flot.spline.js"></script>
-    <script src="script/zabuto_calendar.min.js"></script>
-    <script src="script/index.js"></script>
-    <script src="script/highcharts.js"></script>
-    <script src="script/data.js"></script>
-    <script src="script/drilldown.js"></script>
-    <script src="script/exporting.js"></script>
-    <script src="script/highcharts-more.js"></script>
-    <script src="script/charts-highchart-pie.js"></script>
-    <script src="script/charts-highchart-more.js"></script>
-    <script src="script/modernizr.min.js"></script>
-    <script src="script/jplist.min.js"></script>
-    <script src="script/jplist.js"></script>
-    <script src="script/animation.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-        <script src="script/voluntaris.js"></script>
+    <script src="/script/jquery-1.10.2.min.js"></script>
+    <script src="/script/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/script/jquery-ui.js"></script>
+    <script src="/script/bootstrap.min.js"></script>
+    <script src="/script/bootstrap-hover-dropdown.js"></script>
+    <script src="/script/html5shiv.js"></script>
+    <script src="/script/respond.min.js"></script>
+    <script src="/script/jquery.metisMenu.js"></script>
+    <script src="/script/jquery.slimscroll.js"></script>
+    <script src="/script/jquery.cookie.js"></script>
+    <script src="/script/icheck.min.js"></script>
+    <script src="/script/custom.min.js"></script>
+    <script src="/script/jquery.news-ticker.js"></script>
+    <script src="/script/jquery.menu.js"></script>
+    <script src="/script/pace.min.js"></script>
+    <script src="/script/holder.js"></script>
+    <script src="/script/responsive-tabs.js"></script>
+    <script src="/script/jquery.flot.js"></script>
+    <script src="/script/jquery.flot.categories.js"></script>
+    <script src="/script/jquery.flot.pie.js"></script>
+    <script src="/script/jquery.flot.tooltip.js"></script>
+    <script src="/script/jquery.flot.resize.js"></script>
+    <script src="/script/jquery.flot.fillbetween.js"></script>
+    <script src="/script/jquery.flot.stack.js"></script>
+    <script src="/script/jquery.flot.spline.js"></script>
+    <script src="/script/zabuto_calendar.min.js"></script>
+    <script src="/script/index.js"></script>
+    <script src="/script/highcharts.js"></script>
+    <script src="/script/data.js"></script>
+    <script src="/script/drilldown.js"></script>
+    <script src="/script/exporting.js"></script>
+    <script src="/script/highcharts-more.js"></script>
+    <script src="/script/charts-highchart-pie.js"></script>
+    <script src="/script/charts-highchart-more.js"></script>
+    <script src="/script/modernizr.min.js"></script>
+    <script src="/script/jplist.min.js"></script>
+    <script src="/script/jplist.js"></script>
+    <script src="/script/animation.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="/script/voluntaris.js"></script>
+    <script src="/script/jquery.simple-dtpicker.js"></script>
     <!--CORE JAVASCRIPT-->
-    <script src="script/main.js"></script>
+    <script src="/script/main.js"></script>
     <script>        (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
@@ -353,7 +371,17 @@
         ga('create', 'UA-145464-12', 'auto');
         ga('send', 'pageview');
 
+$(function(){
+			$('#birthDate').appendDtpicker({
+             inline: true,
+             disableEntry: true,
+             changeMonth: true,
+             changeYear: true,
+             format: 'YYYY-mm-dd HH:mm'
+            });
+		});
 
+</script>
 </script>
     </div>
 </body>

@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
     <title>Missatges | Missatges</title>
@@ -68,17 +72,14 @@
                     <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
 
                     </li>
-                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Jordi Viladoms Ferrandiz</span>&nbsp;<span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-user pull-right">
-                            <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
-                            <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
-                            <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
-                            <li class="divider"></li>
-                            <li><a href="#"><i class="fa fa-lock"></i>Lock Screen</a></li>
-                            <li><a href="Login.html"><i class="fa fa-key"></i>Log Out</a></li>
-                        </ul>
-                    </li>
+                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/member/image/display?name=<%= request.getSession().getAttribute("userid") %>" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs"><%= request.getSession().getAttribute("username") %></span>&nbsp;<span class="caret"></span></a>
+                                            <ul class="dropdown-menu dropdown-user pull-right">
+                                                <li><a href="/admin/member_password/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-user"></i>Canviar Password</a></li>
+                                                <li><a href="/admin/member_update/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-calendar"></i>El meu perfil</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="/logout"><i class="fa fa-key"></i>Log Out</a></li>
+                                            </ul>
+                     </li>
                     <li id="topbar-chat" class="hidden-xs"><a href="javascript:void(0)" data-step="4" data-intro="&lt;b&gt;Form chat&lt;/b&gt; keep you connecting with other coworker" data-position="left" class="btn-chat"><i class="fa fa-comments"></i><span class="badge badge-info">3</span></a></li>
                 </ul>
             </div>
@@ -125,7 +126,7 @@
                 <ul id="side-menu" class="nav">
 
                     <div class="clearfix"></div>
-                    <li><a href="/admin/inici"><i class="fa fa-desktop fa-fw">
+                    <li><a href="/user/inici"><i class="fa fa-desktop fa-fw">
                         <div class="icon-bg bg-pink"></div>
                     </i><span class="menu-title">Inici</span></a>
 
@@ -140,7 +141,7 @@
                     </i><span class="menu-title">Vehicles</span></a>
 
                     </li>
-                    <li><a href="/admin/missatges"><i class="fa fa-mobile-phone fa-fw">
+                    <li><a href="/user/missatges"><i class="fa fa-mobile-phone fa-fw">
                         <div class="icon-bg bg-blue"></div>
                     </i><span class="menu-title">Missatges</span></a>
 
@@ -194,58 +195,29 @@
 
                         <div class="chat-scroller">
                             <ul class="chats">
-                                <li class="in">
-                                    <img src="/images/avatar/48.jpg" class="avatar img-responsive" />
-                                    <div class="message">
+                            <c:forEach items="${messages}" var="message">
+                            <li class="in">
+                                    <img src="/member/image/display?name=${message.sendMember.id}" class="avatar img-responsive" />
+                                        <div class="message">
                                         <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span
-                                            class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
-                                                        dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                        ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                </li>
-                                <li class="out">
-                                    <img src="/images/avatar/48.jpg" class="avatar img-responsive" />
-                                    <div class="message">
-                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span
-                                            class="chat-datetime">at July 06, 2014 18:06</span><span class="chat-body">Lorem ipsum
-                                                        dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                        ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                </li>
-                                <li class="in">
-                                    <img src="/images/avatar/48.jpg" class="avatar img-responsive" />
-                                    <div class="message">
-                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span
-                                            class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
-                                                        dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                        ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                </li>
-                                <li class="out">
-                                    <img src="/images/avatar/48.jpg" class="avatar img-responsive" />
-                                    <div class="message">
-                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span
-                                            class="chat-datetime">at July 06, 2014 18:06</span><span class="chat-body">Lorem ipsum
-                                                        dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                        ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                </li>
-                                <li class="in">
-                                    <img src="/images/avatar/48.jpg" class="avatar img-responsive" />
-                                    <div class="message">
-                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span
-                                            class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
-                                                        dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                        ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                </li>
+                                        class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">${message.messageString}</span></div>
+                            </li>
+                            </c:forEach>
                             </ul>
                         </div>
+
+                        <form:form id="addMessage" modelAttribute="message" action="/user/missatges/add" method="post">
                         <div class="chat-form">
                             <div class="input-group">
-                                <input id="input-chat" type="text" placeholder="Type a message here..." class="form-control" /><span
+                                <form:input id="messageString" path="messageString" type="text" placeholder="Type a message here..." class="form-control" /><span
                                     id="btn-chat" class="input-group-btn">
-                                            <button type="button" class="btn btn-green">
+                                            <button type="submit" class="btn btn-green">
                                                 <i class="fa fa-check"></i>
                                             </button>
                                         </span>
                             </div>
                         </div>
+                        </form:form>
                 </div>
             </div>
                 <!--END CONTENT-->
@@ -259,46 +231,7 @@
             <!--END PAGE WRAPPER-->
         </div>
     </div>
-    <script src="script/jquery-1.10.2.min.js"></script>
-    <script src="script/jquery-migrate-1.2.1.min.js"></script>
-    <script src="script/jquery-ui.js"></script>
-    <script src="script/bootstrap.min.js"></script>
-    <script src="script/bootstrap-hover-dropdown.js"></script>
-    <script src="script/html5shiv.js"></script>
-    <script src="script/respond.min.js"></script>
-    <script src="script/jquery.metisMenu.js"></script>
-    <script src="script/jquery.slimscroll.js"></script>
-    <script src="script/jquery.cookie.js"></script>
-    <script src="script/icheck.min.js"></script>
-    <script src="script/custom.min.js"></script>
-    <script src="script/jquery.news-ticker.js"></script>
-    <script src="script/jquery.menu.js"></script>
-    <script src="script/pace.min.js"></script>
-    <script src="script/holder.js"></script>
-    <script src="script/responsive-tabs.js"></script>
-    <script src="script/jquery.flot.js"></script>
-    <script src="script/jquery.flot.categories.js"></script>
-    <script src="script/jquery.flot.pie.js"></script>
-    <script src="script/jquery.flot.tooltip.js"></script>
-    <script src="script/jquery.flot.resize.js"></script>
-    <script src="script/jquery.flot.fillbetween.js"></script>
-    <script src="script/jquery.flot.stack.js"></script>
-    <script src="script/jquery.flot.spline.js"></script>
-    <script src="script/zabuto_calendar.min.js"></script>
-    <script src="script/index.js"></script>
-    <script src="script/highcharts.js"></script>
-    <script src="script/data.js"></script>
-    <script src="script/drilldown.js"></script>
-    <script src="script/exporting.js"></script>
-    <script src="script/highcharts-more.js"></script>
-    <script src="script/charts-highchart-pie.js"></script>
-    <script src="script/charts-highchart-more.js"></script>
-    <script src="script/modernizr.min.js"></script>
-    <script src="script/jplist.min.js"></script>
-    <script src="script/jplist.js"></script>
-    <script src="script/animation.js"></script>
-    <!--CORE JAVASCRIPT-->
-    <script src="script/main.js"></script>
+
     <script>        (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         i[r] = i[r] || function () {
