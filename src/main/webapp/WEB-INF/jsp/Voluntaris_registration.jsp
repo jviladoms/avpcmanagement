@@ -254,7 +254,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
-                                                                    <label for="postalCode" style="font-weight:bold;">Codi Postal</label>
+                                                                    <label for="email" style="font-weight:bold;">Correu electrònic</label>
                                                                     <input id="email" name="email" type="text" class="form-control"/></div>
                                                             </div>
                                                             <div class="form-group">

@@ -168,8 +168,8 @@ public class MemberWebController {
     }
 
     @RequestMapping(value = "/admin/member/uploadFile", method = RequestMethod.POST)
-    public String uploadFileHandler(@RequestParam("member") Long serviceId,
-                             @RequestParam("file") MultipartFile file) {
+    public String uploadFileHandler(@RequestParam("member") Long memberId,
+                             @RequestParam("file") MultipartFile file, ModelMap model) {
 
         if (!file.isEmpty()) {
             try {
@@ -181,13 +181,13 @@ public class MemberWebController {
 
                 // Create the file on server
                 File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + serviceId);
+                        + File.separator + memberId);
                 BufferedOutputStream stream = new BufferedOutputStream(
                         new FileOutputStream(serverFile));
                 stream.write(bytes);
                 stream.close();
 
-                Member member = memberDAO.findOne(serviceId);
+                Member member = memberDAO.findOne(memberId);
 
                 member.setPhotoURL(serverFile.getAbsolutePath());
                 memberDAO.save(member);
@@ -196,10 +196,19 @@ public class MemberWebController {
                         + serverFile.getAbsolutePath());
 
             } catch (Exception e) {
-                log.error("You failed to upload " + serviceId + " => " + e.getMessage());
+                log.error("You failed to upload " + memberId + " => " + e.getMessage());
             }
         }
 
+        Member member = null;
+
+        try{
+            member = memberService.findMember(memberId);
+        } catch (Exception e){
+            log.error(e.getMessage());
+        }
+
+        model.put("member", member);
         return "Voluntaris_update";
     }
 

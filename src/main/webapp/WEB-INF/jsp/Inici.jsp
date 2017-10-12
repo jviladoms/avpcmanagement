@@ -28,19 +28,6 @@
 </head>
 <body>
     <div>
-        <!--BEGIN THEME SETTING-->
-        <div id="theme-setting">
-            <a href="#" data-toggle="dropdown" data-step="1" data-intro="&lt;b&gt;Many styles&lt;/b&gt; and &lt;b&gt;colors&lt;/b&gt; be created for you. Let choose one and enjoy it!"
-                data-position="left" class="btn-theme-setting"><i class="fa fa-cog"></i></a>
-            <div class="content-theme-setting">
-                <select id="list-style" class="form-control">
-                    <option value="style1">Flat Squared style</option>
-                    <option value="style2">Flat Rounded style</option>
-                    <option value="style3" selected="selected">Flat Border style</option>
-                </select>
-            </div>
-        </div>
-        <!--END THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
         <a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
         <!--END BACK TO TOP-->
@@ -50,19 +37,24 @@
             <div class="navbar-header">
                 <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                 <a id="logo" href="/adminindex.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">AVPC SVC</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
-            <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+                 <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
 
-                <form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
+                <!--<form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
                     <div class="input-icon right text-white"><a href="#"><i class="fa fa-search"></i></a><input type="text" placeholder="Search here..." class="form-control text-white"/></div>
-                </form>
+                </form>-->
                 <div class="news-update-box hidden-xs"><span class="text-uppercase mrm pull-left text-white">News:</span>
                     <ul id="news-update" class="ticker list-unstyled">
-                        <li>AVIS SMC: Onada de fred afecta catalunya</li>
-                        <li>AVIS PROTECCIÓ CIVIL: Activat Pla PROCICAT per fred intens</li>
+                        <c:forEach items="${tweets}" var="tweet">
+                            <li>${tweet.fromUser} - ${tweet.text}</li>
+                        </c:forEach>
                     </ul>
                 </div>
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
-                    <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">3</span></a>
+                    <a class="twitter-share-button"
+                       href="https://twitter.com/intent/tweet">
+                        Tweet</a>
+                    <a href="https://twitter.com/avpcsvc?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @avpcsvc</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    <!--<li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">3</span></a>
 
                     </li>
                     <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">7</span></a>
@@ -70,7 +62,7 @@
                     </li>
                     <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
 
-                    </li>
+                    </li>-->
                     <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/member/image/display?name=${member.id}" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">${name}</span>&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">
                             <li><a href="/user/member_password"><i class="fa fa-user"></i>Canviar Password</a></li>
@@ -79,7 +71,7 @@
                             <li><a href="/logout"><i class="fa fa-key"></i>Log Out</a></li>
                         </ul>
                     </li>
-                    <li id="topbar-chat" class="hidden-xs"><a href="javascript:void(0)" data-step="4" data-intro="&lt;b&gt;Form chat&lt;/b&gt; keep you connecting with other coworker" data-position="left" class="btn-chat"><i class="fa fa-comments"></i><span class="badge badge-info">3</span></a></li>
+                    <!--<li id="topbar-chat" class="hidden-xs"><a href="javascript:void(0)" data-step="4" data-intro="&lt;b&gt;Form chat&lt;/b&gt; keep you connecting with other coworker" data-position="left" class="btn-chat"><i class="fa fa-comments"></i><span class="badge badge-info">3</span></a></li>-->
                 </ul>
             </div>
         </nav>
@@ -242,7 +234,7 @@
                             Inici</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
-                        <li><i class="fa fa-home"></i>&nbsp;<a href="Inici.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li><i class="fa fa-home"></i>&nbsp;<a href="/user/inici">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         <li class="hidden"><a href="#">Inici</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         <li class="active">Inici</li>
                     </ol>
@@ -255,93 +247,93 @@
                     <div id="tab-general">
                         <div id="sum_box" class="row mbl">
                             <div class="col-sm-6 col-md-3">
-                                <div class="panel profit db mbm">
+                                <div class="panel db mbm">
                                     <div class="panel-body">
                                         <p class="icon">
                                             <i class="icon fa fa-fire-extinguisher"></i>
                                         </p>
                                         <h4 class="value">
-                                            <span data-counter="" data-start="10" data-end="50" data-step="1" data-duration="0">
+                                            <span> ${numServices}
                                             </span></h4>
                                         <p class="description">
-                                            Serveis Anuals</p>
-                                        <div class="progress progress-sm mbn">
+                                            Serveis</p>
+                                        <!--<div class="progress progress-sm mbn">
                                             <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
                                                 style="width: 80%;" class="progress-bar progress-bar-success">
                                                 <span class="sr-only">80% Complete (success)</span></div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
-                                <div class="panel income db mbm">
+                                <div class="panel db mbm">
                                     <div class="panel-body">
                                         <p class="icon">
-                                            <i class="icon fa fa-file-picture-o"></i>
+                                            <i class="icon fa fa-phone"></i>
                                         </p>
                                         <h4 class="value">
-                                            <span>15</span></h4>
+                                            <span>${numMembers}</span></h4>
                                         <p class="description">
-                                            Income detail</p>
-                                        <div class="progress progress-sm mbn">
+                                            Voluntaris</p>
+                                        <!--<div class="progress progress-sm mbn">
                                             <div role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
                                                 style="width: 60%;" class="progress-bar progress-bar-info">
                                                 <span class="sr-only">60% Complete (success)</span></div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
-                                <div class="panel task db mbm">
+                                <div class="panel db mbm">
                                     <div class="panel-body">
                                         <p class="icon">
-                                            <i class="icon fa fa-signal"></i>
+                                            <i class="icon fa fa-car"></i>
                                         </p>
                                         <h4 class="value">
-                                            <span>215</span></h4>
+                                            <span>${numVehicles}</span></h4>
                                         <p class="description">
-                                            Task completed</p>
-                                        <div class="progress progress-sm mbn">
+                                            Vehicles</p>
+                                        <!--<div class="progress progress-sm mbn">
                                             <div role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
                                                 style="width: 50%;" class="progress-bar progress-bar-danger">
                                                 <span class="sr-only">50% Complete (success)</span></div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
-                                <div class="panel visit db mbm">
+                                <div class="panel db mbm">
                                     <div class="panel-body">
                                         <p class="icon">
-                                            <i class="icon fa fa-group"></i>
+                                            <i class="icon fa fa-mobile-phone"></i>
                                         </p>
                                         <h4 class="value">
-                                            <span>128</span></h4>
+                                            <span>${numMessages}</span></h4>
                                         <p class="description">
-                                            Visitor description</p>
-                                        <div class="progress progress-sm mbn">
+                                            Missatge</p>
+                                        <!--<div class="progress progress-sm mbn">
                                             <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
                                                 style="width: 70%;" class="progress-bar progress-bar-warning">
                                                 <span class="sr-only">70% Complete (success)</span></div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row mbl">
-                            <div class="col-lg-8">
+                            <div class="col-lg-12">
                                 <div class="panel">
                                     <div class="panel-body">
                                         <div class="row">
-                                            <div class="col-md-8">
-                                                <h4 class="mbs">
-                                                    Network Performance</h4>
-                                                <p class="help-block">
-                                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem...</p>
-                                                <div id="area-chart-spline" style="width: 100%; height: 300px">
-                                                </div>
+                                            <div class="col-md-12">
+                                                <a class="twitter-timeline"
+                                                   href="https://twitter.com/emergenciescat"
+                                                   data-width="1100"
+                                                   data-height="500">
+                                                    Tweets by @TwitterDev
+                                                </a>
                                             </div>
-                                            <div class="col-md-4">
+                                            <!--<div class="col-md-4">
                                                 <h4 class="mbm">
                                                     Server Status</h4>
                                                 <span class="task-item">CPU Usage (25 - 32 cpus)<small class="pull-right text-muted">40%</small><div
@@ -379,13 +371,13 @@
                                                         style="width: 50%;" class="progress-bar progress-bar-violet">
                                                         <span class="sr-only">50% Complete (success)</span></div>
                                                 </div>
-                                                </span>
+                                                </span>-->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="portlet box">
                                     <div class="portlet-header">
                                         <div class="caption">
@@ -394,49 +386,17 @@
                                     <div class="portlet-body">
                                         <div class="chat-scroller">
                                             <ul class="chats">
-                                                <li class="in">
-                                                    <img src="/images/avatar/48.jpg" class="avatar img-responsive" />
-                                                    <div class="message">
-                                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span
-                                                            class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
-                                                                dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                                ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                                </li>
-                                                <li class="out">
-                                                    <img src="/images/avatar/48.jpg" class="avatar img-responsive" />
-                                                    <div class="message">
-                                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span
-                                                            class="chat-datetime">at July 06, 2014 18:06</span><span class="chat-body">Lorem ipsum
-                                                                dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                                ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                                </li>
-                                                <li class="in">
-                                                    <img src="/images/avatar/48.jpg" class="avatar img-responsive" />
-                                                    <div class="message">
-                                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span
-                                                            class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
-                                                                dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                                ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                                </li>
-                                                <li class="out">
-                                                    <img src="/images/avatar/48.jpg" class="avatar img-responsive" />
-                                                    <div class="message">
-                                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span
-                                                            class="chat-datetime">at July 06, 2014 18:06</span><span class="chat-body">Lorem ipsum
-                                                                dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                                ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                                </li>
-                                                <li class="in">
-                                                    <img src="/images/avatar/48.jpg" class="avatar img-responsive" />
-                                                    <div class="message">
-                                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span
-                                                            class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
-                                                                dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                                ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                                </li>
+                                                <c:forEach items="${messages}" var="message">
+                                                    <li class="in">
+                                                        <img src="/member/image/display?name=${message.sendMember.id}" class="avatar img-responsive" />
+                                                        <div class="message">
+                                                            <span class="chat-arrow"></span><a href="#" class="chat-name">${message.sendMember.name}</a>&nbsp;<span
+                                                                class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">${message.messageString}</span></div>
+                                                    </li>
+                                                </c:forEach>
                                             </ul>
                                         </div>
-                                        <div class="chat-form">
+                                        <!--<div class="chat-form">
                                             <div class="input-group">
                                                 <input id="input-chat" type="text" placeholder="Type a message here..." class="form-control" /><span
                                                     id="btn-chat" class="input-group-btn">
@@ -445,36 +405,34 @@
                                                     </button>
                                                 </span>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row mbl">
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="panel">
                                     <div class="panel-body">
                                         <div class="profile">
                                             <div style="margin-bottom: 15px" class="row">
                                                 <div class="col-xs-12 col-sm-8">
                                                     <h2>
-                                                        John Doe</h2>
+                                                        ${member.name} ${member.surname1} ${member.surname2}</h2>
                                                     <p>
-                                                        <strong>About:</strong> Web Designer / UI.</p>
+                                                        <strong>Telefon:</strong> ${member.mobilePhoneNumber}</p>
                                                     <p>
-                                                        <strong>Hobbies:</strong> Read, out with friends, listen to music, draw and learn
-                                                        new things.</p>
+                                                        <strong>Adreça:</strong> ${member.address}</p>
                                                     <p>
-                                                        <strong class="mrs">Skills:</strong><span class="label label-green mrs">html5</span><span
-                                                            class="label label-green mrs">css3</span><span class="label label-green mrs">jquery</span></p>
+                                                        <strong>Ciutat:</strong> ${member.city}</p>
+                                                    <p>
+                                                        <strong>Ciutat:</strong> ${member.postalCode}</p>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-4 text-center">
-                                                    <figure><img src="/images/avatar/128.jpg" alt="" style="display: inline-block" class="img-responsive img-circle"/>
-                                                    <figcaption class="ratings"><p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p></figcaption>
-                                                </figure>
+                                                    <figure><img src="/member/image/display?name=${member.id}" alt="" style="display: inline-block" class="img-responsive img-circle"/></figure>
                                                 </div>
                                             </div>
-                                            <div class="row text-center divider">
+                                            <!---<div class="row text-center divider">
                                                 <div class="col-xs-12 col-sm-4 emphasis">
                                                     <h2>
                                                         <strong>20,7K</strong></h2>
@@ -515,12 +473,12 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-8">
+                            <!--<div class="col-lg-8">
                                 <div class="portlet box">
                                     <div class="portlet-header">
                                         <div class="caption">
@@ -638,7 +596,7 @@
                             <!--<div class="col-lg-4">
                             <div id="my-calendar"></div>
                         </div>-->
-                            <div class="col-lg-4">
+                          <!--  <div class="col-lg-4">
                                 <div class="page-content">
                                     <div class="row">
                                         <div class="col-lg-12">
@@ -678,7 +636,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <!--END CONTENT-->
                 <!--BEGIN FOOTER-->
                 <div id="footer">

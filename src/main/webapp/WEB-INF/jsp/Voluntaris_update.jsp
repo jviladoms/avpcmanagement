@@ -203,14 +203,28 @@
                                         <div class="col-lg-12">
                                             <div class="panel">
                                                 <div class="panel-body">
-                                                   <c:if test="${fromUpdate}"> member ${member.name} successfully changed</c:if>
-                                                   <c:if test="${fromRegister}"> member ${member.name} successfully added</c:if>
+
+                                                   <c:if test="${fromUpdate}">
+                                                       <div class="panel panel-success">
+                                                           <div class="panel-heading">
+                                                               <h3 class="panel-title">Usuari ${member.name} correctament canviat</h3>
+                                                           </div>
+                                                       </div>
+                                                   </c:if>
+                                                   <c:if test="${fromRegister}">
+                                                       <div class="panel panel-success">
+                                                           <div class="panel-heading">
+                                                               <h3 class="panel-title">Usuari ${member.name} correctament afegit</h3>
+                                                           </div>
+                                                       </div>
+                                                   </c:if>
+
                                                    <form action="/admin/member/uploadFile" method="post" enctype="multipart/form-data">
                                                            <input type="file" name="file" />
                                                            <input type="hidden" name="member" value="${member.id}">
                                                            <input type="submit" value="upload" />
                                                    </form>
-                                                  <img src="/member/image/display?name=${member.id}" alt="" title="" class="img-responsive img-thumbnail"/>
+                                                   <img src="/member/image/display?name=${member.id}" alt="" title="" class="img-responsive img-thumbnail"/>
                                                     <c:if test="${member.role=='USER'}">
                                                         <form id="updatemember" action="/user/update_member" method="post">
                                                     </c:if>
