@@ -199,7 +199,7 @@
                             <li class="in">
                                     <img src="/member/image/display?name=${message.sendMember.id}" class="avatar img-responsive" />
                                         <div class="message">
-                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span
+                                        <span class="chat-arrow"></span><a href="#" class="chat-name">${message.sendMember.name}</a>&nbsp;<span
                                         class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">${message.messageString}</span></div>
                             </li>
                             </c:forEach>

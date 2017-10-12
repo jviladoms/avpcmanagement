@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
 <head>
     <title>Voluntaris | Voluntaris</title>
@@ -207,14 +208,22 @@
                                                     <div class="box text-shadow">
                                                         <table class="demo-tbl">
                                                             <!--<item>n</item>-->
+                                                            <c:if test="${fromDelete}">
+                                                                <div class="panel panel-success">
+                                                                    <div class="panel-heading">
+                                                                        <h3 class="panel-title">Usuari ${member.name} correctament esborrat</h3>
+                                                                    </div>
+                                                                </div>
+                                                            </c:if>
+
                                                             <button type="button" onclick="window.location.href='/admin/voluntaris_registration'" class="btn btn-default">Afegir voluntari<i class="fa fa-plus mls"></i></button>
-                                                            <c:if test="${fromDelete}"> member ${member.name} successfully Deleted</c:if>
+
                                                             <c:forEach items="${members}" var="member">
                                                             <tr class="tbl-item"><!--<img/>-->
 
-                                                                <td class="col-lg-2"><img src="/member/image/display?name=${member.id}" alt="" title="" class="img-responsive img-thumbnail"/><div class="text-center">${member.id}</div> <div class="text-center">${member.userGroup}</div></td>
+                                                                <td class="col-lg-2"><img src="/member/image/display?name=${member.id}" alt="" title="" class="img-responsive img-thumbnail"/></td>
                                                                 <!--<data></data>-->
-                                                                <td class="td-block"><p class="date">Data Naixement: ${member.birthDate}</p>
+                                                                <td class="td-block"><p class="date">Data Naixement: <fmt:formatDate value="${member.birthDate}" pattern="dd-MMM-yyyy"/></p>
 
                                                                     <p class="title">${member.name} ${member.surname1} ${member.surname2}</p>
 
@@ -235,7 +244,7 @@
                                                                             <div class="well well-sm">${member.services}</div>
                                                                         </div>
                                                                         <div class="col-lg-4">
-                                                                            <a class="btn-xs btn-default" href="/admin/member_update/${member.id}">Configuració</a>
+                                                                            <a class="btn-xs btn-default" href="/admin/member_update/${member.id}">Modificar dades voluntari</a>
                                                                         </div>
                                                                     </div>
 
