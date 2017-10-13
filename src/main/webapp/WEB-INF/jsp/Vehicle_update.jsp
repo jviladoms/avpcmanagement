@@ -49,42 +49,47 @@
         <!--BEGIN TOPBAR-->
         <div id="header-topbar-option-demo" class="page-header-topbar">
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
-            <div class="navbar-header">
-                <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                <a id="logo" href="index.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">AVPC SVC</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
-            <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
-                
-                <form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
-                    <div class="input-icon right text-white"><a href="#"><i class="fa fa-search"></i></a><input type="text" placeholder="Busca aqui..." class="form-control text-white"/></div>
-                </form>
-                <div class="news-update-box hidden-xs"><span class="text-uppercase mrm pull-left text-white">News:</span>
-                    <ul id="news-update" class="ticker list-unstyled">
-                        <li>AVIS SMC: Onada de fred afecta catalunya</li>
-                        <li>AVIS PROTECCIÓ CIVIL: Activat Pla PROCICAT per fred intens</li>
+                <div class="navbar-header">
+                    <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <a id="logo" href="/" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">AVPC SVC</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
+                <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+
+                    <!--<form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
+                        <div class="input-icon right text-white"><a href="#"><i class="fa fa-search"></i></a><input type="text" placeholder="Search here..." class="form-control text-white"/></div>
+                    </form>-->
+                    <div class="news-update-box hidden-xs"><span class="text-uppercase mrm pull-left text-white"></span>
+                        <ul id="news-update" class="ticker list-unstyled">
+                            <c:forEach items="${sessionScope.tweets}" var="tweet">
+                                <li>${tweet.fromUser} - ${tweet.text}</li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                    <ul class="nav navbar navbar-top-links navbar-right mbn">
+                        <a class="twitter-share-button"
+                           href="https://twitter.com/intent/tweet">
+                            Tweet</a>
+                        <a href="https://twitter.com/avpcsvc?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @avpcsvc</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <!--<li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">3</span></a>
+
+                        </li>
+                        <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">7</span></a>
+
+                        </li>
+                        <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
+
+                        </li>-->
+                        <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/member/image/display?name=<%= request.getSession().getAttribute("userid") %>" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs"><%= request.getSession().getAttribute("username") %></span>&nbsp;<span class="caret"></span></a>
+                            <ul class="dropdown-menu dropdown-user pull-right">
+                                <li><a href="/admin/member_password/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-user"></i>Canviar Password</a></li>
+                                <li><a href="/admin/member_update/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-calendar"></i>El meu perfil</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/logout"><i class="fa fa-key"></i>Log Out</a></li>
+                            </ul>
+                        </li>
+                        <!--<li id="topbar-chat" class="hidden-xs"><a href="javascript:void(0)" data-step="4" data-intro="&lt;b&gt;Form chat&lt;/b&gt; keep you connecting with other coworker" data-position="left" class="btn-chat"><i class="fa fa-comments"></i><span class="badge badge-info">3</span></a></li>-->
                     </ul>
                 </div>
-                <ul class="nav navbar navbar-top-links navbar-right mbn">
-                    <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">3</span></a>
-                        
-                    </li>
-                    <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">7</span></a>
-                        
-                    </li>
-                    <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
-                        
-                    </li>
-                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/member/image/display?name=<%= request.getSession().getAttribute("userid") %>" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs"><%= request.getSession().getAttribute("username") %></span>&nbsp;<span class="caret"></span></a>
-                                            <ul class="dropdown-menu dropdown-user pull-right">
-                                                <li><a href="/user/member_password"><i class="fa fa-user"></i>Canviar Password</a></li>
-                                                <li><a href="/user/member_update"><i class="fa fa-calendar"></i>El meu perfil</a></li>
-                                                <li class="divider"></li>
-                                                <li><a href="/logout"><i class="fa fa-key"></i>Log Out</a></li>
-                                            </ul>
-                     </li>
-                    <li id="topbar-chat" class="hidden-xs"><a href="javascript:void(0)" data-step="4" data-intro="&lt;b&gt;Form chat&lt;/b&gt; keep you connecting with other coworker" data-position="left" class="btn-chat"><i class="fa fa-comments"></i><span class="badge badge-info">3</span></a></li>
-                </ul>
-            </div>
-        </nav>
+            </nav>
             <!--BEGIN MODAL CONFIG PORTLET-->
             <div id="modal-config" class="modal fade">
                 <div class="modal-dialog">
@@ -114,6 +119,14 @@
                                 Save changes</button>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="common-modal modal fade" id="common-Modal1" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-content">
+                    <ul class="list-inline item-details">
+                        <li><a href="http://themifycloud.com">Admin templates</a></li>
+                        <li><a href="http://themescloud.org">Bootstrap themes</a></li>
+                    </ul>
                 </div>
             </div>
             <!--END MODAL CONFIG PORTLET-->
@@ -151,11 +164,6 @@
                         <div class="icon-bg bg-red"></div>
                     </i><span class="menu-title">Serveis</span></a>
                       
-                    </li>
-                    <li><a href="/admin/documents"><i class="fa fa-paperclip fa-fw">
-                        <div class="icon-bg bg-yellow"></div>
-                    </i><span class="menu-title">Documents</span></a>
-                       
                     </li>
                     <li><a href="/admin/mapa"><i class="fa fa-map-marker fa-fw">
                         <div class="icon-bg bg-grey"></div>

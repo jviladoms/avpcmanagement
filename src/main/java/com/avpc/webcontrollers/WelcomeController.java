@@ -84,6 +84,7 @@ public class WelcomeController {
         try {
             List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
             model.addAttribute("tweets", tweets);
+            request.getSession().setAttribute("tweets",tweets);
         } catch (Exception e){
             log.error(e.getMessage());
         }

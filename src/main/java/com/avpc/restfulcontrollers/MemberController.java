@@ -101,9 +101,9 @@ public class MemberController {
     @RequestMapping(value ="/{memberId}/location", method = RequestMethod.PUT)
     @ResponseBody
     @CrossOrigin
-    public void updateMemberLocation(@PathVariable(value="memberId") Long memberId, @RequestBody MemberDTO memberParams, HttpServletResponse response) throws IOException {
+    public void updateMemberLocation(@PathVariable(value="memberId") Long memberId, @RequestBody Double longitude,@RequestBody Double latitude, HttpServletResponse response) throws IOException {
         try{
-            memberService.updateMemberLocation(memberParams,memberId);
+            memberService.updateMemberLocation(longitude,latitude, memberId);
         } catch (Exception e){
             log.error(e.getMessage());
             response.sendError(HttpStatus.CONFLICT.value());

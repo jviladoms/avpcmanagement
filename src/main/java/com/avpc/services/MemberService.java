@@ -114,12 +114,12 @@ public class MemberService {
     }
 
 
-    public Member updateMemberLocation(MemberDTO memberParams, Long memberId){
+    public Member updateMemberLocation(Double longitude, Double latitude, Long memberId){
         Member member;
         member = memberDAO.findOne(memberId);
 
-        member.setLongitude(memberParams.getLongitude());
-        member.setLatitude(memberParams.getLatitude());
+        member.setLongitude(longitude);
+        member.setLatitude(latitude);
 
         return memberDAO.save(member);
     }
