@@ -8,10 +8,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="images/icons/favicon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
+    <link rel="shortcut icon" href="/images/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/favicon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/favicon-114x114.png">
     <!--Loading bootstrap css-->
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
@@ -36,13 +36,13 @@
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
             <div class="navbar-header">
                 <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                <a id="logo" href="/adminindex.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">AVPC SVC</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
+                <a id="logo" href="/" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">AVPC SVC</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
                  <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
 
                 <!--<form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
                     <div class="input-icon right text-white"><a href="#"><i class="fa fa-search"></i></a><input type="text" placeholder="Search here..." class="form-control text-white"/></div>
                 </form>-->
-                <div class="news-update-box hidden-xs"><span class="text-uppercase mrm pull-left text-white">News:</span>
+                <div class="news-update-box hidden-xs"><span class="text-uppercase mrm pull-left text-white"></span>
                     <ul id="news-update" class="ticker list-unstyled">
                         <c:forEach items="${tweets}" var="tweet">
                             <li>${tweet.fromUser} - ${tweet.text}</li>
@@ -63,10 +63,10 @@
                     <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
 
                     </li>-->
-                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/member/image/display?name=${member.id}" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">${name}</span>&nbsp;<span class="caret"></span></a>
+                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/member/image/display?name=<%= request.getSession().getAttribute("userid") %>" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs"><%= request.getSession().getAttribute("username") %></span>&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">
-                            <li><a href="/user/member_password"><i class="fa fa-user"></i>Canviar Password</a></li>
-                            <li><a href="/user/member_update"><i class="fa fa-calendar"></i>El meu perfil</a></li>
+                            <li><a href="/admin/member_password/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-user"></i>Canviar Password</a></li>
+                            <li><a href="/admin/member_update/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-calendar"></i>El meu perfil</a></li>
                             <li class="divider"></li>
                             <li><a href="/logout"><i class="fa fa-key"></i>Log Out</a></li>
                         </ul>
@@ -151,11 +151,6 @@
                         </i><span class="menu-title">Serveis</span></a>
 
                         </li>
-                        <li><a href="Documents.html"><i class="fa fa-paperclip fa-fw">
-                            <div class="icon-bg bg-yellow"></div>
-                        </i><span class="menu-title">Documents</span></a>
-
-                        </li>
                         <li><a href="/admin/mapa"><i class="fa fa-map-marker fa-fw">
                             <div class="icon-bg bg-grey"></div>
                         </i><span class="menu-title">Mapa Voluntaris</span></a>
@@ -201,24 +196,6 @@
                         <a href="#" class="chat-box-close pull-right"><i class="glyphicon glyphicon-remove">
                         </i></a><span class="user-status is-online"></span><span class="display-name">Willard
                             Mckenzie</span> <small>Online</small>
-                    </div>
-                    <div class="chat-content">
-                        <ul class="chat-box-body">
-                            <li>
-                                <p>
-                                    <img src="../../../../../../avpc-frontend/images/avatar/128.jpg" class="avt" /><span class="user">John Doe</span><span
-                                        class="time">09:33</span></p>
-                                <p>
-                                    Hi Swlabs, we have some comments for you.</p>
-                            </li>
-                            <li class="odd">
-                                <p>
-                                    <img src="/images/avatar/48.jpg" class="avt" /><span class="user">Swlabs</span><span
-                                        class="time">09:33</span></p>
-                                <p>
-                                    Hi, we're listening you...</p>
-                            </li>
-                        </ul>
                     </div>
                     <div class="chat-textarea">
                         <input placeholder="Type your message" class="form-control" /></div>
@@ -641,7 +618,7 @@
                 <!--BEGIN FOOTER-->
                 <div id="footer">
                     <div class="copyright">
-                        <a href="http://themifycloud.com">2014 © KAdmin Responsive Multi-Purpose Template</a></div>
+                        <a href="">2017 © Associació de Voluntaris de Protecció Civil de Sant Vicenç de Castellet</a></div>
                 </div>
                 <!--END FOOTER-->
             </div>
@@ -674,16 +651,16 @@
     <script src="/script/jquery.flot.stack.js"></script>
     <script src="/script/jquery.flot.spline.js"></script>
     <script src="/script/zabuto_calendar.min.js"></script>
-    <script src="/script/index.js"></script>
+    <!--<script src="/script/index.js"></script>
     <!--LOADING SCRIPTS FOR CHARTS-->
-    <script src="/script/highcharts.js"></script>
-    <script src="/script/data.js"></script>
-    <script src="/script/drilldown.js"></script>
-    <script src="/script/exporting.js"></script>
-    <script src="/script/highcharts-more.js"></script>
-    <script src="/script/charts-highchart-pie.js"></script>
-    <script src="/script/charts-highchart-more.js"></script>
-    <!--CORE JAVASCRIPT-->
+            <!--<script src="/script/highcharts.js"></script>
+            <script src="/script/data.js"></script>
+            <script src="/script/drilldown.js"></script>
+            <script src="/script/exporting.js"></script>
+            <script src="/script/highcharts-more.js"></script>
+            <script src="/script/charts-highchart-pie.js"></script>
+            <script src="/script/charts-highchart-more.js"></script
+            <!--CORE JAVASCRIPT-->
     <script src="/script/main.js"></script>
     <script>        (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
