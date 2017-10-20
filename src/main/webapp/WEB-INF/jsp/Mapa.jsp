@@ -86,7 +86,7 @@
                         </li>-->
                         <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="/member/image/display?name=<%= request.getSession().getAttribute("userid") %>" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs"><%= request.getSession().getAttribute("username") %></span>&nbsp;<span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-user pull-right">
-                                <li><a href="/admin/member_password/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-user"></i>Canviar Password</a></li>
+                                <li><a href="/user/member_password"><i class="fa fa-user"></i>Canviar Password</a></li>
                                 <li><a href="/admin/member_update/<%= request.getSession().getAttribute("userid") %>"><i class="fa fa-calendar"></i>El meu perfil</a></li>
                                 <li class="divider"></li>
                                 <li><a href="/logout"><i class="fa fa-key"></i>Log Out</a></li>
@@ -297,11 +297,13 @@
                     zoom: 15,
                     center: uluru
                 });
+
+                <c:forEach items="${members}" var="member">
                 var marker = new google.maps.Marker({
-                    position: uluru,
+                    position: {lat: ${member.latitude}, lng:  ${member.longitude}},
                     map: map
                 });
-
+                </c:forEach>
                 getLocation();
             }
 
@@ -309,14 +311,36 @@
               if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
               } else {
+                var x = document.getElementById("footer");
                 x.innerHTML = "Geolocation is not supported by this browser.";
               }
             }
             function showPosition(position) {
-              var marker1 = new google.maps.Marker({
-                position: {lat: position.coords.latitude, lng: position.coords.longitude},
-                map: map
+              var url = "https://192.168.1.37:8443/members/${sessionScope.userid}/location/";
+
+              var data = {
+                "latitude" :  position.coords.latitude,
+                "longitude" : position.coords.longitude
+              };
+              var log = JSON.stringify(data);
+              //console.log(log);
+              $.ajax({
+                type: "PUT",
+                url: url,
+                dataType : 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function(data) {
+                  alert("Voluntari modificat correctament");
+                },
+                error: function(data)
+                {
+                  alert("Error en la modificació " + url.toString() + " " + log);
+                }
               });
+
+              //e.preventDefault();
+
 
 
 

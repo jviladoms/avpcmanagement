@@ -126,16 +126,12 @@ public class ServicesWebController {
     @RequestMapping(value = "/serveis/image/display",method=RequestMethod.GET)
     @ResponseBody
     public byte[] memberImageDisplay(@RequestParam String name,HttpServletResponse response)  {
-        System.out.println("Show is invoked");
         response.setContentType("image/jpeg");
         File file;
         byte arr[]={};
         try{
             file = new File(rootPath + File.separator + "serveis" + File.separator + name);
-            if(file.isFile()){
-                System.out.println("File is found");
-            }
-            else{
+            if(!file.isFile()){
                 name = "no-image.jpg";
                 file = new File(rootPath+name);
             }

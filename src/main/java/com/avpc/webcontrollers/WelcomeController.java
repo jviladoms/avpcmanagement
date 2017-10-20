@@ -102,6 +102,9 @@ public class WelcomeController {
 
     @RequestMapping(value = "/admin/mapa")
     public String mapa(ModelMap model){
+
+        List<Member> memberList = memberService.findMembers();
+        model.addAttribute("members",memberList);
         return "Mapa";
     }
 
