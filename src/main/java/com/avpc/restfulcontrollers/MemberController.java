@@ -2,6 +2,7 @@ package com.avpc.restfulcontrollers;
 
 import com.avpc.model.Member;
 
+import com.avpc.restfulcontrollers.dto.CoordinatesDTO;
 import com.avpc.restfulcontrollers.dto.MemberDTO;
 import com.avpc.services.MemberService;
 import org.apache.log4j.Logger;
@@ -101,9 +102,9 @@ public class MemberController {
     @RequestMapping(value ="/{memberId}/location", method = RequestMethod.PUT)
     @ResponseBody
     @CrossOrigin
-    public void updateMemberLocation(@PathVariable(value="memberId") Long memberId, @RequestBody Double longitude,@RequestBody Double latitude, HttpServletResponse response) throws IOException {
+    public void updateMemberLocation(@PathVariable(value="memberId") Long memberId, @RequestBody CoordinatesDTO coordinatesDTO, HttpServletResponse response) throws IOException {
         try{
-            memberService.updateMemberLocation(longitude,latitude, memberId);
+            memberService.updateMemberLocation(coordinatesDTO.getLongitude(),coordinatesDTO.getLatitude(), memberId);
         } catch (Exception e){
             log.error(e.getMessage());
             response.sendError(HttpStatus.CONFLICT.value());
@@ -118,7 +119,7 @@ public class MemberController {
         Member member = null;
 
         try{
-          member = memberService.updateMemberAvailability(memberParams,memberId);
+          member = memberService.updateMemberAvailability(memberParams.getAvailability(),memberId);
 
         } catch (Exception e){
             log.error(e.getMessage());

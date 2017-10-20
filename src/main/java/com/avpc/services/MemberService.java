@@ -124,11 +124,11 @@ public class MemberService {
         return memberDAO.save(member);
     }
 
-    public Member updateMemberAvailability(MemberDTO memberParams, Long memberId){
+    public Member updateMemberAvailability(Boolean availability, Long memberId){
         Member member;
         member = memberDAO.findOne(memberId);
 
-        member.setAvailability(memberParams.getAvailability());
+        member.setAvailability(availability);
 
         return memberDAO.save(member);
     }
