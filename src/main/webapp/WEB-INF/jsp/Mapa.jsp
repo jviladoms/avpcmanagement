@@ -316,7 +316,7 @@
               }
             }
             function showPosition(position) {
-              var url = "https://192.168.1.37:8443/members/${sessionScope.userid}/location/";
+              var url = "https://avpc.herokuapp.com/members/${sessionScope.userid}/location/";
 
               var data = {
                 "latitude" :  position.coords.latitude,
@@ -331,11 +331,11 @@
                 contentType: 'application/json',
                 data: JSON.stringify(data),
                 success: function(data) {
-                  alert("Voluntari modificat correctament");
+
                 },
                 error: function(data)
                 {
-                  alert("Error en la modificació " + url.toString() + " " + log);
+
                 }
               });
 
