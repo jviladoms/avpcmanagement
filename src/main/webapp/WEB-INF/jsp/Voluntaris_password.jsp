@@ -212,7 +212,7 @@
                                             <div class="panel">
                                                 <div class="panel-body">
                                                    <c:if test="${success}"> password successfully changed</c:if>
-                                                    <form id="updatepassword" action="/admin/update_member_password/${member.id}" method="post">
+                                                    <form id="updatepassword" action="/user/update_member_password" method="post">
                                                         <div class="form-body pal">
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
