@@ -208,25 +208,28 @@
                                                         <div class="form-body pal">
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
-                                                                    <i class="fa fa-user"></i>
-                                                                    <input id="brand" name="brand" type="text" placeholder="brand" class="form-control" /></div>
+                                                                    <i class="fa"></i>
+                                                                    <label for="credential" style="font-weight:bold;">Credencial</label>
+                                                                    <input id="credential" name="credential" type="text"  class="form-control" /></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
-                                                                    <i class="fa fa-user"></i>
-                                                                    <input id="credential" name="credential" type="text" placeholder="credential" class="form-control" /></div>
+                                                                    <i class="fa"></i>
+                                                                    <label for="brand" style="font-weight:bold;">Marca</label>
+                                                                    <input id="brand" name="brand" type="text"  class="form-control" /></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
-                                                                    <i class="fa fa-user"></i>
-                                                                    <input id="model" name="model" type="text" placeholder="model" class="form-control" /></div>
+                                                                    <i class="fa"></i>
+                                                                    <label for="model" style="font-weight:bold;">Model</label>
+                                                                    <input id="model" name="model" type="text" class="form-control" /></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-icon right">
-                                                                    <i class="fa fa-user"></i>
-                                                                    <input id="registrationNumber" name="registrationNumber" type="text" placeholder="registrationNumber" class="form-control" /></div>
+                                                                    <i class="fa"></i>
+                                                                    <label for="registrationNumber" style="font-weight:bold;">Matricula</label>
+                                                                    <input id="registrationNumber" name="registrationNumber" type="text"  class="form-control" /></div>
                                                             </div>
-
 
                                                             <hr />
 

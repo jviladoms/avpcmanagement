@@ -301,7 +301,8 @@
                 <c:forEach items="${members}" var="member">
                 var marker = new google.maps.Marker({
                     position: {lat: ${member.latitude}, lng:  ${member.longitude}},
-                    map: map
+                    map: map,
+                    label: '${member.name} ${member.surname1}'
                 });
                 </c:forEach>
                 getLocation();
@@ -316,7 +317,7 @@
               }
             }
             function showPosition(position) {
-              var url = "https://avpc.herokuapp.com/members/${sessionScope.userid}/location/";
+              var url = "https://www.avpcsantvi.com/members/${sessionScope.userid}/location/";
 
               var data = {
                 "latitude" :  position.coords.latitude,
