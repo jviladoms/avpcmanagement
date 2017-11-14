@@ -99,7 +99,7 @@ public class WelcomeController {
         List<Message> messages = messageService.findAllMessages();
         model.addAttribute("messages",messages);
         request.getSession().setAttribute("messages",messages);
-        //model.addAttribute("member",member);
+        model.addAttribute("member",member);
 
         return "Inici";
     }
