@@ -1,6 +1,7 @@
 package com.avpc.webcontrollers;
 
 import com.avpc.model.Member;
+import com.avpc.model.Message;
 import com.avpc.model.dao.MemberDAO;
 import com.avpc.model.dao.ServiceDAO;
 import com.avpc.restfulcontrollers.MemberController;
@@ -8,6 +9,7 @@ import com.avpc.services.MemberService;
 import com.avpc.services.MessageService;
 import com.avpc.services.ServicesService;
 import com.avpc.services.VehicleService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import org.apache.log4j.Logger;
@@ -77,7 +79,7 @@ public class WelcomeController {
         model.put("name", member.getFullName());
         model.put("member", member);
 
-        if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
+        /*if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
             return "redirect:/connect/twitter";
         }
 
@@ -87,15 +89,17 @@ public class WelcomeController {
             request.getSession().setAttribute("tweets",tweets);
         } catch (Exception e){
             log.error(e.getMessage());
-        }
+        }*/
 
         model.addAttribute("numServices",servicesService.getServices().size());
         model.addAttribute("numMembers",memberService.findMembers().size());
         model.addAttribute("numVehicles",vehicleService.getAllVehicles().size());
         model.addAttribute("numMessages",messageService.findAllMessages().size());
 
-        model.addAttribute("messages",messageService.findAllMessages());
-        model.addAttribute("member",member);
+        List<Message> messages = messageService.findAllMessages();
+        model.addAttribute("messages",messages);
+        request.getSession().setAttribute("messages",messages);
+        //model.addAttribute("member",member);
 
         return "Inici";
     }

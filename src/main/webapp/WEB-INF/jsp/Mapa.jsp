@@ -65,8 +65,8 @@
                     </form>-->
                     <div class="news-update-box hidden-xs"><span class="text-uppercase mrm pull-left text-white"></span>
                         <ul id="news-update" class="ticker list-unstyled">
-                            <c:forEach items="${sessionScope.tweets}" var="tweet">
-                                <li>${tweet.fromUser} - ${tweet.text}</li>
+                            <c:forEach items="${messages}" var="message">
+                                <li>${message.sendMember.name} - ${message.messageString}</li>
                             </c:forEach>
                         </ul>
                     </div>
