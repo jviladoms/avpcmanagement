@@ -14,7 +14,6 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
-apply plugin: 'war'
 
 jar {
     baseName = 'gs-batch-processing'
@@ -32,10 +31,13 @@ repositories {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    //compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.social:spring-social-twitter")
+    compile("javax.servlet:jstl")
+    compile("org.apache.tomcat.embed:tomcat-embed-jasper")
+    compile("org.apache.tomcat.embed:tomcat-embed-el")
     testCompile("junit:junit")
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("mysql:mysql-connector-java:5.1.6")
+    compile("mysql:mysql-connector-java:5.1.44")
     testCompile('org.springframework.boot:spring-boot-starter-test')
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.7'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.7'

@@ -11,7 +11,8 @@ public class VehicleDTO implements Serializable {
     private String brand;
     private String credential;
     private String model;
-    private String registration_number;
+    private String registrationNumber;
+    private Boolean deleted;
 
     public Long getId() {
         return id;
@@ -45,11 +46,11 @@ public class VehicleDTO implements Serializable {
         this.model = model;
     }
 
-    public String getRegistration_number() {
-        return registration_number;
+    public String getRegistrationNumber() {
+        return registrationNumber;
     }
 
-    public void setRegistration_number(String registration_number) {
-        this.registration_number = registration_number;
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
     }
 }

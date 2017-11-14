@@ -1,13 +1,7 @@
 package com.avpc.model;
 
-/**
- * Created by Jordi on 29/10/2016.
- */
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.Date;
 import javax.persistence.*;
-
 
 @Entity
 public class Member {
@@ -18,6 +12,9 @@ public class Member {
 
     @Column(unique = true, nullable = false)
     private String dni;
+
+    @Column(nullable = false)
+    private String tip;
 
     @Column(nullable = false)
     private String name;
@@ -76,6 +73,11 @@ public class Member {
     @Column(nullable = true)
     private Integer services;
 
+    @Column(nullable = true)
+    private String password;
+
+    @Column(nullable = true)
+    private String role;
 
     public Long getId() {
         return id;
@@ -243,5 +245,33 @@ public class Member {
 
     public void setServices(Integer services) {
         this.services = services;
+    }
+
+    public String getTip() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFullName() {
+        return String.format("%s %s %s", name, surname1, surname2);
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

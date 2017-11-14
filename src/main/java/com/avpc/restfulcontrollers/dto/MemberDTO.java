@@ -1,5 +1,7 @@
 package com.avpc.restfulcontrollers.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.function.BooleanSupplier;
@@ -11,6 +13,7 @@ public class MemberDTO implements Serializable {
 
     private Long id;
     private String dni;
+    private String tip;
     private String name;
     private String surname1;
     private String surname2;
@@ -24,12 +27,14 @@ public class MemberDTO implements Serializable {
     private Date registryDate;
     private Date deletionDate;
     private Date lastAccesDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date birthDate;
     private Double longitude;
     private Double latitude;
     private Boolean availability;
     private String photoURL;
     private String password;
+    private String role;
 
 
     public Long getId() {
@@ -199,4 +204,20 @@ public class MemberDTO implements Serializable {
     public String getPassword() { return password; }
 
     public void setPassword(String password) { this.password = password; }
+
+    public String getTip() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
