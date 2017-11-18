@@ -79,6 +79,16 @@ public class Member {
     @Column(nullable = true)
     private String role;
 
+    private Integer numHoursOfService;
+
+    public Integer getNumHoursOfService() {
+        return numHoursOfService;
+    }
+
+    public void setNumHoursOfService(Integer numHoursOfService) {
+        this.numHoursOfService = numHoursOfService;
+    }
+
     public Long getId() {
         return id;
     }

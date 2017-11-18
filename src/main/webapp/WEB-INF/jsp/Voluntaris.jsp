@@ -239,19 +239,23 @@
 
                                                                     <div class="row">
                                                                         <input type="hidden" id="memberId" value="{{member.id}}">
-                                                                        <div class="col-lg-4">
+                                                                        <div class="col-lg-5">
                                                                             <h7 class="box-heading">Email</h7>
                                                                             <div class="well well-sm">${member.email}</div>
                                                                         </div>
-                                                                        <div class="col-lg-4">
+                                                                        <div class="col-lg-5">
                                                                             <h7 class="box-heading">Telefon</h7>
                                                                             <div class="well well-sm">${member.mobilePhoneNumber}</div>
                                                                         </div>
-                                                                        <div class="col-lg-4">
+                                                                        <div class="col-lg-5">
                                                                             <h7 class="box-heading">Serveis</h7>
                                                                             <div class="well well-sm">${member.services}</div>
                                                                         </div>
-                                                                        <div class="col-lg-4">
+                                                                        <div class="col-lg-5">
+                                                                              <h7 class="box-heading">Hores</h7>
+                                                                              <div class="well well-sm">${member.numHoursOfService}</div>
+                                                                        </div>
+                                                                        <div class="col-lg-5">
                                                                             <a class="btn-xs btn-default" href="/admin/member_update/${member.id}">Modificar dades voluntari</a>
                                                                         </div>
                                                                     </div>

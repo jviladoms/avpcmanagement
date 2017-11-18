@@ -31,7 +31,10 @@ public class MemberService {
 
         try{
             memberDAO.findAll().forEach(member -> listMembers.add(member));
-            listMembers.forEach(member -> member.setServices(serviceDAO.findByMembersInServiceIn(member).size()));
+            listMembers.forEach(member -> {
+                member.setServices(serviceDAO.findByMembersInServiceIn(member).size());
+                member.setNumHoursOfService((serviceDAO.findHoursOfServiceByMemberID(member.getId())));
+            });
         } catch (Exception e){
             log.error(e.getMessage());
             throw new RuntimeException("member not found");
