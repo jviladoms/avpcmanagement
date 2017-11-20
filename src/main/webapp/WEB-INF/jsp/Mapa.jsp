@@ -310,7 +310,7 @@
 
             function getLocation() {
               if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
+                navigator.geolocation.watchPosition(showPosition);
               } else {
                 var x = document.getElementById("footer");
                 x.innerHTML = "Geolocation is not supported by this browser.";
