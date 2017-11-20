@@ -316,6 +316,7 @@
                 x.innerHTML = "Geolocation is not supported by this browser.";
               }
             }
+
             function showPosition(position) {
               var url = "https://www.avpcsantvi.com/members/${sessionScope.userid}/location/";
 
@@ -341,9 +342,6 @@
               });
 
               //e.preventDefault();
-
-
-
 
             }
         </script>
