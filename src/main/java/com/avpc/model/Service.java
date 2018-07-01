@@ -6,9 +6,6 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Jordi on 29/10/2016.
- */
 @Entity
 public class Service {
     @Id

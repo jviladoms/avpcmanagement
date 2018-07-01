@@ -3,8 +3,6 @@ package com.avpc.webcontrollers;
 import com.avpc.model.Member;
 import com.avpc.model.Service;
 import com.avpc.model.Vehicle;
-import com.avpc.model.dao.ServiceDAO;
-import com.avpc.restfulcontrollers.dto.ServiceDTO;
 import com.avpc.services.MemberService;
 import com.avpc.services.ServicesService;
 import com.avpc.services.VehicleService;
@@ -22,7 +20,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -37,9 +34,6 @@ public class ServicesWebController {
 
     @Autowired
     VehicleService vehicleService;
-
-    @Autowired
-    ServiceDAO serviceDAO;
 
     @Value("${image.storage.folder}")
     private String rootPath;
@@ -76,8 +70,7 @@ public class ServicesWebController {
     @RequestMapping(value ="/admin/addService", method = RequestMethod.POST)
     public String addServices(@ModelAttribute("service") Service service, BindingResult serviceResult, ModelMap model ){
         try{
-            serviceDAO.save(service);
-            //service = servicesService.addService(serviceDTO);
+            servicesService.addService(service);
         } catch (IllegalArgumentException e ){
             log.error(e.getMessage());
         }
@@ -107,10 +100,9 @@ public class ServicesWebController {
                 stream.write(bytes);
                 stream.close();
 
-                Service service = serviceDAO.findOne(serviceId);
-
+                Service service = servicesService.getService(serviceId);
                 service.setPhotoURL(serverFile.getAbsolutePath());
-                serviceDAO.save(service);
+                servicesService.updateService(service);
 
                 log.info("Server File Location="
                         + serverFile.getAbsolutePath());

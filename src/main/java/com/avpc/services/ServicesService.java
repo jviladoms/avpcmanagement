@@ -7,9 +7,7 @@ import com.avpc.restfulcontrollers.dto.ServiceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.avpc.model.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Service
@@ -19,9 +17,6 @@ public class ServicesService {
 
     @Autowired
     private MemberDAO memberDAO;
-
-    @Autowired
-    private ServicesService servicesService;
 
     public Service addService(ServiceDTO serviceDTO){
         Service service = new com.avpc.model.Service();
@@ -45,6 +40,11 @@ public class ServicesService {
         return service;
     }
 
+    public Service addService(Service service){
+        serviceDAO.save(service);
+        return service;
+    }
+
     public Service getService(Long serviceId) throws IllegalArgumentException{
         return serviceDAO.findOne(serviceId);
     }
@@ -52,6 +52,7 @@ public class ServicesService {
     public List<Service> getServices() throws IllegalArgumentException{
         List<Service> listService = new ArrayList<>();
         serviceDAO.findAll().forEach(service -> listService.add(service));
+        sortServicesByDate(listService);
         return listService;
     }
 
@@ -104,6 +105,15 @@ public class ServicesService {
 
     public void deleteService(Long serviceId){
         serviceDAO.delete(serviceId);
+    }
+
+    private void sortServicesByDate(List<Service> listService) {
+        Collections.sort(listService, new Comparator<Service>() {
+            @Override
+            public int compare(Service o1, Service o2) {
+                return o2.getStartDate().compareTo(o1.getStartDate());
+            }
+        });
     }
 
     private List<Member> getMembers(Iterable<Long> ids){
