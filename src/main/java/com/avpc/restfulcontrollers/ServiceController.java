@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -61,8 +62,8 @@ public class ServiceController {
     @RequestMapping(value ="/find_between_dates", method = RequestMethod.GET)
     @ResponseBody
     @CrossOrigin
-    public List<Service> getServicesBetweenDays(@RequestParam(value="start_date") Date start_date,
-                                         @RequestParam(value="end_date") Date end_date,
+    public List<Service> getServicesBetweenDays(@RequestParam(value="start_date") LocalDate start_date,
+                                         @RequestParam(value="end_date") LocalDate end_date,
                                         HttpServletResponse response) throws IOException {
 
         List<Service> listService = null;

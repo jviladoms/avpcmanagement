@@ -7,6 +7,8 @@ import com.avpc.restfulcontrollers.dto.ServiceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.avpc.model.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -56,8 +58,13 @@ public class ServicesService {
         return listService;
     }
 
-    public List<Service> getServicesBetweenDays(Date start_date, Date end_date){
-        return serviceDAO.findByStartDateBetween(start_date,end_date);
+    public List<Service> getServicesBetweenDays(LocalDate init_date, LocalDate last_date){
+        Date start_date = Date.from(init_date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date end_date = Date.from(last_date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        List<Service> listService = serviceDAO.findByStartDateBetween(start_date,end_date);
+        sortServicesByDate(listService);
+        return listService;
     }
 
     public Service updateService(Long serviceId, ServiceDTO serviceDTO){

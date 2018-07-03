@@ -9,6 +9,7 @@ import com.avpc.services.VehicleService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,11 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -39,8 +45,21 @@ public class ServicesWebController {
     private String rootPath;
 
     @RequestMapping(value = "/admin/serveis")
-    public String services(ModelMap model){
-        model.put("services", servicesService.getServices());
+    public String services(@RequestParam(value="initDate", required=false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate initDate,
+                           @RequestParam(value="endDate", required=false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+                           ModelMap model){
+
+        if (initDate == null) {
+            LocalDate date = LocalDate.of(Calendar.getInstance().get(Calendar.YEAR), Month.JANUARY, 01);
+            LocalDate firstDayOfYear = date.with(TemporalAdjusters.firstDayOfYear());
+            initDate = firstDayOfYear;
+        }
+
+        if (endDate == null) {
+            endDate = LocalDate.now();
+        }
+
+        model.put("services", servicesService.getServicesBetweenDays(initDate,endDate));
         return "Serveis";
     }
 
