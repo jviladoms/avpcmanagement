@@ -26,8 +26,9 @@
     <link type="text/css" rel="stylesheet" href="/styles/pace.css">
     <link type="text/css" rel="stylesheet" href="/styles/jquery.news-ticker.css">
     <link type="text/css" rel="stylesheet" href="/styles/jplist-custom.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-    <script src="script/services.js"></script>
+    <link type="text/css" rel="stylesheet" href="/styles/datepicker.css" >
+
+
 </head>
 <body>
 <div>
@@ -214,6 +215,16 @@
                                                 <div id="grid-layout-table-1" class="box" ng-controller="services">
                                                     <div class="box text-shadow">
                                                         <table class="demo-tbl">
+                                                            <tr class="tbl-item">
+                                                                <td class="col-lg-1">
+                                                                    <div id="errorFilter"></div>
+                                                                    <input id="initDate" name="initDate" type="text" placeholder="Data inici" value="${initDate}"/>
+                                                                    <input id="endDate" name="endDate" type="text" placeholder="Data final" value="${endDate}"/>
+                                                                    <button type="button" onclick="redirect()" class="btn btn-default">Filtrar <i class="fa fa-filter mls"></i></button>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <table class="demo-tbl">
                                                             <!--<item>n</item>-->
                                                             <button type="button" onclick="window.location.href='/admin/serveis_registration'" class="btn btn-default">Afegir servei<i class="fa fa-plus mls"></i></button>
                                                             <c:forEach items="${services}" var="service">
@@ -307,6 +318,7 @@
 <script src="/script/charts-highchart-more.js"></script>
 <script src="/script/modernizr.min.js"></script>
 <script src="/script/animation.js"></script>
+<script src="/script/bootstrap-datepicker.js"></script>
 <!--CORE JAVASCRIPT-->
 <script src="/script/main.js"></script>
 <script>        (function (i, s, o, g, r, a, m) {
@@ -324,6 +336,32 @@ ga('create', 'UA-145464-12', 'auto');
 ga('send', 'pageview');
 
 
+</script>
+<script>
+    $(function(){
+        $('#initDate').datepicker({
+            format: 'yyyy-mm-dd'})
+
+        $('#endDate').datepicker({
+            format: 'yyyy-mm-dd'});
+    });
+</script>
+
+<script>
+    function redirect() {
+        var dtRegex = new RegExp(/\b\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])\b/);
+
+        var initDate = $('#initDate').val();
+        var endDate = $('#endDate').val();
+
+        if(dtRegex.test(initDate) && dtRegex.test(endDate)){
+            window.location.href='/admin/serveis?initDate=' + initDate + '&endDate=' + endDate;
+        } else if ($.datepicker.parseDate('YYYY-MM-DD', initDate) > $.datepicker.parseDate('YYYY-MM-DD', endDate)){
+            $('#errorFilter').html("error fecha mayor");
+        } else {
+            $('#errorFilter').html("error")
+        }
+    }
 </script>
 </body>
 </html>

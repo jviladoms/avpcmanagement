@@ -297,96 +297,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mbl">
-                            <div class="col-lg-12">
-                                <div class="panel">
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <a class="twitter-timeline"
-                                                   href="https://twitter.com/emergenciescat"
-                                                   data-width="1100"
-                                                   data-height="500">
-                                                    Tweets by @TwitterDev
-                                                </a>
-                                            </div>
-                                            <!--<div class="col-md-4">
-                                                <h4 class="mbm">
-                                                    Server Status</h4>
-                                                <span class="task-item">CPU Usage (25 - 32 cpus)<small class="pull-right text-muted">40%</small><div
-                                                    class="progress progress-sm">
-                                                    <div role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
-                                                        style="width: 40%;" class="progress-bar progress-bar-orange">
-                                                        <span class="sr-only">40% Complete (success)</span></div>
-                                                </div>
-                                                </span><span>Memory Usage (2.5GB)<small class="pull-right text-muted">60%</small><div
-                                                    class="progress progress-sm">
-                                                    <div role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                                        style="width: 60%;" class="progress-bar progress-bar-blue">
-                                                        <span class="sr-only">60% Complete (success)</span></div>
-                                                </div>
-                                                </span><span>Disk Usage (C:\ 120GB , D:\ 430GB)<small class="pull-right text-muted">55%</small><div
-                                                    class="progress progress-sm">
-                                                    <div role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"
-                                                        style="width: 55%;" class="progress-bar progress-bar-green">
-                                                        <span class="sr-only">55% Complete (success)</span></div>
-                                                </div>
-                                                </span><span>Domain (2/5)<small class="pull-right text-muted">66%</small><div class="progress progress-sm">
-                                                    <div role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"
-                                                        style="width: 66%;" class="progress-bar progress-bar-yellow">
-                                                        <span class="sr-only">66% Complete (success)</span></div>
-                                                </div>
-                                                </span><span>Database (90/100)<small class="pull-right text-muted">90%</small><div
-                                                    class="progress progress-sm">
-                                                    <div role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-                                                        style="width: 90%;" class="progress-bar progress-bar-pink">
-                                                        <span class="sr-only">90% Complete (success)</span></div>
-                                                </div>
-                                                </span><span>Email Account (25/50)<small class="pull-right text-muted">50%</small><div
-                                                    class="progress progress-sm">
-                                                    <div role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
-                                                        style="width: 50%;" class="progress-bar progress-bar-violet">
-                                                        <span class="sr-only">50% Complete (success)</span></div>
-                                                </div>
-                                                </span>-->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="portlet box">
-                                    <div class="portlet-header">
-                                        <div class="caption">
-                                            Chats</div>
-                                    </div>
-                                    <div class="portlet-body">
-                                        <div class="chat-scroller">
-                                            <ul class="chats">
-                                                <c:forEach items="${messages}" var="message">
-                                                    <li class="in">
-                                                        <img src="/member/image/display?name=${message.sendMember.id}" class="avatar img-responsive" />
-                                                        <div class="message">
-                                                            <span class="chat-arrow"></span><a href="#" class="chat-name">${message.sendMember.name}</a>&nbsp;<span
-                                                                class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">${message.messageString}</span></div>
-                                                    </li>
-                                                </c:forEach>
-                                            </ul>
-                                        </div>
-                                        <!--<div class="chat-form">
-                                            <div class="input-group">
-                                                <input id="input-chat" type="text" placeholder="Type a message here..." class="form-control" /><span
-                                                    id="btn-chat" class="input-group-btn">
-                                                    <button type="button" class="btn btn-green">
-                                                        <i class="fa fa-check"></i>
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </div>-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="row mbl">
                             <div class="col-lg-6">
                                 <div class="panel">
@@ -394,20 +305,16 @@
                                         <div class="profile">
                                             <div style="margin-bottom: 15px" class="row">
                                                 <div class="col-xs-12 col-sm-8">
-                                                    <h2>
-                                                        ${member.name} ${member.surname1} ${member.surname2}</h2>
-                                                    <p>
-                                                        <strong>Telefon:</strong> ${member.mobilePhoneNumber}</p>
-                                                    <p>
-                                                        <strong>Adreça:</strong> ${member.address}</p>
-                                                    <p>
-                                                        <strong>Ciutat:</strong> ${member.city}</p>
-                                                    <p>
-                                                        <strong>Ciutat:</strong> ${member.postalCode}</p>
+                                                    <img src="http://www.gencat.cat/medinatural/incendis/mapes/pla_alfa.gif" alt="Mapa del Pla Alfa (dia en curs)" style="display: inline-block" class="img-responsive">
                                                 </div>
-                                                <div class="col-xs-12 col-sm-4 text-center">
-                                                    <figure><img src="/member/image/display?name=${member.id}" alt="" style="display: inline-block" class="img-responsive img-circle"/></figure>
-                                                </div>
+                                                <br>
+                                                <a class="twitter-timeline"
+                                                   style="display: inline-block"
+                                                   href="https://twitter.com/emergenciescat"
+                                                   data-width="1100"
+                                                   data-height="800">
+                                                    Tweets by @TwitterDev
+                                                </a>
                                             </div>
                                             <!---<div class="row text-center divider">
                                                 <div class="col-xs-12 col-sm-4 emphasis">
@@ -455,165 +362,38 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--<div class="col-lg-8">
-                                <div class="portlet box">
-                                    <div class="portlet-header">
-                                        <div class="caption">
-                                            Todo List</div>
-                                    </div>
-                                    <div style="overflow: hidden;" class="portlet-body">
-                                        <ul class="todo-list sortable">
-                                            <li class="clearfix"><span class="drag-drop"><i></i></span>
-                                                <div class="todo-check pull-left">
-                                                    <input type="checkbox" value="" /></div>
-                                                <div class="todo-title">
-                                                    Sed ut perspiciatis unde omnis iste</div>
-                                                <div class="todo-actions pull-right clearfix">
-                                                    <a href="#" class="todo-complete"><i class="fa fa-check"></i></a><a href="#" class="todo-edit">
-                                                        <i class="fa fa-edit"></i></a><a href="#" class="todo-remove"><i class="fa fa-trash-o">
-                                                        </i></a>
-                                                </div>
-                                            </li>
-                                            <li class="clearfix"><span class="drag-drop"><i></i></span>
-                                                <div class="todo-check pull-left">
-                                                    <input type="checkbox" value="" /></div>
-                                                <div class="todo-title">
-                                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</div>
-                                                <div class="todo-actions pull-right clearfix">
-                                                    <a href="#" class="todo-complete"><i class="fa fa-check"></i></a><a href="#" class="todo-edit">
-                                                        <i class="fa fa-edit"></i></a><a href="#" class="todo-remove"><i class="fa fa-trash-o">
-                                                        </i></a>
-                                                </div>
-                                            </li>
-                                            <li class="clearfix"><span class="drag-drop"><i></i></span>
-                                                <div class="todo-check pull-left">
-                                                    <input type="checkbox" value="" /></div>
-                                                <div class="todo-title">
-                                                    Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo
-                                                    minus id</div>
-                                                <div class="todo-actions pull-right clearfix">
-                                                    <a href="#" class="todo-complete"><i class="fa fa-check"></i></a><a href="#" class="todo-edit">
-                                                        <i class="fa fa-edit"></i></a><a href="#" class="todo-remove"><i class="fa fa-trash-o">
-                                                        </i></a>
-                                                </div>
-                                            </li>
-                                            <li class="clearfix"><span class="drag-drop"><i></i></span>
-                                                <div class="todo-check pull-left">
-                                                    <input type="checkbox" value="" /></div>
-                                                <div class="todo-title">
-                                                    Et harum quidem rerum facilis est</div>
-                                                <div class="todo-actions pull-right clearfix">
-                                                    <a href="#" class="todo-complete"><i class="fa fa-check"></i></a><a href="#" class="todo-edit">
-                                                        <i class="fa fa-edit"></i></a><a href="#" class="todo-remove"><i class="fa fa-trash-o">
-                                                        </i></a>
-                                                </div>
-                                            </li>
-                                            <li class="clearfix"><span class="drag-drop"><i></i></span>
-                                                <div class="todo-check pull-left">
-                                                    <input type="checkbox" value="" /></div>
-                                                <div class="todo-title">
-                                                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet</div>
-                                                <div class="todo-actions pull-right clearfix">
-                                                    <a href="#" class="todo-complete"><i class="fa fa-check"></i></a><a href="#" class="todo-edit">
-                                                        <i class="fa fa-edit"></i></a><a href="#" class="todo-remove"><i class="fa fa-trash-o">
-                                                        </i></a>
-                                                </div>
-                                            </li>
-                                            <li class="clearfix"><span class="drag-drop"><i></i></span>
-                                                <div class="todo-check pull-left">
-                                                    <input type="checkbox" value="" /></div>
-                                                <div class="todo-title">
-                                                    Excepteur sint occaecat cupidatat non proident</div>
-                                                <div class="todo-actions pull-right clearfix">
-                                                    <a href="#" class="todo-complete"><i class="fa fa-check"></i></a><a href="#" class="todo-edit">
-                                                        <i class="fa fa-edit"></i></a><a href="#" class="todo-remove"><i class="fa fa-trash-o">
-                                                        </i></a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="timeline-centered timeline-sm">
-                                    <article class="timeline-entry">
-                                    <div class="timeline-entry-inner">
-                                        <time datetime="2014-01-10T03:45" class="timeline-time"><span>12:45 AM</span><span>Today</span></time>
-                                        <div class="timeline-icon bg-violet"><i class="fa fa-exclamation"></i></div>
-                                        <div class="timeline-label"><h4 class="timeline-title">New Project</h4>
 
-                                            <p>Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial.</p></div>
-                                    </div>
-                                </article>
-                                    <article class="timeline-entry left-aligned">
-                                    <div class="timeline-entry-inner">
-                                        <time datetime="2014-01-10T03:45" class="timeline-time"><span>9:15 AM</span><span>Today</span></time>
-                                        <div class="timeline-icon bg-green"><i class="fa fa-group"></i></div>
-                                        <div class="timeline-label bg-green"><h4 class="timeline-title">Job Meeting</h4>
-
-                                            <p>Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette.</p></div>
-                                    </div>
-                                </article>
-                                    <article class="timeline-entry">
-                                    <div class="timeline-entry-inner">
-                                        <time datetime="2014-01-09T13:22" class="timeline-time"><span>8:20 PM</span><span>04/03/2013</span></time>
-                                        <div class="timeline-icon bg-orange"><i class="fa fa-paper-plane"></i></div>
-                                        <div class="timeline-label bg-orange"><h4 class="timeline-title">Daily Feeds</h4>
-
-                                            <p><img src="http://lorempixel.com/45/45/nature/3/" alt="" class="timeline-img pull-left"/>Parsley amaranth tigernut silver beet maize fennel spinach ricebean black-eyed. Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial.</p></div>
-                                    </div>
-                                    <div class="timeline-entry-inner">
-                                        <div style="-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);" class="timeline-icon"><i class="fa fa-plus"></i></div>
-                                    </div>
-                                </article>
-                                </div>
-                            </div>
-                            <!--<div class="col-lg-4">
-                            <div id="my-calendar"></div>
-                        </div>-->
-                          <!--  <div class="col-lg-4">
-                                <div class="page-content">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="portlet box">
-                                                <div class="portlet-header">
-                                                    <div class="caption">
-                                                        Pie with gradient fill</div>
-                                                    <div class="tools">
-                                                        <i class="fa fa-chevron-up"></i><i data-toggle="modal" data-target="#modal-config"
-                                                            class="fa fa-cog"></i><i class="fa fa-refresh"></i><i class="fa fa-times"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="portlet-body">
-                                                    <div id="pie-with-gradient-fill">
-                                                    </div>
+                            <div class="row mbl">
+                                <div class="col-lg-6">
+                                    <div class="panel">
+                                        <div class="panel-body">
+                                            <div class="profile">
+                                                <div style="margin-bottom: 15px" class="row">
+                                                    <iframe id="smcpredgen3d" width="380" height="450" style="border: 0;"></iframe>
+                                                    <iframe id="smcxrad" width="380" height="450" style="border: 0;"></iframe>
+                                                    <iframe id="smcsmp" width="380" height="450" style="border: 0;"></iframe>
+                                                    <iframe id="smcpredgen" width="380" height="450" style="border: 0;"></iframe>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="portlet box">
-                                    <div class="portlet-header">
-                                        <div class="caption">
-                                            Scatter plot</div>
-                                        <div class="tools">
-                                            <i class="fa fa-chevron-up"></i><i data-toggle="modal" data-target="#modal-config"
-                                                class="fa fa-cog"></i><i class="fa fa-refresh"></i><i class="fa fa-times"></i>
-                                        </div>
-                                    </div>
-                                    <div class="portlet-body">
-                                        <div id="angular-gauge">
+                            <div class="row mbl">
+                                <div class="col-lg-12">
+                                    <div class="panel">
+                                        <div class="panel-body">
+                                            <div class="profile">
+                                                <div style="margin-bottom: 15px" class="row">
+                                                    <iframe id="mapaProte" src="https://pcivil.icgc.cat" width="900" height="900"  style="display: inline-block; border: 0;"></iframe>i
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>-->
+
                 <!--END CONTENT-->
                 <!--BEGIN FOOTER-->
                 <div id="footer">
@@ -678,5 +458,11 @@
 
 
 </script>
+                <script>
+                    document.getElementById('smcpredgen3d').setAttribute('src', 'http://static-m.meteo.cat/ginys/prediccio3d/v1/?rnd=' + Math.random());
+                    document.getElementById('smcxrad').setAttribute('src', 'http://static-m.meteo.cat/ginys/mapaRadar/v1/?rnd=' + Math.random());
+                    document.getElementById('smcsmp').setAttribute('src', 'http://static-m.meteo.cat/ginys/mapaAvisos/v1/?rnd=' + Math.random());
+                    document.getElementById('smcpredgen').setAttribute('src', 'http://static-m.meteo.cat/ginys/mapaPrediccio/v1/?rnd=' + Math.random());
+                </script>
 </body>
 </html>

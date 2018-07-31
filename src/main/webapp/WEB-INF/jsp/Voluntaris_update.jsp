@@ -310,6 +310,7 @@
                                                                         <option value="CDG">CAP DE GRUP</option>
                                                                         <option value="CDS">CAP DE SECCIO</option>
                                                                         <option value="CDU">CAP UNITAT</option>
+                                                                        <option value="TPC">TÈCNICA PROTECCIÖ CIVIL</option>
                                                                     </select>
                                                             </div>
                                                             <div class="form-group">

@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.TemporalAdjusters;
@@ -50,16 +47,16 @@ public class ServicesWebController {
                            ModelMap model){
 
         if (initDate == null) {
-            LocalDate date = LocalDate.of(Calendar.getInstance().get(Calendar.YEAR), Month.JANUARY, 01);
-            LocalDate firstDayOfYear = date.with(TemporalAdjusters.firstDayOfYear());
-            initDate = firstDayOfYear;
+            initDate = LocalDate.now().minusMonths(3);
         }
 
         if (endDate == null) {
-            endDate = LocalDate.now();
+            endDate = LocalDate.now().plusDays(1);
         }
 
         model.put("services", servicesService.getServicesBetweenDays(initDate,endDate));
+        model.addAttribute("initDate",initDate);
+        model.addAttribute("endDate",endDate);
         return "Serveis";
     }
 
@@ -101,9 +98,10 @@ public class ServicesWebController {
 
     @RequestMapping(value = "/admin/serveis/uploadFile", method = RequestMethod.POST)
     public @ResponseBody String uploadFileHandler(@RequestParam("service") Long serviceId,
-                             @RequestParam("file") MultipartFile file) {
+                             @RequestParam("file") MultipartFile file) throws IOException {
 
         if (!file.isEmpty()) {
+            BufferedOutputStream stream = null;
             try {
                 byte[] bytes = file.getBytes();
 
@@ -114,7 +112,7 @@ public class ServicesWebController {
                 // Create the file on server
                 File serverFile = new File(dir.getAbsolutePath()
                         + File.separator + serviceId);
-                BufferedOutputStream stream = new BufferedOutputStream(
+                stream = new BufferedOutputStream(
                         new FileOutputStream(serverFile));
                 stream.write(bytes);
                 stream.close();
@@ -128,6 +126,8 @@ public class ServicesWebController {
 
             } catch (Exception e) {
                 log.error("You failed to upload " + serviceId + " => " + e.getMessage());
+            } finally {
+                stream.close();
             }
         }
 
@@ -136,10 +136,11 @@ public class ServicesWebController {
 
     @RequestMapping(value = "/serveis/image/display",method=RequestMethod.GET)
     @ResponseBody
-    public byte[] memberImageDisplay(@RequestParam String name,HttpServletResponse response)  {
+    public byte[] memberImageDisplay(@RequestParam String name,HttpServletResponse response) throws IOException {
         response.setContentType("image/jpeg");
         File file;
         byte arr[]={};
+        FileInputStream fis = null;
         try{
             file = new File(rootPath + File.separator + "serveis" + File.separator + name);
             if(!file.isFile()){
@@ -147,10 +148,12 @@ public class ServicesWebController {
                 file = new File(rootPath+name);
             }
             arr= new byte[(int)file.length()];
-            FileInputStream fis = new FileInputStream(file);
+            fis = new FileInputStream(file);
             fis.read(arr,0,arr.length);
         }catch(Exception e){
             System.out.println(e);
+        } finally {
+            fis.close();
         }
         return arr;
     }

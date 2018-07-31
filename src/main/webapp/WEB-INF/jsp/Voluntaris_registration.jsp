@@ -282,6 +282,7 @@
                                                                         <option value="CDG">CAP DE GRUP</option>
                                                                         <option value="CDS">CAP DE SECCIO</option>
                                                                         <option value="CDU">CAP UNITAT</option>
+                                                                        <option value="TPC">TÈCNICA PROTECCIÖ CIVIL</option>
                                                                     </select>
                                                             </div>
                                                             <div class="form-group">
@@ -290,7 +291,7 @@
                                                                     <select id="role" name="role" type="text" placeholder="Rol" class="form-control" />
                                                                         <option value="ADMIN">ADMIN</option>
                                                                         <option value="USER">USER</option>
-                                                                    </select
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                             <hr />

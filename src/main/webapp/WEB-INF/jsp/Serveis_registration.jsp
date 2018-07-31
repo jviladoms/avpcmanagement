@@ -182,7 +182,7 @@
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
                         <div class="page-title">
-                            Registre de nou voluntari</div>
+                            Registre de nou servei</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -266,7 +266,7 @@
                                                         </div>
                                                         <div class=" text-right pal">
                                                             <button type="submit" class="btn btn-primary">
-                                                                Afegir voluntari</button>
+                                                                Afegir servei</button>
                                                         </div>
 
                                                     </form:form>
