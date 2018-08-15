@@ -459,10 +459,10 @@
 
 </script>
                 <script>
-                    document.getElementById('smcpredgen3d').setAttribute('src', 'http://static-m.meteo.cat/ginys/prediccio3d/v1/?rnd=' + Math.random());
-                    document.getElementById('smcxrad').setAttribute('src', 'http://static-m.meteo.cat/ginys/mapaRadar/v1/?rnd=' + Math.random());
-                    document.getElementById('smcsmp').setAttribute('src', 'http://static-m.meteo.cat/ginys/mapaAvisos/v1/?rnd=' + Math.random());
-                    document.getElementById('smcpredgen').setAttribute('src', 'http://static-m.meteo.cat/ginys/mapaPrediccio/v1/?rnd=' + Math.random());
+                    document.getElementById('smcpredgen3d').setAttribute('src', 'https://static-m.meteo.cat/ginys/prediccio3d/v1/?rnd=' + Math.random());
+                    document.getElementById('smcxrad').setAttribute('src', 'https://static-m.meteo.cat/ginys/mapaRadar/v1/?rnd=' + Math.random());
+                    document.getElementById('smcsmp').setAttribute('src', 'https://static-m.meteo.cat/ginys/mapaAvisos/v1/?rnd=' + Math.random());
+                    document.getElementById('smcpredgen').setAttribute('src', 'https://static-m.meteo.cat/ginys/mapaPrediccio/v1/?rnd=' + Math.random());
                 </script>
 </body>
 </html>
