@@ -5,11 +5,13 @@ import com.avpc.model.Message;
 import com.avpc.model.dao.MemberDAO;
 import com.avpc.model.dao.ServiceDAO;
 import com.avpc.restfulcontrollers.MemberController;
+import com.avpc.rssreader.Feed;
+import com.avpc.rssreader.RssFeedReaderService;
 import com.avpc.services.MemberService;
 import com.avpc.services.MessageService;
 import com.avpc.services.ServicesService;
 import com.avpc.services.VehicleService;
-import java.util.ArrayList;
+
 import java.util.List;
 import javax.inject.Inject;
 import org.apache.log4j.Logger;
@@ -17,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,6 +32,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class WelcomeController {
 
+    public static final String PC_URL = "http://premsa.gencat.cat/pres_fsvp/AppJava/rss/list.do?pageCount=1&idioma=0&objectType=1&departament=61";
+    public static final String MOSSOS_URL = "http://premsa.gencat.cat/pres_fsvp/AppJava/rss/list.do?pageCount=1&idioma=0&objectType=1&departament=40";
+    public static final String BOMBERS_URL = "http://premsa.gencat.cat/pres_fsvp/AppJava/rss/list.do?pageCount=1&idioma=0&objectType=1&departament=22";
     @Inject
     private Twitter twitter;
     @Inject
@@ -60,6 +64,18 @@ public class WelcomeController {
     public String showWelcomePage(ModelMap model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         auth.getName();
+        RssFeedReaderService rssFeedReaderProteccioCivilService = RssFeedReaderService.create(PC_URL);
+        RssFeedReaderService rssFeedReaderMossosService = RssFeedReaderService.create(MOSSOS_URL);
+        RssFeedReaderService rssFeedReaderBombers = RssFeedReaderService.create(BOMBERS_URL);
+
+
+        Feed feedProteccioCivil = rssFeedReaderProteccioCivilService.readFeed();
+        Feed feedMossos = rssFeedReaderMossosService.readFeed();
+        Feed feedBombers = rssFeedReaderBombers.readFeed();
+
+        model.put("feedProteccioCivil",feedProteccioCivil);
+        model.put("feedMossos",feedMossos);
+        model.put("feedBombers",feedBombers);
         model.put("name", auth.getName());
         return "index";
     }

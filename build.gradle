@@ -43,5 +43,6 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.7'
     compile ("io.springfox:springfox-swagger2:2.4.0")
     compile ("io.springfox:springfox-swagger-ui:2.4.0")
-
+    compile ("org.jsoup:jsoup:1.8.3")
+    compile ("rome:rome:1.0")
 }

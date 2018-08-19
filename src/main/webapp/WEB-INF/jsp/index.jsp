@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -113,7 +114,7 @@
           <p> <img src="http://www.gencat.cat/medinatural/incendis/mapes/pla_alfa.gif" alt="Mapa del Pla Alfa (dia en curs)" style="display: inline-block" class="img-responsive"></p>
           <p><a class="btn btn-default" href="http://www.gencat.cat/medinatural/incendis/mapes/pla_alfa.gif" role="button">Veure detalls &raquo;</a></p>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-4">
           <h2>Twitter @avpcsvc</h2>
           <p>               <a class="twitter-timeline"
                                href="https://twitter.com/avpcsvc"
@@ -123,6 +124,57 @@
                             </a>
           </p>
           <p><a class="btn btn-default" href="https://twitter.com/avpcsvc" role="button">Veure detalls &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Twitter @emergenciescat</h2>
+          <p>               <a class="twitter-timeline"
+                               href="https://twitter.com/emergenciescat"
+                               data-width="1100"
+                               data-height="500">
+            Tweets by @avpcsvc
+          </a>
+          </p>
+          <p><a class="btn btn-default" href="https://twitter.com/avpcsvc" role="button">Veure detalls &raquo;</a></p>
+        </div>
+      </div>
+        <div class="row" style ='background-color: #d3d3d3;'>
+              <div class="col-md-4" >
+                <h2>Noticies Emergencies</h2>
+                <div id="news1" class="list-group-item pre-scrollable">
+                  <c:forEach items="${feedProteccioCivil.entries}" var="entry">
+                    <b><b></b><fmt:formatDate value="${entry.pubDate}" pattern="yyyy-MM-dd HH:mm:ss" /></b></p>
+                    <p><b>${entry.title}</b></p>
+                    <p><a href="${entry.link}">Més informació</a></p>
+                    <hr>
+                  </c:forEach>
+                </div>
+                <p><a class="btn btn-default" href="http://web.gencat.cat/ca/actualitat/rss" role="button">Veure detalls &raquo;</a></p>
+              </div>
+              <div class="col-md-4" >
+                <h2>Noticies Mossos</h2>
+                <div id="news2" class="list-group-item pre-scrollable">
+                  <c:forEach items="${feedMossos.entries}" var="entry">
+                    <b><b></b><fmt:formatDate value="${entry.pubDate}" pattern="yyyy-MM-dd HH:mm:ss" /></b></p>
+                    <p><b>${entry.title}</b></p>
+                    <p><a href="${entry.link}">Més informació</a></p>
+                    <hr>
+                  </c:forEach>
+                </div>
+                <p><a class="btn btn-default" href="http://web.gencat.cat/ca/actualitat/rss" role="button">Veure detalls &raquo;</a></p>
+              </div>
+              <div class="col-md-4" >
+                <h2>Noticies Bombers</h2>
+                <div id="news3" class="list-group-item pre-scrollable">
+                  <c:forEach items="${feedBombers.entries}" var="entry">
+                    <b><b></b><fmt:formatDate value="${entry.pubDate}" pattern="yyyy-MM-dd HH:mm:ss" /></b></p>
+                    <p><b>${entry.title}</b></p>
+                    <p><a href="${entry.link}">Més informació</a></p>
+                    <hr>
+                  </c:forEach>
+                </div>
+                <p><a class="btn btn-default" href="http://web.gencat.cat/ca/actualitat/rss" role="button">Veure detalls &raquo;</a></p>
+              </div>
+              <br>
         </div>
       </div>
       </div>
