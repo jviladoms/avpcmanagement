@@ -60,73 +60,82 @@
     </div>
 
 
-    <div class="container-fluid" >
+    <div class="container" >
+      <div class="row" >
+        <div class="col-md-12">
+          <h2 align="center"><strong>"Els voluntaris no cobren, però no perquè el que fan no tingui valor, sinó perquè el que fan no té preu"</strong></h2>
+        </div>
+      </div>
+      <hr width="0">
+      <hr width="0">
       <!-- Example row of columns -->
-
       <div class="row" >
         <div class="col-md-4">
-          <h2>Qui som?</h2>
+          <h3 align="center">Qui som?</h3>
           <p>L'AVPC Sant Vicenç de Castellet és una entitat sense ànim de lucre que té per a objectius dotar el poble de Sant Vicenç de Castellet d'un servei municipal d'emergències.
             La nostra associació està reconeguda per l'Ajuntament de Sant Vicenç i, tots els seus membres tenen el nomenament oficial de voluntaris de protecció civil expedit pel mateix ajuntament. </p>
         </div>
         <div class="col-md-4">
-          <h2>Què fem?</h2><p>Tasques preventives com són la inspecció i manteniment de camins, control d'hidrants...
+          <h3 align="center">Què fem?</h3><p>Tasques preventives com són la inspecció i manteniment de camins, control d'hidrants...
           Atendre les urgències que es produeixen dins del terme municipal, col·laborant amb els serveis ordinaris d'emergències en accidents de tràfic, talls de carretera, caiguda d'arbres, esllavissaments de terra, incendis, inundacions, col·laboració amb els serveis sanitaris. </p>
         </div>
         <div class="col-md-4">
-          <h2>Vols Col·laborar?</h2>
+          <h3 align="center">Vols Col·laborar?</h3>
           <p>Si vols formar part de la nostra associació, ja sigui com a soci o voluntari, deixa'ns les teves dades. Si vols donar-nos la teva opinió o suggeriment, no dubtis en fer-nos arribar un missatge a la següent adreça de correu electrònic: protecciocivil.svc@gmail.com</p>
         </div>
       </div>
-
     </div>
 
-    <hr class="featurette-divider">
-
       <div class="container" >
-        <div class="row" style ='background-color: #d3d3d3;'>
+        <hr>
+        <div class = "row">
           <div class="col-md-12">
-            <h1>INFORMACIÓ PROTECCIÓ CIVIL</h1>
+            <h2>INFORMACIÓ METEOROLOGICA</h2>
           </div>
         </div>
-      <div class="row" style ='background-color: #d3d3d3;'>
+      <div class="row" >
         <div class="col-md-4">
-          <h2>Avisos SMP</h2>
+          <h3>Avisos SMP</h3>
           <p> <iframe id="smcsmp" width="380" height="450" style="border: 0;"></iframe></p>
           <p><a class="btn btn-default" href="http://www.meteo.cat" role="button">Veure detalls &raquo;</a></p>
         </div>
         <div class="col-md-4">
-          <h2>Meteo</h2>
+          <h3>Meteo</h3>
           <p> <iframe id="smcpredgen3d" width="380" height="450" style="border: 0;"></iframe></p>
           <p><a class="btn btn-default" href="http://www.meteo.cat/prediccio/general" role="button">Veure detalls &raquo;</a></p>
         </div>
-
         <div class="col-md-4">
-          <h2>Radar</h2>
+          <h3>Radar</h3>
           <p> <iframe id="smcxrad" width="380" height="450" style="border: 0;"></iframe></p>
           <p><a class="btn btn-default" href="http://www.meteo.cat/observacions/radar" role="button">Veure detalls &raquo;</a></p>
         </div>
       </div>
 
-      <div class="row" style ='background-color: #d3d3d3;'>
+        <hr>
+        <div class = "row">
+          <div class="col-md-12">
+            <h2>INFORMACIÓ TWEETER</h2>
+          </div>
+        </div>
+      <div class="row" >
         <div class="col-md-4">
-          <h2>Pla Alfa</h2>
+          <h3>Pla Alfa</h3>
           <p> <img src="http://www.gencat.cat/medinatural/incendis/mapes/pla_alfa.gif" alt="Mapa del Pla Alfa (dia en curs)" style="display: inline-block" class="img-responsive"></p>
           <p><a class="btn btn-default" href="http://www.gencat.cat/medinatural/incendis/mapes/pla_alfa.gif" role="button">Veure detalls &raquo;</a></p>
         </div>
         <div class="col-md-4">
-          <h2>Twitter @avpcsvc</h2>
+          <h3>Twitter @avpcsvc</h3>
           <p>               <a class="twitter-timeline"
                                href="https://twitter.com/avpcsvc"
                                data-width="1100"
                                data-height="500">
-                               Tweets by @avpcsvc
-                            </a>
+            Tweets by @avpcsvc
+          </a>
           </p>
           <p><a class="btn btn-default" href="https://twitter.com/avpcsvc" role="button">Veure detalls &raquo;</a></p>
         </div>
         <div class="col-md-4">
-          <h2>Twitter @emergenciescat</h2>
+          <h3>Twitter @emergenciescat</h3>
           <p>               <a class="twitter-timeline"
                                href="https://twitter.com/emergenciescat"
                                data-width="1100"
@@ -137,46 +146,70 @@
           <p><a class="btn btn-default" href="https://twitter.com/avpcsvc" role="button">Veure detalls &raquo;</a></p>
         </div>
       </div>
-        <div class="row" style ='background-color: #d3d3d3;'>
-              <div class="col-md-4" >
-                <h2>Noticies Emergencies</h2>
-                <div id="news1" class="list-group-item pre-scrollable">
-                  <c:forEach items="${feedProteccioCivil.entries}" var="entry">
-                    <b><b></b><fmt:formatDate value="${entry.pubDate}" pattern="yyyy-MM-dd HH:mm:ss" /></b></p>
-                    <p><b>${entry.title}</b></p>
-                    <p><a href="${entry.link}">Més informació</a></p>
-                    <hr>
-                  </c:forEach>
-                </div>
-                <p><a class="btn btn-default" href="http://web.gencat.cat/ca/actualitat/rss" role="button">Veure detalls &raquo;</a></p>
-              </div>
-              <div class="col-md-4" >
-                <h2>Noticies Mossos</h2>
-                <div id="news2" class="list-group-item pre-scrollable">
-                  <c:forEach items="${feedMossos.entries}" var="entry">
-                    <b><b></b><fmt:formatDate value="${entry.pubDate}" pattern="yyyy-MM-dd HH:mm:ss" /></b></p>
-                    <p><b>${entry.title}</b></p>
-                    <p><a href="${entry.link}">Més informació</a></p>
-                    <hr>
-                  </c:forEach>
-                </div>
-                <p><a class="btn btn-default" href="http://web.gencat.cat/ca/actualitat/rss" role="button">Veure detalls &raquo;</a></p>
-              </div>
-              <div class="col-md-4" >
-                <h2>Noticies Bombers</h2>
-                <div id="news3" class="list-group-item pre-scrollable">
-                  <c:forEach items="${feedBombers.entries}" var="entry">
-                    <b><b></b><fmt:formatDate value="${entry.pubDate}" pattern="yyyy-MM-dd HH:mm:ss" /></b></p>
-                    <p><b>${entry.title}</b></p>
-                    <p><a href="${entry.link}">Més informació</a></p>
-                    <hr>
-                  </c:forEach>
-                </div>
-                <p><a class="btn btn-default" href="http://web.gencat.cat/ca/actualitat/rss" role="button">Veure detalls &raquo;</a></p>
-              </div>
-              <br>
+        <hr>
+        <div class = "row">
+          <div class="col-md-12">
+            <h2>NOTICIES PROTECCIO CIVIL</h2>
+          </div>
+        </div>
+      <div class="row" >
+        <div class="col-md-4">
+          <h3>Noticies Emergencies</h3>
+          <div id="news1" class="list-group-item pre-scrollable">
+            <c:forEach items="${feedProteccioCivil.entries}" var="entry">
+              <b><b></b><fmt:formatDate value="${entry.pubDate}" pattern="yyyy-MM-dd HH:mm:ss" /></b></p>
+              <p><b>${entry.title}</b></p>
+              <p><a href="${entry.link}">Més informació</a></p>
+              <hr>
+            </c:forEach>
+          </div>
+          <p><a class="btn btn-default" href="http://web.gencat.cat/ca/actualitat/rss" role="button">Veure detalls &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h3>Noticies Mossos</h3>
+          <div id="news2" class="list-group-item pre-scrollable">
+            <c:forEach items="${feedMossos.entries}" var="entry">
+              <b><b></b><fmt:formatDate value="${entry.pubDate}" pattern="yyyy-MM-dd HH:mm:ss" /></b></p>
+              <p><b>${entry.title}</b></p>
+              <p><a href="${entry.link}">Més informació</a></p>
+              <hr>
+            </c:forEach>
+          </div>
+            <p><a class="btn btn-default" href="http://web.gencat.cat/ca/actualitat/rss" role="button">Veure detalls &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h3>Noticies Bombers</h3>
+          <div id="news3" class="list-group-item pre-scrollable">
+            <c:forEach items="${feedBombers.entries}" var="entry">
+              <b><b></b><fmt:formatDate value="${entry.pubDate}" pattern="yyyy-MM-dd HH:mm:ss" /></b></p>
+              <p><b>${entry.title}</b></p>
+              <p><a href="${entry.link}">Més informació</a></p>
+              <hr>
+            </c:forEach>
+          </div>
+          <p><a class="btn btn-default" href="http://web.gencat.cat/ca/actualitat/rss" role="button">Veure detalls &raquo;</a></p>
         </div>
       </div>
+        <hr>
+        <div class = "row">
+          <div class="col-md-12">
+            <h2>INFORMACIÓ MUNICIPAL</h2>
+          </div>
+        </div>
+      <div class="row" >
+        <div class="col-md-6">
+          <h3>Mapa municipi</h3>
+          <p><iframe width="500" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/?ie=UTF8&amp;ll=41.668296,1.862354&amp;spn=0.03084,0.058365&amp;t=h&amp;z=14&amp;om=1&amp;output=embed&amp;s=AARTsJqzARj-Z8VnW5pkPMLMmZbqrJcYpw"></iframe></p>
+        </div>
+        <div class="col-md-6">
+          <h3>Hidrants del municipi</h3>
+          <p> <iframe src="https://www.google.com/maps/d/embed?mid=1rEXX8ECH--M8y1JnYQSF1Gi7vWrDiXLh" width="500" height="500"></iframe></p>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
       </div>
 
       <hr>
@@ -185,7 +218,6 @@
         <p>&copy; 2016 Associació de voluntaris de protecció civil de Sant Vicenç de Castellet.</p>
       </footer>
     </div> <!-- /container -->
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
