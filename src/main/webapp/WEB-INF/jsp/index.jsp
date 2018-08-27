@@ -199,7 +199,7 @@
       <div class="row" >
         <div class="col-md-6">
           <h3>Mapa municipi</h3>
-          <p><iframe width="500" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/?ie=UTF8&amp;ll=41.668296,1.862354&amp;spn=0.03084,0.058365&amp;t=h&amp;z=14&amp;om=1&amp;output=embed&amp;s=AARTsJqzARj-Z8VnW5pkPMLMmZbqrJcYpw"></iframe></p>
+          <p><iframe width="500" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/?ie=UTF8&amp;ll=41.668296,1.862354&amp;spn=0.03084,0.058365&amp;t=h&amp;z=14&amp;om=1&amp;output=embed&amp;s=AARTsJqzARj-Z8VnW5pkPMLMmZbqrJcYpw"></iframe></p>
         </div>
         <div class="col-md-6">
           <h3>Hidrants del municipi</h3>
